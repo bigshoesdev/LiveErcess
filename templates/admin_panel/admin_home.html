@@ -1,0 +1,43 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block home %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Welcome to admin panel.</h1>
+		</div>
+
+		<div class="col-md-6 col-lg-6">
+			<a href="{% url 'admin-panel:eve_list' %}">
+				<div style="padding: 50px 0;text-align: center;background: #da2021;color: #fff;">
+					<h3>Upcoming events list</h3>
+				</div>
+			</a>
+		</div>
+		<div class="col-md-6 col-lg-6">
+			<a href="{% url 'admin-panel:past_list' %}">
+				<div style="padding: 50px 0;text-align: center;background: #da2021;color: #fff;">
+					<h3>Past events list</h3>
+				</div>
+			</a>
+		</div>
+		<div class="clearfix"></div>
+
+		<div class="col-md-6 col-lg-6">
+			<a href="{% url 'admin-panel:up_prom' %}">
+				<div style="padding: 50px 0;margin-top:30px;text-align: center;background: #da2021;color: #fff;">
+					<h3>Upcoming events promotion links</h3>
+				</div>
+			</a>
+		</div>
+		<div class="col-md-6 col-lg-6">
+			<a href="{% url 'admin-panel:past_prom' %}">
+				<div style="padding: 50px 0;margin-top:30px;text-align: center;background: #da2021;color: #fff;">
+					<h3>Past events promotion links</h3>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

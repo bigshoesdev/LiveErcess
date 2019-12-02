@@ -1,0 +1,57 @@
+<!--
+<div class="form-group"  style="width: 80%">
+      		<div class="input-group mb-3">
+         	 <div class="input-group-prepend">
+            	  <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+        	 </div>
+        	 <select>
+  				<option value="Register">Register</option>
+  				<option value="Donation">Donation</option>
+  				<option value="RSVP">RSVP</option>
+  				
+			</select>
+		<div style="
+
+   color: red;
+  
+   display: inline-block;
+   margin-left: 23px;
+   position: absolute;
+   margin-top: 38px;
+   "></div>
+     	  	 </div>
+    	  </div>
+
+-->7
+<div class="form-group"  style="width: 80%">
+      		<div class="input-group mb-" style="color:grey">
+        	    <label class="checkbox-inline">
+      			<input type="checkbox" style="position:inherit;opacity:inherit;" class="marked"  value="Register">Register
+    			</label>
+    			
+    			<label class="checkbox-inline";>
+      			<input type="checkbox" style="position:inherit;opacity:inherit" class="marked"  value="Donation">Donation
+    			</label>
+    			<label class="checkbox-inline">
+      			<input type="checkbox" style="position:inherit;opacity:inherit" class="marked" value="RSVP">RSVP
+    			</label>
+			
+		<div style="
+
+   color: red;
+  
+   display: inline-block;
+   margin-left: 23px;
+   position: absolute;
+   margin-top: 38px;
+   "></div>
+     	  	 </div>
+    	  </div>
+
+<script type="text/javascript">
+        $('.marked').on('change', function() {
+            $('.marked').not(this).prop('checked', false);  
+        });
+    </script>
+
+

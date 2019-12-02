@@ -1,0 +1,411 @@
+{% extends "dashboard/create_event.html" %}
+{% load rest_framework %}
+{% load static %}
+{% block title %}Edit Images - Ercess Live{% endblock title %}
+
+{% block step_three %}
+
+
+<script>
+  $(function() {
+
+    /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+    $("#menu_images").change(function() {
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $("#image").attr("src", e.target.result);
+          //$("#modalCrop").modal("show");
+          $("#modalCrop").modal({
+            //to open and prevent modal box to close
+            show: true,
+            keyboard: false,
+            backdrop: 'static'
+          });
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    /* SCRIPTS TO HANDLE THE CROPPER BOX */
+    var $image = $("#image");
+    var cropBoxData;
+    var canvasData;
+    $("#modalCrop").on("shown.bs.modal", function() {
+      $image.cropper({
+        viewMode: 1,
+        aspectRatio: 16 / 9,
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+        preview: ".preview",
+
+        ready: function() {
+          $image.cropper("setCanvasData", canvasData);
+          $image.cropper("setCropBoxData", cropBoxData);
+        }
+      });
+    }).on("hidden.bs.modal", function() {
+      cropBoxData = $image.cropper("getCropBoxData");
+      canvasData = $image.cropper("getCanvasData");
+      $image.cropper("destroy");
+    });
+
+    $(".js-zoom-in").click(function() {
+      $image.cropper("zoom", 0.1);
+    });
+
+    $(".js-zoom-out").click(function() {
+      $image.cropper("zoom", -0.1);
+    });
+
+    /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+    $(".js-crop-and-upload").click(function() {
+      var cropData = $image.cropper("getData");
+      $("#id_x").val(cropData["x"]);
+      $("#id_y").val(cropData["y"]);
+      $("#id_height").val(cropData["height"]);
+      $("#id_width").val(cropData["width"]);
+      // $("#formUpload").submit();
+      $("#modalCrop").modal("hide");
+      $('#test').trigger('click');
+
+      let cropImgSrc = $image.cropper('getCroppedCanvas').toDataURL();
+      // console.log(cropImgSrc)
+      $("#menu_image").attr("src", cropImgSrc);
+
+
+    });
+
+
+      $(".js-nevermind-and-upload").click(function() {
+        var cropData = $image[0];
+        // console.log('cropData >> ',cropData)
+        $("#id_x").val(0);
+        $("#id_y").val(0);
+        $("#id_height").val(cropData.naturalHeight);
+        $("#id_width").val(cropData.naturalWidth);
+        // $("#formUpload").submit();
+        $("#modalCrop").modal("hide");
+        $('#test').trigger('click');
+      });
+
+  });
+</script>
+
+
+<section class="content">
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-dark mb-30">Upload Images</h1>
+        <div class="md-stepper-horizontal red">
+          <div class="md-step active done">
+            <div class="md-step-circle"><span>1</span></div>
+            <div class="md-step-title">Basic details</div>
+            <div class="md-step-bar-left"></div>
+            <div class="md-step-bar-right"></div>
+          </div>
+          <div class="md-step active done">
+            <div class="md-step-circle"><span>2</span></div>
+            <div class="md-step-title">Set targets</div>
+            <div class="md-step-bar-left"></div>
+            <div class="md-step-bar-right"></div>
+          </div>
+          <div class="md-step active">
+            <div class="md-step-circle"><span>3</span></div>
+            <div class="md-step-title">Upload images</div>
+            <div class="md-step-bar-left"></div>
+            <div class="md-step-bar-right"></div>
+          </div>
+          <div class="md-step">
+            <div class="md-step-circle"><span>4</span></div>
+            <div class="md-step-title">Description</div>
+            <div class="md-step-bar-left"></div>
+            <div class="md-step-bar-right"></div>
+          </div>
+          <div class="md-step">
+            <div class="md-step-circle"><span>5</span></div>
+            <div class="md-step-title">Add tickets</div>
+            <div class="md-step-bar-left"></div>
+            <div class="md-step-bar-right"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-12">
+        <div class="alert alert-info text-center mt-40">
+          <h4>If your image contains contact details, it will not be approved for promotion.</h4>
+        </div>
+      </div>
+      <form  enctype="multipart/form-data" method="POST" id="msform1" class="col-md-12 mt-50 mb-50" autocomplete="off"> {% csrf_token %}
+        <fieldset>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <h3>Thumbnail</h3>
+
+              <input id="menu_images1" class="form-control" type="file" name="myfile1">
+              <input type="hidden" name="x_p" id="id_x_p">
+              <input type="hidden" name="y_p" id="id_y_p">
+              <input type="hidden" name="width_p" id="id_width_p">
+              <input type="hidden" name="height_p" id="id_height_p">
+              <img id="menu_image1" class="preview_img1" />
+              <div id="e1" style="display: none;" class="alert alert-danger">
+                <strongn id="error1" style="color: white"></strong>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <h3>Banner Image</h3>
+
+              <input id="menu_images" class="form-control" type="file" name="myfile">
+              <input type="hidden" name="x" id="id_x">
+              <input type="hidden" name="y" id="id_y">
+              <input type="hidden" name="width" id="id_width">
+              <input type="hidden" name="height" id="id_height">
+              <img id="menu_image" class="preview_img" />
+              <div id="e" class="alert alert-danger" style="display: none;">
+                <strongn id="error" style="color: white;"></strong>
+              </div>
+            </div>
+
+
+            <div class="form-group col-md-12">
+              <h3>Editable Image</h3>
+              <div class="alert alert-info text-center">
+                <p>Only PSD, AI & CDR files allowed.</p>
+              </div>
+              <input id="menu_images2" class="form-control block" type="file" name="myfile2">
+              <img id="menu_image2" class="preview_img2" />
+              <p id="text_image2" class="preview_img2"></p>
+              <div id="e2" style="display: none;" class="alert alert-danger">
+                <strongn id="error2" class="align-middle" style="color: white"></strong>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <button type="submit" class="btn btn1 btn-danger btn-block mt-10">Upload</button>
+            </div>
+
+            <!-- MODAL TO CROP THE IMAGE -->
+            <div class="modal fade" id="modalCrop">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button> -->
+                    <h4 class="modal-title">Crop the photo</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <img src="" id="image" style="max-width: 100%;">
+                      </div>
+                      <div class="col-md-6">
+                        <div class="preview ml-auto mr-auto " style="overflow:hidden;height:225px;width:400px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="modal-footer">
+                    <div class="btn-group btn-group-justified" role="group">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-default js-zoom-in">
+                          <span class="glyphicon glyphicon-zoom-in"></span>
+                        </button>
+                      </div>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-default js-zoom-out">
+                          <span class="glyphicon glyphicon-zoom-out"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <br />
+                    <button type="button" class="btn btn-default js-nevermind-and-upload" data-dismiss="modal" style="width:100%;">Nevermind</button>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-primary js-crop-and-upload" style="width:100%;">Crop and upload</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CONTAINER TO DISPLAY THE CROPPED IMAGES -->
+
+
+
+            <div class="modal fade" id="modalCrop_p">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Crop the photo</h4>
+                  </div>
+                  <div class="modal-body">
+                    <img src="" id="image_p" style="max-width: 100%;">
+                  </div>
+                  <div class="preview_p ml-auto mr-auto" style="overflow:hidden;height:225px;width:400px;"></div>
+                  <div class="modal-footer">
+                    <div class="btn-group pull-left" role="group">
+                      <button type="button" class="btn btn-default js-zoom-in_p">
+                        <span class="glyphicon glyphicon-zoom-in"></span>
+                      </button>
+                      <button type="button" class="btn btn-default js-zoom-out_p">
+                        <span class="glyphicon glyphicon-zoom-out"></span>
+                      </button>
+                    </div>
+                    <button type="button" class="btn btn-default js-nevermind-and-upload_p js-nevermind-and-upload" data-dismiss="modal">Nevermind</button>
+                    <button type="button" class="btn btn-primary js-crop-and-upload_p">Crop and upload</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </fieldset>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<script>
+
+  console.log('pro_image >> ', '{{pro_image}}', 'banner >> ', '{{banner}}', 'edit_image >> ', '{{edit_image}}')
+  if('{{banner}}' != ''){
+    document.getElementById("menu_image").src = '{{banner}}';
+    $("#menu_image").show();
+  }
+  if('{{pro_image}}' != ''){
+    document.getElementById("menu_image1").src = '{{pro_image}}';
+    $("#menu_image1").show();
+  }
+  if('{{edit_image}}' != ''){
+    document.getElementById("text_image2").innerHTML = '{{edit_image}}';
+    $("#text_image2").show();
+  }
+
+  document.getElementById("menu_images").onchange = function() {
+    var reader = new FileReader();
+     // $("#id_x").val(0);
+     // $("#id_y").val(0);
+     // $("#id_height").val(cropData.naturalHeight);
+     // $("#id_width").val(cropData.naturalWidth);
+
+    document.getElementById('e').style.display = "none";
+
+    if (this.files[0].size > 2097152) {
+      document.getElementById('e').style.display = "block";
+      if (document.getElementById("error").innerText == 'Image Size should not be greater than 2 MB') {
+        document.getElementById("error").innerHTML += '';
+      } else {
+        document.getElementById("error").innerHTML += "Image Size should not be greater than 2 MB";
+      }
+      $("#menu_image").attr("src", "blank");
+      $("#menu_image").hide();
+      $('#menu_images').wrap('<form>').closest('form').get(0).reset();
+      $('#menu_images').unwrap();
+      return false;
+    }
+
+    if (this.files[0].type.indexOf("image") == -1) {
+      document.getElementById('e').style.display = "block";
+      if (document.getElementById("error").innerText == 'Invalid Type') {
+        document.getElementById("error").innerHTML += '';
+      } else {
+        document.getElementById("error").innerHTML += "Invalid Type";
+      }
+
+      $("#menu_image").attr("src", "blank");
+      $("#menu_image").hide();
+      $('#menu_images').wrap('<form>').closest('form').get(0).reset();
+      $('#menu_images').unwrap();
+      return false;
+    }
+    reader.onload = function(e) {
+      // get loaded data and render thumbnail.
+      document.getElementById("menu_image").src = e.target.result;
+      $("#menu_image").show();
+      document.getElementById("menu_image").onload = function() {
+        // $("#id_x").val(0);
+        // $("#id_y").val(0);
+        // $("#id_height").val(this.height);
+        // $("#id_width").val(this.width);
+
+        // console.log($("#id_height").val(), ' >> << ',$("#id_width").val())
+
+      }
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+  };
+
+
+  document.getElementById("menu_images1").onchange = function() {
+    var reader = new FileReader();
+    document.getElementById('e1').style.display = "none";
+
+    if (this.files[0].size > 2097152) {
+      document.getElementById('e1').style.display = "block";
+
+      if (document.getElementById("error1").innerText == 'Image Size should not be greater than 2 MB') {
+        document.getElementById("error1").innerHTML += '';
+      } else {
+        document.getElementById("error1").innerHTML += "Image Size should not be greater than 2 MB";
+      }
+
+      $("#menu_image1").attr("src", "blank");
+      $("#menu_image1").hide();
+      $('#menu_images1').wrap('<form>').closest('form').get(0).reset();
+      $('#menu_images1').unwrap();
+      return false;
+    }
+
+    if (this.files[0].type.indexOf("image") == -1) {
+      document.getElementById('e1').style.display = "block";
+      if (document.getElementById("error1").innerText == 'Invalid Type') {
+        document.getElementById("error1").innerHTML += '';
+      } else {
+        document.getElementById("error1").innerHTML += "Invalid Type";
+      }
+
+      $("#menu_image1").attr("src", "blank");
+      $("#menu_image1").hide();
+      $('#menu_images1').wrap('<form>').closest('form').get(0).reset();
+      $('#menu_images1').unwrap();
+      return false;
+    }
+    reader.onload = function(e) {
+      // get loaded data and render thumbnail.
+      document.getElementById("menu_image1").src = e.target.result;
+      $("#menu_image1").show();
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+  };
+
+  $(function() {
+    document.getElementById('e2').style.display = "none";
+
+    $('#menu_images2').change(function() {
+      var val = $(this).val().toLowerCase(),
+        regex = new RegExp("(.*?)\.(ai|psd|cdr)$");
+
+      if (!(regex.test(val))) {
+        $(this).val('');
+        document.getElementById('e2').style.display = "block";
+        if (document.getElementById("error2").innerText == 'Please select only AI, PSD, CDR format file') {
+          document.getElementById("error2").innerHTML += '';
+        } else {
+          document.getElementById("error2").innerHTML += "Please select only AI, PSD, CDR format file";
+        }
+      }
+    });
+  });
+</script>
+
+
+{% endblock step_three %}

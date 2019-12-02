@@ -1,0 +1,61 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block upprom %}
+<link rel="stylesheet" type="text/css" href="/static/assets/vendor_components/datatable/datatables.min.css"/>
+
+<section class='content'>
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Upcoming events' promotion status</h1>
+        <div class="table-responsive">
+            <table class="table table-hover display nowrap">
+                <tbody>
+                  <tr>
+                    <th>Event name</th>
+                    <th>Site name</th>
+                    <th>Link</th>
+                    <th>Promotion status</th>
+                    <th>Partner status</th>
+                  </tr>
+                </tbody>
+                {% for id,name,site,link,prom,part in up %}
+                <tr>
+                    <td>
+                      <div class="pull-left ml-10 pt-10">
+                        <a href="{% url 'admin-panel:details' event_id=id %}" target="_blank">{{name}}</a>
+                      </div>
+                    </td>
+                    <td>{{site}}</td>
+                      <td class="">
+                        {% if link == 'None' %}
+                        --
+                        {% else %}
+                        <a href="{{link}}" target="_blank">Link</a>
+                        {% endif %}
+                      </td>
+                    <td>{{prom}}</td>
+                    <td>{{part}}</td>
+                </tr>
+                {% endfor %}
+                <tfoot>
+                  <tr>
+                    <th>Event name</th>
+                    <th>Site name</th>
+                    <th>Link</th>
+                    <th>Promotion status</th>
+                    <th>Partner status</th>
+                  </tr>
+                </tfoot>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/static/assets/vendor_components/datatable/datatables.min.js"></script>
+<script src="/static/js/pages/data-table.js"></script>
+<script src="/static/js/pages/project-table.js"></script>
+
+{% endblock upprom %}

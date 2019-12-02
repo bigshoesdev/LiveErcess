@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <title> {{ data.title }} | Ercess Live | Ercess.com/Live</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+  <meta name="description" content="TITLE" />
+  <meta name="keywords" content="TITLE, Ercess Live" />
+  <link rel="shortcut icon" href="{% static 'images/fav.ico'%}">
+  <meta name="google-site-verification" content="Hp-UR63f6b4b-tVU0rbbM4gE6AEHcRCbZ8vtbxRnpC4" />
+  <!--[if IE]>
+            <script src="js/html5shiv.js"></script>
+        <![endif]-->
+  {% include 'static/common/css.html' %}
+  <style>
+    div#big {
+      word-spacing: 8px;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  {% include 'static/common/header2.html' %}
+  <section class="wow fadeIn bg-light-gray padding-35px-tb page-title-small top-space">
+    <div class="container">
+      <div class="row equalize xs-equalize-auto">
+        <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 display-table">
+          <div class="display-table-cell vertical-align-middle text-left xs-text-center">
+            <h1 class="alt-font text-extra-dark-gray font-weight-600 no-margin-bottom text-uppercase">{{ data.title }}</h1>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 display-table text-right xs-text-left xs-margin-10px-top">
+          <div class="display-table-cell vertical-align-middle breadcrumb text-small alt-font">
+            <ul class="xs-text-center text-uppercase">
+              <li><a href="#" class="text-dark-gray">{{ data.date }}</a></li>
+              <li><span class="text-dark-gray">by <a href="#">{{ data.author }}</a></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="blog-details-text last-paragraph-no-margin" id="big" style="white-space: pre-wrap;">
+          {#                        <img src="?php echo $blog_img;?>" alt="" class="width-100 margin-45px-bottom">#}
+          {{ data.description }}
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include 'static/common/social.html' %}
+  {% include 'static/common/footer.html' %}
+  {% include 'static/common/js.html' %}
+
+</body>
+
+</html>

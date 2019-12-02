@@ -1,0 +1,38 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block saledetail %}
+
+<section class='content'>
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Sales Details </h1>
+        <div class="table-responsive">
+            <table class="table table-hover table-event-list">
+                <tr>
+                  <th>Booking id</th>
+                  <th>Attendee Name</th>
+                  <th>Amount Paid</th>
+                  <th>Purchase Date</th>
+                  <th>Receival Status</th>
+                </tr>
+
+                <tr>
+                    <td>
+                        {{sales.booking_id}}
+                    </td>
+                    <td>{{sales.attendee_name}}</td>
+                    <td>{{sales.ampunt_paid}}</td>
+                     <td>{{sales.purchase_date}}</td>
+                    <td>{{ payment.receival_status}}</td>
+                </tr>
+            </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+{% endblock saledetail %}

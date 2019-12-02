@@ -1,0 +1,251 @@
+{% extends "dashboard/create_event.html" %}
+{% load rest_framework %}
+
+{% block title %}Set target of your event - Ercess Live{% endblock title %}
+{% block step_two %}
+<section class="content">
+	<div class="container arrow-steps clearfix">
+		<div class="row">
+			<div class="col-md-12">
+
+				<div class="md-stepper-horizontal red">
+					<div class="md-step">
+						<a href="{% url 'dashboard:edit-event' event_id %}">
+							<div class="md-step-circle"><span>1</span></div>
+							<div class="md-step-title">Basic details</div>
+							<div class="md-step-bar-left"></div>
+							<div class="md-step-bar-right"></div>
+						</a>
+					</div>
+					<div class="md-step active">
+						<a href="{% url 'dashboard:edit-event-two' event_id  %}">
+							<div class="md-step-circle"><span>2</span></div>
+							<div class="md-step-title">Set targets</div>
+							<div class="md-step-bar-left"></div>
+							<div class="md-step-bar-right"></div>
+						</a>
+					</div>
+					<div class="md-step">
+						<a href="{% url 'dashboard:edit-event-three' event_id  %}">
+								<div class="md-step-circle"><span>3</span></div>
+								<div class="md-step-title">Upload images</div>
+								<div class="md-step-bar-left"></div>
+								<div class="md-step-bar-right"></div>
+						</a>
+					</div>
+					<div class="md-step">
+						<a href="{% url 'dashboard:edit-event-four' event_id  %}">
+							<div class="md-step-circle"><span>4</span></div>
+							<div class="md-step-title">Description</div>
+							<div class="md-step-bar-left"></div>
+							<div class="md-step-bar-right"></div>
+						</a>
+					</div>
+					<div class="md-step">
+						<a href="{% url 'dashboard:edit-event-ticket' event_id  %}">
+							<div class="md-step-circle"><span>5</span></div>
+							<div class="md-step-title">Add tickets</div>
+							<div class="md-step-bar-left"></div>
+							<div class="md-step-bar-right"></div>
+						</a>
+					</div>
+				</div>
+
+				<h1 class="text-dark mb-30">Set your target</h1>
+			</div>
+		</div>
+	</div>
+	<!--   {% if messages %}
+<ul class="messages">
+{% for message in messages %}
+<div class="alert alert-success">
+<strong style="color: white">{{ message }}</strong>
+</div>
+{% endfor %}
+</ul>
+
+{% endif %}
+-->
+	<form action="{% url 'dashboard:edit-action-two' event_id %}" method="POST" id="msform" class="col-md-12 mt-50 mb-50" autocomplete="off">
+		{% csrf_token %}
+		<fieldset>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="input-group mb-30">
+							<div class="input-group-prepend"> <span class="input-group-text bg-info border-info"><i class="ti-arrow-down"></i></span></div>
+							<select name="category_id" type="text" id="select_dropdown" class="form-control" style="height:auto">
+								<!-- <option value="default" selected disabled>Select a topic</option> -->
+								{% for val,id  in c %}
+
+								{% if id == k %}
+								<option id={{id}} value="{{id}}" selected> {{ val }} </option>
+
+								{% else %}
+								<option id={{id}} value="{{id}}"> {{ val }} {{h}}</option>
+								{% endif %}
+								{% endfor %}
+							</select>
+							<div class="input-error"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="input-group mb-30">
+							<div class="input-group-prepend"> <span class="input-group-text bg-info border-info"><i class="ti-arrow-down"></i></span>
+							</div>
+							<select name="topic_id" id='top' type="text" class="form-control" style="height:auto">
+
+								{% for val1,id1  in t %}
+
+								{% if id1 == l %}
+								<option id={{id1}} value="{{id1}}" selected> {{ val1 }} </option>
+
+								{% else %}
+								<option id={{id1}} value="{{id1}}"> {{ val1 }} </option>
+								{% endif %}
+								{% endfor %}
+							</select>
+							<div class="input-error"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="btn-group mb-30 mt-30" data-toggle="buttons">
+
+						{% if pr == 0 %}
+						<label class="btn btn-primary active toggle-pair">
+							<input type="radio" name="type1" id="pub" class='type1' value='public' style="margin-right:19px" checked> Public Event
+						</label>
+						<label class="btn btn-primary toggle-pair">
+							<input type="radio" name="type1" class='type1' id="pri" value='private'> Private Event
+						</label>
+						{% endif %}
+						{% if pr == 1 %}
+						<label class="btn btn-primary toggle-pair">
+							<input type="radio" name="type1" id="pub" class='type1' value='public' style="margin-right:19px"> Public Event
+						</label>
+						<label class="btn btn-primary active toggle-pair">
+							<input type="radio" name="type1" class='type1' id="pri" value='private' checked> Private Event
+						</label>
+						{% endif %}
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="btn-group mb-30 mt-30" data-toggle="buttons">
+						{% if tick == 1 %}
+						<label class="btn btn-primary active toggle-pair">
+							<input type="radio" name="type2" id="paidevent" class='type2' value='paid' style="margin-right:19px" checked> Paid Event
+						</label>
+						<label class="btn btn-primary toggle-pair">
+							<input type="radio" name="type2" class='type2' id="freeevent" value='free'> Free Event
+						</label>
+						{% elif tick == 0 %}
+						<label class="btn btn-primary toggle-pair">
+							<input type="radio" name="type2" id="paidevent" class='type2' value='paid' style="margin-right:19px"> Paid Event
+						</label>
+						<label class="btn btn-primary active toggle-pair">
+							<input type="radio" name="type2" class='type2' id="freeevent" value='free' checked> Free Event
+						</label>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			<!--  <div id='type1'  style='float: left'>
+         <input id='pub' class='type1' name='type1' type="checkbox" value='public' checked >
+          <label  for='pub' style='color: black'>Public Event</label> <br/>
+         <input type="checkbox" class='type1' name='type1' id='pri' value='private'>
+          <label for='pri' style='color: black'>Private Event</label>
+          </div>
+         <div id='type2'>
+         <input id='paidevent' class='type2' name='type2' type="checkbox" value='paid' checked >
+          <label  for='paidevent' style='color: black'>Paid Event</label> <br/>
+         <input type="checkbox" class='type2' name='type2' value='free' id='freeevent' >
+          <label for='freeevent' style='color: black'>Free Event</label>
+          </div-->
+			<button type="submit" id="n" class="btn btn2 btn-danger btn-block mt-50">Update</button>
+		</fieldset>
+	</form>
+
+
+
+
+
+</section>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script>
+	//        function getCookie(name) {
+	//     var cookieValue = null;
+	//     if (document.cookie && document.cookie != '') {
+	//         var cookies = document.cookie.split(';');
+	//         for (var i = 0; i < cookies.length; i++) {
+	//             var cookie = jQuery.trim(cookies[i]);
+	//             // Does this cookie string begin with the name we want?
+	//             if (cookie.substring(0, name.length + 1) == (name + '=')) {
+	//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+	//                 break;
+	//             }
+	//         }
+	//     }
+	//     return cookieValue;
+	// }
+	// var csrftoken = getCookie('csrftoken');
+	// function csrfSafeMethod(method) {
+	//     // these HTTP methods do not require CSRF protection
+	//     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+	// }
+	// $.ajaxSetup({
+	//     beforeSend: function(xhr, settings) {
+	//         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+	//             xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	//         }
+	//     }
+	// });
+
+	$(document).ready(function() {
+
+		$('#select_dropdown').change(function() {
+			var e = document.getElementById("select_dropdown");
+			var value = e.options[e.selectedIndex].value;
+
+			$("#n").trigger("click");
+		});
+	});
+
+	//        $.ajax({
+	//            url: "{% url 'dashboard:edit-action-two' event_id %}",
+	//            type: "post",
+	//            data: {'value':value},
+	//            success: function(data) {
+
+	//               value;
+	//            }});
+
+
+	//    });
+
+	// });
+
+
+	//    $(document).ready(function(){
+
+
+	//          $.ajax({
+	//              url: "http://127.0.0.1:8000/live/dashboard/edit-event-two/36758",
+	//              type: "get",
+	//              datatype: json,
+	//              success: function(data) {
+	//                   alert("data");
+	//              }});
+
+
+	//      });
+
+	//   });
+
+</script>
+
+
+{% endblock step_two %}

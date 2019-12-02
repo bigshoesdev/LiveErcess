@@ -1,0 +1,186 @@
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %}Event details - Ercess Live {% endblock title %}
+{% block og %}
+
+{% for name,src,c_s,c_r in data %}
+<section class="content">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-dark mb-30">{{name}}</h1>
+                <h3>website : {{website}}</h3>
+                {% if status == False %}
+                <div class="alert alert-danger text-center mb-80">
+                    <h4>THIS EVENT HAS INCOMPLETE DETAILS</h4>
+                </div>
+                {% endif %}
+                {% if veri_count != 0 %}
+	                <div class="alert alert-danger mb-1">
+	                	<p class="mb-25">Your event did not get approved due to following reasons:</p>
+	                	<ol>
+			                {% for msg in msg_org %}
+			                    <li>{{msg|safe}}</li>
+			                {% endfor %}
+		            	</ol>
+	                </div>
+                {% endif %}
+            </div>
+            <div class="col-md-12">
+            	<div class="box mt-30">
+            		<div class="row">
+			            <div class="col-md-4">
+			                <img src="{{src}}" class="full-width pl-20 mt-20 mb-20">
+			            </div>
+			            <div class="col-md-8 text-right">
+			            	<div class="pr-20 mt-20 mb-20">
+				            	<p>
+				            		<a href="{% url 'dashboard:detail' event_id=eve_id %}" data-toggle="tooltip" title="Edit this event"><i class="fa fa-pencil"></i> Edit</a>
+				            	</p>
+				            	<p>
+				            		Created at: {{create.date}}
+				            	</p>
+				            	<p class="mt-40">
+				            		For any support, do get in touch with our coordinator:<br />
+				            		{% if admin %}	{{admin}} {% if  contact  %}- {{contact}} {% endif %},{% endif %} tickets@ercess.com
+				            	</p>
+			            	</div>
+			            </div>
+            		</div>
+            	</div>
+            </div>
+            <div class="col-md-6">
+				<div class="box box-default color-palette-box">
+					<div class="box-header with-border">
+						<h4 class="box-title">Recent purchases</h4>
+					</div>
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-12">
+							  <div class="media-list full-width media-list-hover media-list-divided">
+							    {% if c_s == 0 %}
+
+								<div class="media media-single">
+									<div class="media-body">
+										<h3>Nothing to show.</h3>
+
+									</div>
+								</div>
+								{% else %}
+								{% for name_a,amt,qty in sale %}
+								<div class="media media-single">
+									<div class="media-body">
+										<h6>{{name_a}}</h6>
+										<h6 class="mt-10"><b>Paid:</b> {{amt}} ({{qty}} Tickets)</h6>
+									</div>
+								</div>
+								{% endfor %}
+								{% endif %}
+
+							  </div>
+							</div>
+							{% if c_s != 0 %}
+							<div class="col-md-12">
+								<p class="text-right mr-15"><a href="{% url 'dashboard:sale_details' event_id=eve_id %}">See full list</a></p>
+							</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+
+            </div>
+            <div class="col-md-6">
+            	<div class="box box-default color-palette-box">
+					<div class="box-header with-border">
+						<h4 class="box-title">Recent RSVPs</h4>
+					</div>
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-12">
+							  <div class="media-list full-width media-list-hover media-list-divided">
+								{% if c_r == 0 %}
+								<div class="media media-single">
+
+									<div class="media-body">
+										<h3>Nothing to show.</h3>
+
+									</div>
+								</div>
+								{% else %}
+								{% for name_r,cont,email in rsvp %}
+								<div class="media media-single">
+									<div class="media-body">
+										<h6>{{name_r}}</h6>
+										<p><small><b>Contact:</b> {{cont}}</small></p>
+										<p><small><b>Email:</b> {{email}}</small></p>
+									</div>
+								</div>
+								{% endfor %}
+								{% endif %}
+							  </div>
+							</div>
+							{% if c_r != 0 %}
+							<div class="col-md-12">
+								<p class="text-right mr-15"><a href="{% url 'dashboard:rsvp-event' event_id=eve_id %}">See full list</a></p>
+							</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+            </div>
+            <div class="col-md-12">
+                <div class="table-responsive">
+                  {% if s_len == 0 %}
+                  <div class="alert alert-info text-center mb-80">
+		              <h4>PROMOTION IS YET TO BE STARTED. CONTACT OUR SUPPORT TEAM FOR MORE DETAILS.</h4>
+		          </div>
+                  {% else %}
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Site</th>
+                                <th>Link</th>
+								<th>Promotion status</th>
+								<th>Partner status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+							{% for site_name,link,pro_sta,par_sta in site %}
+                            <tr>
+                                <td>{{site_name}}</td>
+                			{% if link == 0 %}
+								      <td class="">--</td>
+                			{% else %}
+                      <td class=""><a href="{{link}}" target="_blank">{{link}}</a></td>
+			                {% endif %}
+
+
+                {% if pro_sta == 'published' %}
+								<td class="text-capitalize"><span class="green-text">{{pro_sta}}</span></td>
+								{% elif pro_sta == 'pending' or pro_sta == 'ready to upload'  %}
+								<td class="text-capitalize"><span class="grey-text">{{pro_sta}}</span></td>
+								{% else %}
+								<td class="text-capitalize"><span class="">{{pro_sta}}</span></td>
+								{% endif %}
+								{% if par_sta == 'published' %}
+								<td class="text-capitalize"><span class="green-text">{{par_sta}}</span></td>
+								{% elif par_sta == 'pending' or par_sta == 'ready to upload'  %}
+								<td class="text-capitalize"><span class="grey-text">{{par_sta}}</span></td>
+								{% else %}
+								<td class="text-capitalize"><span>{{par_sta}}</span></td>
+								{% endif %}
+
+							</tr>
+							{% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/static/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+{% endfor %}
+{% endblock og %}

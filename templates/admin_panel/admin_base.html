@@ -1,0 +1,294 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+   <head>
+
+      <meta charset="UTF-8">
+
+      <title>{% block title %} {% endblock title %}</title>
+
+      <link rel="shortcut icon" href="/static/images/fav.ico">
+      <link rel="stylesheet" href="{% static 'dashboard/main.css' %}" type="text/css">
+      <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+      <script src="{% static 'assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js' %}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-methods.js"></script>
+
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.1/jquery-migrate.min.js"></script>
+      <!--  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+      <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script> -->
+      <script src="{% static 'dashboard/main.js' %}"></script>
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css">
+
+
+{#    for replacing name at field of uploads   #}
+
+{#  bootstrap cdns      #}
+
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script-->
+    <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script-->
+
+  <!-- DateTime Picker -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment-with-locales.min.js"></script>
+  <script src="{% static 'assets/vendor_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+  <link rel="stylesheet" href="{% static 'dashboard/modified-datetime.css' %}" type="text/css">
+  <script src="{% static 'dashboard/modified-datetime.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'assets/vendor_components/bootstrap/dist/css/bootstrap.min.css' %}" type="text/css">
+
+
+
+  <!-- Date Picker -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+
+
+
+
+{#  google fonts    #}
+       <link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
+
+      <!-- Bootstrap extend-->
+      <link rel="stylesheet" href="{% static 'css/bootstrap-extend.css' %}" type="text/css">
+
+
+      <!-- Theme style -->
+      <link rel="stylesheet" href="{% static 'css/master_style.css' %}" type="text/css">
+      <link rel="stylesheet" href="{% static 'css/skins/_all-skins.css' %}" type="text/css">
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
+
+
+{#   for cropping#}
+   <link href="{% static 'img_cpr/css/cropper.min.css' %}" rel="stylesheet">
+   <script src="{% static 'img_cpr/js/cropper.min.js' %}"></script>
+<style>
+  select{
+    width: 100%;
+  }
+  .table{
+    width: auto !important;
+    min-width: 100%;
+  }
+</style>
+
+   {% block RSVP_head %}
+   {% endblock RSVP_head %}
+   {% block og_head %}
+   {% endblock og_head %}
+{% block javascript%}
+
+{% endblock javascript %}
+
+ </head>
+ <body class="hold-transition skin-purple-light sidebar-mini bg-black">
+<div class='wrapper'>
+     <header class="main-header">
+       <!-- Logo -->
+            <a href="{% url 'dashboard:how' %}" class="logo">
+                <span class="logo-lg">
+                    <img src="{% static 'images/logo.png' %}" alt="logo" class="light-logo">
+                </span>
+            </a>
+        <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#"  data-toggle="push-menu" role="button" class="d-block d-sm-none">
+        <i style="color: white;" class="glyphicon glyphicon-resize-horizontal"></i>
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+      </a>
+      <div></div>
+  <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="{% static 'images/user-avatar.jpg' %}" class="user-image rounded-circle b-2">
+                  <span class="font-size-14">{{ request.session.fname }} {{ request.session.lname }}<i class="mdi mdi-chevron-down"></i></span>
+                </a>
+                <ul class="dropdown-menu scale-up">
+                  <!-- Menu Body -->
+                  <li class="user-body bt-0">
+                  <div class="row no-gutters">
+                      <!-- <div class="col-12 text-left">
+                          <a href="{% url 'dashboard:profile' %}"><i class="glyphicon glyphicon-user"></i> My Profile</a>
+                      </div> -->
+
+                      <div class="col-12 text-left">
+                          <a href="{% url 'dashboard:settings' %}"><i class="glyphicon glyphicon-cog"></i> Settings</a>
+                      </div>
+
+          <div role="separator" class="divider col-12"></div>
+            <div class="col-12 text-left">
+                         <a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logout</a>
+                          </div>
+                     </div>
+                    <!-- /.row -->
+                  </li>
+             </ul>
+            </li>
+           </ul>
+        </div>
+  </nav>
+     </header>
+<!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar-->
+    <section class="sidebar">
+
+      <!-- sidebar menu-->
+      <ul class="sidebar-menu pt-20" data-widget="tree">
+          <li >
+            <a href="{% url 'admin-panel:home' %}">
+              <span>Home</span>
+            </a>
+          </li>
+          {% if request.session.para_1 == 'event_list' and request.session.read_1 == 1 %}
+          <li class="treeview">
+            <a href="#">
+              <span>Events list</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{% url 'admin-panel:eve_list' %}">Upcoming/ongoing event</a></li>
+              <li><a href="{% url 'admin-panel:past_list' %}">Past events</a></li>
+            </ul>
+          </li>
+          {% endif %}
+
+          {% if request.session.para_2 == 'event_promotion' and request.session.read_2 == 1 %}
+          <li class="treeview">
+            <a href="#">
+              <span>Event Promotion</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{% url 'admin-panel:up_prom' %}">Upcoming events</a></li>
+              <li><a href="{% url 'admin-panel:past_prom' %}">Past events</a></li>
+            </ul>
+          </li>
+          {% endif %}
+
+          {% if request.session.para_8 == 'partners_list' and request.session.read_8 == 1 %}
+          <li>
+            <a href="{% url 'admin-panel:test' %}">
+                Partner sites details
+            </a>
+          </li>
+          {% endif %}
+
+          {% if request.session.para_7 == 'users_list' and request.session.read_7 == 1 %}
+
+          <li>
+            <a href="{% url 'admin-panel:user-detail' %}">
+               Users details
+            </a>
+          </li>
+          {% endif %}
+
+           <li >
+            <a href="{% url 'admin-panel:sale-settled' %}">
+              <span>Sale Settled List</span>
+            </a>
+          </li>
+
+          <li >
+            <a href="{% url 'admin-panel:sale-pending' %}">
+              <span>Sale Pending List</span>
+            </a>
+          </li>
+
+          <!-- <li>
+            <a href="'admin-panel:add'">
+              <span>Add New User</span>
+            </a>
+          </li> -->
+
+      </ul>
+    </section>
+  </aside>
+
+  <div class="content-wrapper" >
+
+{% block home %}
+{% endblock home %}
+
+{% block eventlist %}
+{% endblock eventlist %}
+
+{% block details %}
+{% endblock details %}
+
+{% block pastlist %}
+{% endblock pastlist %}
+
+{% block pastdetails %}
+{% endblock pastdetails %}
+
+{% block pastprom %}
+{% endblock pastprom %}
+
+{% block upprom %}
+{% endblock upprom %}
+
+
+{% block partner_sites %}
+{% endblock partner_sites %}
+
+{% block users %}
+{% endblock users %}
+
+{% block addrsvp %}
+{% endblock %}
+
+{% block addsales %}
+{% endblock %}
+
+{% block sale-settled %}
+{% endblock sale-settled %}
+
+{% block sale-pending %}
+{% endblock sale-pending %}
+
+{% block saledetail %}
+{% endblock saledetail %}
+
+{% block saleslist %}
+{% endblock saleslist %}
+
+{% block adduser %}
+{% endblock adduser%}
+
+  </div>
+        {% include "dashboard/footer.html" %}
+  <div class="control-sidebar-bg"></div>
+</div>
+
+    <!-- jQuery 3
+  <script src="{% static 'assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js' %}"></script> -->
+  <script src="{% static 'assets/vendor_components/screenfull/screenfull.js' %}"></script>
+  <script src="{% static 'assets/vendor_components/popper/dist/popper.min.js' %}"></script>
+
+  <!-- Bootstrap 4.1
+  <script src="{% static 'assets/vendor_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>-->
+  <script src="{% static 'assets/vendor_components/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
+  <script src="{% static 'assets/vendor_components/fastclick/lib/fastclick.js' %}"></script>
+  <script src="{% static 'js/template.js' %}"></script>
+  <script>
+    $(document).ready(function(){
+      $('input').addClass('form-control');
+      $('table.display').DataTable();
+    } );
+  </script>
+  </body>
+</html>

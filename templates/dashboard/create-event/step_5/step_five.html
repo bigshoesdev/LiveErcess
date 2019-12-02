@@ -1,0 +1,1091 @@
+{% extends "dashboard/create_event.html" %}
+{% load rest_framework %}
+{% block title %}Create tickets to sell - Ercess Live{% endblock title %}
+
+
+
+{% block step_one %}
+<section class="content">
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-dark mb-30">Create tickets</h1>
+        <div class="md-stepper-horizontal red">
+          <div class="md-step active done">
+            <div class="md-step-circle"><span>1</span></div>
+            <div class="md-step-title">Basic details</div>
+            <div class="md-step-bar-left"></div>
+            <div class="md-step-bar-right"></div>
+          </div>
+          <div class="md-step active done">
+            <div class="md-step-circle"><span>2</span></div>
+            <div class="md-step-title">Set targets</div>
+            <div class="md-step-bar-left"></div>
+            <div class="md-step-bar-right"></div>
+          </div>
+          <div class="md-step active done">
+            <div class="md-step-circle"><span>3</span></div>
+            <div class="md-step-title">Upload images</div>
+            <div class="md-step-bar-left"></div>
+            <div class="md-step-bar-right"></div>
+          </div>
+          <div class="md-step active done">
+            <div class="md-step-circle"><span>4</span></div>
+            <div class="md-step-title">Description</div>
+            <div class="md-step-bar-left"></div>
+            <div class="md-step-bar-right"></div>
+          </div>
+          <div class="md-step active">
+            <div class="md-step-circle"><span>5</span></div>
+            <div class="md-step-title">Add tickets</div>
+            <div class="md-step-bar-left"></div>
+            <div class="md-step-bar-right"></div>
+          </div>
+          <div class="md-step">
+            <div class="md-step-circle"><span>6</span></div>
+            <div class="md-step-title">Custom questions</div>
+            <div class="md-step-bar-left"></div>
+            <div class="md-step-bar-right"></div>
+          </div>
+        </div>
+
+        {% if flag == True %}
+        <div style="color:grey">
+          <div id="Div1">
+            <table class="table">
+              <tr>
+                <th>Ticket Name</th>
+                <th>Ticket Price</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Action</th>
+              </tr>
+
+              {% for i in ticket %}
+
+              {% if cureventid == i.event_id %}
+              <tr>
+                <td>{{ i.ticket_name }}</td>
+                <td>{{ i.ticket_price }}</td>
+                <td>{{ i.ticket_start_date|date:'M d,Y h:i A' }}</td>
+                <td>{{ i.expiry_date|date:'M d,Y h:i A' }}</td>
+                <td>
+
+
+                   <!-- <input type="button" class="btn btn21 btn-danger mt-30" value="Edit" onclick="switchVisible('editTicket','{{md5}}','{{i.event_id}}','{{i.tickets_id}}','{{i.ticket_name}}','{{i.ticket_price}}','{{i.other_charges}}','{{i.other_charges_type}}','{{i.ticket_qty}}','{{i.min_qty}}','{{i.max_qty}}','{{i.ticket_start_date}}','{{i.starttimepicker}}','{{i.enddateticket}}','{{i.endtimepicker}}','{{i.ticket_msg}}','{{i.ticket_label}}');" /> -->
+
+                  <div>
+                    <input type="button" class="btn btn21 btn-danger mt-30" value="Edit" onclick="switchVisible('editTicket','{{md5}}','{{i.event_id}}','{{i.tickets_id}}','{{i.ticket_name}}','{{i.ticket_price}}','{{i.other_charges}}','{{i.other_charges_type}}','{{i.ticket_qty}}','{{i.min_qty}}','{{i.max_qty}}','{{i.ticket_start_date | date}}','{{i.ticket_start_date | time}}','{{i.expiry_date | date}}','{{i.expiry_date | time}}','{{i.ticket_msg}}','{{i.ticket_label}}');" style="margin-left: 5px;margin-bottom: 5px;" />
+                  </div>
+                  <div>
+                    <a class="btn btn1 btn-danger text-white ml-5" href="{% url 'dashboard:delete-ticket' md5 i.event_id i.tickets_id 0 %}">Delete</a>
+                  </div>
+
+                </td>
+              </tr>
+              {% endif %}
+
+              {% endfor %}
+            </table>
+
+            <input id="Button1" type="button" class="btn btn21 btn-danger mt-30" value="+ Create New Ticket"
+              onclick="switchVisible();" />
+            {% if event_id and md5 %}
+            <a class="btn btn-2 btn-danger mt-50 mb-30 btn-block" id="done"
+              href="{% url 'dashboard:step_six' md5=md5 event_id=event_id %}"> Done </a>
+            {% endif %}
+          </div>
+
+          <div id="Div2">
+              <form action="" method="GET" class="col-md-12 mt-30" autocomplete="off"> {% csrf_token %}
+                  <fieldset>
+                    <button type="submit" name="next1" value="Next" class="btn btn21 btn-danger">Back</button>
+                  </fieldset>
+                </form>
+            <div class="alert alert-info mt-30">
+                Organizer must pay both Ercess convenience fee and Applicable tax.
+            </div>
+            
+            <form action="" id="editTicketForm"  method="POST" class="col-md-12 mt-50 mb-50 msform11" autocomplete="off"> {% csrf_token %}
+              <fieldset>
+                {% render_form serializer template_pack='rest_framework/vertical' %}
+                <button type="submit" name="next1" value="Next" class="btn btn21 btn-danger btn-block mt-50">Next</button>
+              </fieldset>
+            </form>
+            
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    //modify code for edit mode 
+    var ticketMode = 'addTicket';
+    function switchVisible(mode, md5, eventId, ticketId, ticketName, ticketPrice, otherCharges, otherChargesType, ticketQty, minQty, maxQty, ticketStartDate, ticketStartTime, ticketEndDate, ticketEndTime, ticketMsg, ticketLabel) {
+      ticketMode = mode;
+      if (document.getElementById('Div1')) {
+
+        if (document.getElementById('Div1').style.display == 'none') {
+          document.getElementById('Div1').style.display = 'block';
+          document.getElementById('Div2').style.display = 'none';
+        } else {
+          document.getElementById('Div1').style.display = 'none';
+          document.getElementById('Div2').style.display = 'block';
+        }
+        $('#editTicketForm').attr('action', '');
+        if(mode == 'editTicket') {
+          $("#endtimepicker").removeAttr('disabled');
+          changeEndTimePickerVal();
+          let urlToCall = '/live/dashboard/update_event_tickets/'+md5+'/'+eventId+'/'+ticketId;
+          $('#editTicketForm').attr('action', urlToCall);
+          $("#ticket_name").val(ticketName);
+          $("#ticket_price").val(ticketPrice);
+          $("#other_charges").val(otherCharges);
+          $("#other_charges_type").val(otherChargesType);
+          $("#ticket_qty").val(ticketQty);
+          $("#min_qty").val(minQty);
+          $("#max_qty").val(maxQty);
+          $("#starttimepicker").removeAttr('disabled');
+          changeStartTimePickerVal();
+          $("#starttimepicker").val(ticketStartTime);
+          $("#endtimepicker").val(ticketEndTime);
+          $("#ticket_msg").val(ticketMsg);
+          $("select[name='ticket_label']").val(ticketLabel);
+
+          let tStartDate = new Date(Date.parse(ticketStartDate))
+          let tStartDateFinal = tStartDate.getDate()  + "/" + (tStartDate.getMonth()+1) + "/" + tStartDate.getFullYear();
+          $("#startdateticket").val(tStartDateFinal);
+
+          let tEndDate = new Date(Date.parse(ticketEndDate))
+          let tEndDateFinal = tEndDate.getDate()  + "/" + (tEndDate.getMonth()+1) + "/" + tEndDate.getFullYear();
+          $("#enddateticket").val(tEndDateFinal);
+
+
+        }
+
+      }
+    }
+    // ends here ~ modify code for edit mode 
+  </script>
+  <style>
+    #Div2 {
+      display: none;
+    }
+  </style>
+
+  {% elif flag == False %}
+
+  <div>
+    <div class="alert alert-info mt-30">
+        Organizer must pay both Ercess convenience fee and Applicable tax.
+    </div>
+
+    <form action="" method="POST" class="col-md-12 mt-50 mb-50 msform11" autocomplete="off"> {% csrf_token %}
+      <fieldset>
+        {% render_form serializer template_pack='rest_framework/vertical' %}
+        <button type="submit" name="next2" value="Next" class="btn btn21 btn-danger btn-block mt-50">Next</button>
+      </fieldset>
+    </form>
+  </div>
+  {% endif %}
+
+  <!--form action="" class="col-md-12 mt-50 mb-50" method="POST" id="msform11"-->
+
+
+
+
+<!-- new js code -->
+ <script>
+    var ticketMode;
+    var event_date = "{{ event_start_date }}";
+
+    function convertInputtoDate(){
+      var input = document.getElementById("startdateticket").value;
+      var date = input.split('/');
+      var selectdate = new Date(date[2]+"-"+ date[1]+"-"+ date[0]);
+
+      return selectdate;
+    }
+
+    // function for compare dates
+    function isDateGreater(prevDate, nextDate) {
+      let arrPrevDate = prevDate.split('/');
+      let arrNextDate = nextDate.split('/');
+      return new Date(arrPrevDate[2], arrPrevDate[1], arrPrevDate[0]) < new Date(arrNextDate[2], arrNextDate[1], arrNextDate[0]);
+    }
+    // ends here ~ function for compare dates
+
+    // function for get next day date
+    function nextDayDate() {
+       let today = convertInputtoDate();
+       let tomorrow = new Date(convertInputtoDate());
+       tomorrow.setDate(today.getDate() + 1);
+       return tomorrow
+    }
+    // ends here ~ function for get next day date
+
+    // function for make prepend 0 in single digit numbers
+    function leftPad(number, targetLength) {
+        let output = number + '';
+        while (output.length < targetLength) {
+            output = '0' + output;
+        }
+        return output;
+    }
+    // ends here ~ function for make prepend 0 in single digit numbers
+
+    // on load end date values
+    let onloadEventEndDate = '{{edate}}';
+    let eventEndTime = '{{event_end_time}}'.split(':')
+    let eventEndHour = eventEndTime[0]
+    let eventEndMinute;
+    if (eventEndTime[1] == 0){
+      eventEndHour -= 1;
+      eventEndMinute = 59;
+    } else {
+      eventEndMinute = leftPad(eventEndTime[1]-1, 2);
+    }
+    // ends here ~ on load end date values
+
+    // on load start time values
+    let onloadEventStartDate = '{{sdate}}';
+    let eventStartTime = '{{event_start_time}}'.split(':')
+    let eventStartHour = eventEndTime[0]
+    let eventStartMinute;
+    if (eventStartTime[1] == 0){
+      eventStartHour -= 1;
+      eventStartMinute = 59;
+    } else {
+      eventStartMinute = leftPad(eventStartTime[1]-1, 2);
+    }
+    // ends here ~ on load start time values
+
+    // // on load start date field
+    // $('#startdateticket').datepicker({
+    //   format: 'dd/mm/yyyy',
+    //   endDate: '{{sdate}}',
+    //   startDate: new Date(),
+    // }).on('change', function () {
+    //   let tomorrowDate = nextDayDate()
+    //   $('#enddateticket').datepicker('setStartDate', tomorrowDate);
+    // });
+    // // ends here ~ on load start date field
+
+   
+    // //starttime
+    // $('#starttimepicker').datetimepicker({
+    //   format: 'LT',
+    //   stepping: 5
+    //  });
+
+    
+    // function for end time picker val
+    function changeEndTimePickerVal() {
+      let endDateTicketVal = $("#enddateticket").val();
+      if(endDateTicketVal == '' && ticketMode != 'editTicket') {
+        $("#endtimepicker").attr('disabled', true)
+      } else {
+        let checkIsDateGreater = isDateGreater(endDateTicketVal, '{{edate}}');
+        $("#endtimepicker").removeAttr('disabled');
+        $("#endtimepicker").replaceWith('<input name="end_time_step5" id="endtimepicker" class="input-small form-control" placeholder="End Time*" type="text" >')
+        if(checkIsDateGreater == true) {
+          $('#endtimepicker').datetimepicker({
+            format: 'LT',
+            stepping: 5,
+          });  
+        } else {
+          console.log(eventEndHour, eventEndMinute)
+          $('#endtimepicker').datetimepicker({
+            format: 'LT',
+            stepping: 5,
+            useCurrent: false,
+            defaultDate:moment(new Date()).hours(0).minutes(0).seconds(0).milliseconds(0),
+            maxDate:moment({h:eventEndHour, m:eventEndMinute})
+          });
+        }
+          
+      }
+    }
+    // ends here ~ function for end time picker val
+
+    // function for end date val
+    function changeEndDatePickerVal() {
+      $('#enddateticket').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: new Date(),
+        endDate: onloadEventEndDate
+      }).on('change', function () {
+        changeEndTimePickerVal();
+      });
+    }
+    // ends here ~ function for end date val
+
+     
+    changeEndDatePickerVal();
+    changeEndTimePickerVal();
+     
+
+    // $('#enddateticket').datepicker('setStartDate', {{sdate}});
+
+
+    // function for start time picker val
+    function changeStartTimePickerVal() {
+      let startDateTicketVal = $("#startdateticket").val();
+
+      console.log(' >> 0 >> ',startDateTicketVal,' >> 1 >> ',ticketMode)
+
+      if(startDateTicketVal == '' && ticketMode != 'editTicket') {
+        $("#starttimepicker").attr('disabled', true)
+      } else {
+        let checkIsDateGreater = isDateGreater(startDateTicketVal, '{{sdate}}');
+        console.log(checkIsDateGreater)
+        $("#starttimepicker").removeAttr('disabled');
+        $("#starttimepicker").replaceWith('<input name="start_time_step5" id="starttimepicker" class="input-small form-control" placeholder="End Time*" type="text" >')
+        if(checkIsDateGreater == true) {
+          $('#starttimepicker').datetimepicker({
+            format: 'LT',
+            stepping: 5,
+          });  
+        } else {
+          console.log(eventStartHour, eventStartMinute)
+          $('#starttimepicker').datetimepicker({
+            format: 'LT',
+            stepping: 5,
+            useCurrent: false,
+            defaultDate:moment(new Date()).hours(0).minutes(0).seconds(0).milliseconds(0),
+            maxDate:moment({h:eventStartHour, m:eventStartMinute})
+          });
+        }
+          
+      }
+    }
+    // ends here ~ function for start time picker val
+
+    // function for start date val
+    function changeStartDatePickerVal() {
+      $('#startdateticket').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: new Date(),
+        endDate: '{{sdate}}'
+      }).on('change', function () {
+        changeStartTimePickerVal();
+      });
+    }
+    // ends here ~ function for end date val
+
+    changeStartDatePickerVal();
+    changeStartTimePickerVal();
+
+    // ends here ~ code modify ~ @author Shubham
+
+
+
+    jQuery.validator.addMethod("enddatestep5", function (enddatevalue, element) {
+      var startdatevalue = $('#startdateticket').val();
+      console.log(typeof (startdatevalue));
+      var arrsdate = startdatevalue.split('/');
+      var arredate = enddatevalue.split('/');
+      return new Date(arrsdate[2], arrsdate[1], arrsdate[0]) <= new Date(arredate[2], arredate[1], arredate[0]);
+    }, "End date can not be less than Start Date.");
+
+    $.validator.addMethod("eventdate", function (datevalue, element) {
+      console.log('datevalue >>',datevalue, 'element >>',element)
+      var arrsdate = event_date.split('/');
+      var arredate = datevalue.split('/');
+
+      console.log(arrsdate,' >  = = < ',arredate)
+
+      return new Date(arrsdate[2], arrsdate[0], arrsdate[1]) >= new Date(arredate[2], arredate[1], arredate[0]);
+    }, "Date can not be greater than Start Date of Event 3.");
+
+    $.validator.addMethod("tqty", function (qty, element) {
+      
+      var min = $("#min_qty").val();
+      var max = qty;
+      min=parseInt(min);
+      max=parseInt(max);
+      
+
+      return max > min;
+    }, "Maximum quantity should be more than minimum quantity.");
+
+    $.validator.addMethod("iqty", function (qty, element) {
+      
+      var i = $("#ticket_qty").val();
+      var m = qty;
+      i=parseInt(i);
+      m=parseInt(m);
+
+      return i >= m;
+    }, "Maximum quantity should be less than inventory.");
+
+    $.validator.addMethod("dupli", function (contt, element) {
+      // alert(k);
+      if(k==2){
+        return false;
+      }
+      else{
+      return true;
+      }
+    }, "Same ticket name with same price exist.");
+
+    $.validator.addMethod("peval", function (htmldata1, element) {
+
+      var content = $("#ticket_msg").val();
+      
+      
+
+      var re_email = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+
+      var re_phn = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/im;
+
+      var re_web = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+
+      if (re_phn.test(content))
+      {
+              
+          return false;
+      }
+
+      else if (re_email.test(content))
+      {
+              
+          return false;
+      }
+      else if (re_web.test(content))
+      {
+              
+          return false;
+      }
+      
+      else {
+        return true;
+      }
+      
+    }, "Please remove email id/website url or contact number.");
+
+    let allTicketNames = {{ ticketnames | safe }};
+
+
+    $(".btn21").click(function () {
+
+
+
+      form = $(".msform11");
+
+      form.validate({
+
+        rules: {
+          ticket_name: {
+            required: true,
+            minlength: 3,
+            peval1 : true,
+            ticketNameValidation: true,
+            ticketAlreadyExists: true
+          },
+          ticket_price: {
+            required: true,
+            digits: true,
+            // dupli: true,
+            min: 1
+          },
+          ticket_qty: {
+            required: true,
+            digits: true,
+            min: 1,
+            max:99999
+          },
+          min_qty: {
+            required: true,
+            digits: true,
+            min: 1
+
+          },
+          max_qty: {
+            required: true,
+            digits: true,
+            tqty: true,
+            iqty : true,
+            min: 1
+          },
+          other_charges_type: {
+
+            required: function (element) {
+              return $("#other_charges").val().length > 0;
+            }
+          },
+        
+          start_date: {
+            required: true,
+            eventdate: true,
+            
+          },
+          end_date: {
+            required: true,
+            enddatestep5: true,
+            // eventdate: true,
+            
+          },
+          start_time_step5: {
+            required: true,
+            
+          },
+          end_time_step5: {
+            required: true,
+            endtime: true,
+          },
+
+          ticket_msg:{
+            peval1: true,
+            maxlength: 120,
+
+          },
+          ticket_label: {
+            required: true,
+            
+          },
+
+
+        },
+        highlight: function (element) {
+          // add a class "has_error" to the element
+          $(element).next('div').addClass('has_error');
+        },
+        unhighlight: function (element) {
+          // remove the class "has_error" from the element
+          $(element).next('div').removeClass('has_error');
+        },
+        messages: {
+          ticket_name: {
+            required: "Please provide name of your ticket",
+
+          },
+
+          start_date: {
+            required: "Provide the Start Date",
+            // eventdate: "Date can not be greater than Start Date of Event."
+          },
+          end_date: {
+            required: "Provide the End Date",
+            enddatestep5: "End Date cannot be less than Start Date.",
+            // eventdate: "Date can not be greater than Start Date of Event."
+          },
+          start_time_step5: {
+            required: "Provide Start Time",
+
+          },
+          end_time_step5: {
+            required: "Provide End Time",
+            endtime: "End Time can not be less than Start Time for same day event.",
+          },
+          other_charges_type: {
+            required: "Select other charges type",
+
+          },
+          ticket_msg: {
+            peval:"Please remove phone and email.",
+            maxlength: "Max Length must not be more than 120 Characters"
+          },
+          ticket_label: {
+            required: "Select Ticket type",
+
+          }
+
+
+        },
+        errorPlacement: function (error, element) {
+
+          error.appendTo(element.next('div'));
+          element.next('div').show();
+
+
+        },
+      });
+      //    $("#msform11").valid();
+    });
+
+
+    // check ticket name already exists or not
+    $.validator.addMethod("ticketAlreadyExists", function(eventNameVal, element) {
+        console.log(allTicketNames.indexOf(eventNameVal), ' >> << ',ticketMode)
+        if(ticketMode == "editTicket") {
+          return true
+        } else {
+          if(allTicketNames.indexOf(eventNameVal) == -1) {
+            return true
+          } else {
+            return false
+          }
+        }
+        
+    }, "Ticket already create with this Name");
+    // ends here ~ check ticket name already exists or not
+    
+
+    // check contact details content
+     var re_email = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+
+    var re_phn = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/im;
+
+    var re_url = /((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?/;
+
+    // contact details validation
+    $.validator.addMethod("peval1", function(eventNameVal, element) {
+        console.log(re_email.test(eventNameVal)|| re_phn.test(eventNameVal))
+        if (re_email.test(eventNameVal)|| re_phn.test(eventNameVal)|| re_url.test(eventNameVal)) {
+          return false;
+        } else {
+          return true
+        }
+    }, "Please remove phone and email");
+    // ends here ~ contact details validation
+
+    
+    $("#enddateticket").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#startdateticket").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#starttimepicker").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#endtimepicker").keydown(function(e){
+        e.preventDefault();
+    });
+
+    $("#ticket_qty").on('change', function () {
+      
+      if($("#ticket_qty").val() <= 0){
+      $("#max_qty").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#min_qty").keydown(function(e){
+        e.preventDefault();
+    });
+    }
+   
+    });
+
+
+    // for end time validation
+    $.validator.addMethod("endtime", function(endtimevalue, element) {
+      var startdatevalue = $('#startdateticket').val();
+      var enddatevalue = $('#enddateticket').val();
+
+      if(startdatevalue == enddatevalue){
+          var temp = '01/01/1990'
+          var starttimevalue = $('#starttimepicker').val();
+          var st = new Date(temp + " " +starttimevalue).getTime();
+          var et = new Date(temp + " " +endtimevalue).getTime();
+          return et > st;
+      } else{
+        return true;
+      }
+        
+    }, "End Time can not be less than Start Time for same day event.");
+    // ends here ~ for end time validation
+
+    // ticket name validation
+    $.validator.addMethod("ticketNameValidation", function(ticketNameVal, element) {
+      return /^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/.test(ticketNameVal)
+    }, "Ticket Name is Not Valid: Check Spaces");
+    // ends here ~ ticket name validation
+
+  </script>
+<!-- ends here ~ new js code -->
+
+<!-- old js code -->
+ <!--  <script>
+    var event_date = "{{ event_start_date }}";
+    var k=0;
+    $('#ticket_name').on('change', function () {
+      
+      var name=$("#ticket_name").val();
+      if(name=="855487458584884768768768768768687687687687687687686485687468648568546864568765865876868"){
+        k=0;
+      }
+      {% for i in names %}
+      else if( name == "{{i}}"){
+        k =k+1;
+      }
+      {% endfor %}
+      else{
+        k=0;
+      }
+      // alert(k);
+  
+      });
+    $('#ticket_price').on('change', function () {
+      
+      var price=$("#ticket_price").val();
+      
+      if(price == "1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"){
+        k=k;
+      }
+
+      {% for k in prices %}
+      
+      if( price == "{{k}}"){
+        if(k == 1){
+          k=k+1;
+        }
+      }
+      {% endfor %}
+      else{
+        k=k;
+      }
+      // alert(k);
+  
+      });
+
+  
+    // code modify ~ @author Shubham
+
+    function convertInputtoDate(){
+      var input = document.getElementById("startdateticket").value;
+      var date = input.split('/');
+      var selectdate = new Date(date[2]+"-"+ date[1]+"-"+ date[0]);
+
+      return selectdate;
+    }
+
+
+    $('#startdateticket').datepicker({
+
+      format: 'dd/mm/yyyy',
+      endDate: '{{sdate}}',
+      startDate: new Date(),
+        
+    }).on('change', function () {
+
+      var today = convertInputtoDate();
+    var tomorrow = new Date(convertInputtoDate());
+    tomorrow.setDate(today.getDate() + 1);
+
+    $('#enddateticket').datepicker('setStartDate', tomorrow);
+
+    });
+    
+
+   
+    //starttime
+    $('#starttimepicker').datetimepicker({
+      format: 'LT',
+      stepping: 5
+
+    });
+
+    
+
+
+     
+    $('#enddateticket').datepicker({
+      format: 'dd/mm/yyyy',
+      startDate: '{{sdate}}',
+
+    })
+
+     $('#endtimepicker').datetimepicker({
+        format: 'LT',
+        stepping: 5
+      });
+
+    // $('#enddateticket').datepicker('setStartDate', {{sdate}});
+
+    // ends here ~ code modify ~ @author Shubham
+
+
+
+    jQuery.validator.addMethod("enddatestep5", function (enddatevalue, element) {
+      var startdatevalue = $('#startdateticket').val();
+      console.log(typeof (startdatevalue));
+      var arrsdate = startdatevalue.split('/');
+      var arredate = enddatevalue.split('/');
+      return new Date(arrsdate[2], arrsdate[1], arrsdate[0]) <= new Date(arredate[2], arredate[1], arredate[0]);
+    }, "End date can not be less than Start Date.");
+
+    $.validator.addMethod("eventdate", function (datevalue, element) {
+      console.log('datevalue >>',datevalue, 'element >>',element)
+      var arrsdate = event_date.split('/');
+      var arredate = datevalue.split('/');
+
+      console.log(arrsdate,' >  = = < ',arredate)
+
+      return new Date(arrsdate[2], arrsdate[0], arrsdate[1]) >= new Date(arredate[2], arredate[1], arredate[0]);
+    }, "Date can not be greater than Start Date of Event 3.");
+
+    $.validator.addMethod("tqty", function (qty, element) {
+      
+      var min = $("#min_qty").val();
+      var max = qty;
+      min=parseInt(min);
+      max=parseInt(max);
+      
+
+      return max > min;
+    }, "Maximum quantity should be more than minimum quantity.");
+
+    $.validator.addMethod("iqty", function (qty, element) {
+      
+      var i = $("#ticket_qty").val();
+      var m = qty;
+      i=parseInt(i);
+      m=parseInt(m);
+
+      return i >= m;
+    }, "Maximum quantity should be less than inventory.");
+
+    $.validator.addMethod("dupli", function (contt, element) {
+      // alert(k);
+      if(k==2){
+        return false;
+      }
+      else{
+      return true;
+      }
+    }, "Same ticket name with same price exist.");
+
+    $.validator.addMethod("peval", function (htmldata1, element) {
+
+      var content = $("#ticket_msg").val();
+      
+      
+
+      var re_email = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+
+      var re_phn = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/im;
+
+      var re_web = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+
+      if (re_phn.test(content))
+      {
+              
+          return false;
+      }
+
+      else if (re_email.test(content))
+      {
+              
+          return false;
+      }
+      else if (re_web.test(content))
+      {
+              
+          return false;
+      }
+      
+      else {
+        return true;
+      }
+      
+    }, "Please remove email id/website url or contact number.");
+
+    $.validator.addMethod("peval1", function (htmldata1, element) {
+
+var content = $("#ticket_name").val();
+
+
+
+var re_email = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+
+var re_phn = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/im;
+
+var re_web = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+
+
+if (re_phn.test(content))
+{
+        
+    return false;
+}
+
+else if (re_email.test(content))
+{
+        
+    return false;
+}
+else if (re_web.test(content))
+      {
+              
+          return false;
+      }
+else {
+  return true;
+}
+
+}, "Please remove email id/website url or contact number.");
+
+
+    $(".btn21").click(function () {
+      form = $(".msform11");
+
+      form.validate({
+
+        rules: {
+          ticket_name: {
+            required: true,
+            minlength: 3,
+            peval1 : true,
+            ticketNameValidation: true,
+          },
+          ticket_price: {
+            required: true,
+            digits: true,
+            dupli: true,
+            min: 1
+          },
+          ticket_qty: {
+            required: true,
+            digits: true,
+            min: 1
+          },
+          min_qty: {
+            required: true,
+            digits: true,
+            min: 1
+
+          },
+          max_qty: {
+            required: true,
+            digits: true,
+            tqty: true,
+            iqty : true,
+            min: 1
+          },
+          other_charges_type: {
+
+            required: function (element) {
+              return $("#other_charges").val().length > 0;
+            }
+          },
+        
+          start_date: {
+            required: true,
+            eventdate: true,
+            
+          },
+          end_date: {
+            required: true,
+            enddatestep5: true,
+            // eventdate: true,
+            
+          },
+          start_time_step5: {
+            required: true,
+            
+          },
+          end_time_step5: {
+            required: true,
+            
+          },
+
+          ticket_msg:{
+            peval: true,
+
+          },
+          ticket_label: {
+            required: true,
+            
+          },
+
+
+        },
+        highlight: function (element) {
+          // add a class "has_error" to the element
+          $(element).next('div').addClass('has_error');
+        },
+        unhighlight: function (element) {
+          // remove the class "has_error" from the element
+          $(element).next('div').removeClass('has_error');
+        },
+        messages: {
+          ticket_name: {
+            required: "Please provide name of your ticket",
+
+          },
+
+          start_date: {
+            required: "Provide the Start Date",
+            // eventdate: "Date can not be greater than Start Date of Event."
+          },
+          end_date: {
+            required: "Provide the End Date",
+            enddatestep5: "End Date cannot be less than Start Date.",
+            // eventdate: "Date can not be greater than Start Date of Event."
+          },
+          start_time_step5: {
+            required: "Provide Start Time",
+
+          },
+          end_time_step5: {
+            required: "Provide End Time",
+
+          },
+          other_charges_type: {
+            required: "Select other charges type",
+
+          },
+          ticket_msg: {
+            peval:"Please remove phone and email.",
+
+          },
+          ticket_label: {
+            required: "Select Ticket type",
+
+          }
+
+
+        },
+        errorPlacement: function (error, element) {
+
+          error.appendTo(element.next('div'));
+          element.next('div').show();
+
+
+        },
+      });
+      //    $("#msform11").valid();
+
+    });
+    
+    $("#enddateticket").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#startdateticket").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#starttimepicker").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#endtimepicker").keydown(function(e){
+        e.preventDefault();
+    });
+
+    $("#ticket_qty").on('change', function () {
+      
+      if($("#ticket_qty").val() <= 0){
+      $("#max_qty").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#min_qty").keydown(function(e){
+        e.preventDefault();
+    });
+    }
+   
+    });
+
+
+    // ticket name validation
+    $.validator.addMethod("ticketNameValidation", function(ticketNameVal, element) {
+      return /^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/.test(ticketNameVal)
+    }, "Ticket Name is Not Valid: Check Spaces");
+    // ends here ~ ticket name validation
+
+  </script> -->
+<!-- ends here ~ old js code -->
+</section>
+{% endblock step_one %}

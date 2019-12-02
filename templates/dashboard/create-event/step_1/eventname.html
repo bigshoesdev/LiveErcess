@@ -1,0 +1,17 @@
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+				</div>
+				{% if event_name %}
+				<input name="event_name" type="text" class="form-control" value="{{event_name}}" >
+				<div class="input-error"></div>
+				{% else %}
+				<input name="event_name" type="text" class="form-control" placeholder="Event Name*{{event_name}}">
+				<div class="input-error"></div>
+				{% endif %}
+			</div>
+		</div>
+	</div>

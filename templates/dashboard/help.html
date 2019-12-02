@@ -1,0 +1,88 @@
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %} Help center - Ercess Live {% endblock title %}
+{% block og %}
+
+
+<section class="content">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-dark mb-30">Welcome to our help center</h1>
+
+                <ul class="nav nav-tabs mb-30 mt-30">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#event-promotion">Event promotion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#finance">Finance</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="event-promotion" class="tab-pane active">
+                    	<div class="box box-solid bg-gray site-collapse">
+					        <div class="box-header with-border box-btn-slide">
+					          	<h5 class="box-title">How multichannel event promotion works?</h5>
+					        </div>
+					        <div class="box-body">
+								<p>The whole multichannel event promotion is broken down in 6 steps, which are:</p>
+								<ol>
+									<li>you create an account, log in to your dashboard and create your event.</li>
+									<li>Our team goes through your event, approve it for promotion and then send the details to all our channel partners.</li>
+									<li>Once an event is live, the booking starts and people purchase the tickets.</li>
+									<li>You check all the sales, RSVP, inquiries in Ercess Live dashboard and connects with your audience as and when necessary.</li>
+									<li>Once the event is started, Ercess Live collects all the money from all the channel partners.</li>
+									<li>Ercess Live transfers favored financial balance to the organizer’s bank account within 5 business days after the event starts.</li>
+								</ol>
+					        </div>
+					    </div>
+					    <div class="box box-solid bg-gray site-collapse">
+					        <div class="box-header with-border box-btn-slide">
+					          	<h5 class="box-title">How will I know if my event is promoted?</h5>
+					        </div>
+					        <div class="box-body">
+								<p>When an event is approved by our team to promote, you receive an email alert. After this, you can log in to your account, go to Manage events > click on the event and you see a table which displays on which websites we are posting your event along with the current status. In order to cross verify, we provide you the public link of your event.</p>
+					        </div>
+					    </div>
+                    </div>
+                    <div id="finance" class="tab-pane">
+					    <div class="box box-solid bg-gray site-collapse">
+					        <div class="box-header with-border box-btn-slide">
+					          	<h5 class="box-title">Why my payment is not being released?</h5>
+					        </div>
+					        <div class="box-body">
+								<p>There are two possibilities:</p>
+								<ol>
+									<li>You have not added your bank account details.</li>
+									<li>You have not signed the agreement.</li>
+								</ol>
+					        </div>
+					    </div>
+					    <div class="box box-solid bg-gray site-collapse">
+					        <div class="box-header with-border box-btn-slide">
+					          	<h5 class="box-title">Can I get partial payment before event starts?</h5>
+					        </div>
+					        <div class="box-body">
+								<p>Yes, we can initiate the partial payment which is limited to 40% of all ticket sales.</p>
+					        </div>
+					    </div>
+					    <div class="box box-solid bg-gray site-collapse">
+					        <div class="box-header with-border box-btn-slide">
+					          	<h5 class="box-title">Do you charge for free events?</h5>
+					        </div>
+					        <div class="box-body">
+								<p>No.</p>
+					        </div>
+					    </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock og %}

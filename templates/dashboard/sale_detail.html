@@ -1,0 +1,62 @@
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %} Sales details - Ercess Live {% endblock title %}
+{% block og %}
+<link rel="stylesheet" type="text/css" href="/static/assets/vendor_components/datatable/datatables.min.css"/>
+<section class="content">
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+          <h1 class="text-dark mb-30">Sales Details</h1>
+          <h2 class="text-dark mb-30" align='center'>{{eve_name}}</h2>
+          {% if count == 0 %}
+          <div class="alert alert-info text-center mb-80">
+              <h4>NOTHING TO WORRY. WE ARE WORKING HARD FOR YOU.</h4>
+          </div>
+          {% else %}
+          <div class="table-responsive">
+            <table id="example" class="table table-hover display nowrap w-p100">
+              <thead>
+                <tr>
+                  <th>Attendee</th>
+                  <th>Amount</th>
+                  <th>Quantity</th>
+                  <th>Purchase Date</th>
+                  <th>Ticket Type</th>
+                  <th>Booking Id</th>
+                </tr>
+              </thead>
+
+              {% for type,id,amt,qty,p_date,site,atten in details %}
+
+              <tr>
+                <td>{{atten}}</td>
+                <td>{{amt}}</td>
+                <td>{{qty}}</td>
+                <td>{{p_date.date}}</td>
+                <td>{{type}}</td>
+                <td>{{id}}</td>
+              </tr>
+              {% endfor %}
+              <tfoot>
+                <tr>
+                  <th>Attendee</th>
+                  <th>Amount</th>
+                  <th>Quantity</th>
+                  <th>Purchase Date</th>
+                  <th>Ticket Type</th>
+                  <th>Booking Id</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/static/assets/vendor_components/datatable/datatables.min.js"></script>
+<script src="/static/js/pages/data-table.js"></script>
+<script src="/static/js/pages/project-table.js"></script>
+{% endblock og %}

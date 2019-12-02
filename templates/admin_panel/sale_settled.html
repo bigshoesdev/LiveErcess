@@ -1,0 +1,52 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block sale-settled %}
+<section class='content'>
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Sales Settled</h1>
+        <div class="table-responsive">
+            <table class="table table-hover table-event-list">
+                <tr>
+                  <th>Booking id</th>
+                  <th>Event Name</th>
+                  <th>Attendee Name</th>
+                  <th>Amount Paid</th>
+                  <th>Purchase Date</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+
+                {% for booking_id, amount_paid, purchase_date, attendee_name,event_name,id, event_id in sales %}
+                 <tr>
+                    <td>
+                      <div class="pull-left ml-10 pt-10">
+                        <a href="{% url 'admin-panel:booking-details' booking_id=booking_id  %}">{{booking_id}}</a>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="pull-left ml-10 pt-10">
+                        <a href="{% url 'admin-panel:details' event_id=event_id %}" target="_blank">{{ event_name }}</a>
+                      </div>
+                    </td>
+                    <td>{{attendee_name}}</td>
+                    <td>{{amount_paid}}</td>
+                     <td>{{purchase_date}}</td>
+                      <td>
+                      <div class="pull-left ml-10 pt-10">
+                        <a href="#">Edit</a>
+                      </div>
+                    </td>
+                </tr>
+        {% endfor %}
+     </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+{% endblock sale-settled %}

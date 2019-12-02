@@ -1,0 +1,446 @@
+  {% load static %}
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>{% block title %} {% endblock title %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="/static/images/fav.ico">
+        <link rel="stylesheet" href="{% static 'assets/vendor_components/bootstrap/dist/css/bootstrap.min.css' %}" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        <link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-extend.css' %}" type="text/css">  
+        <link rel="stylesheet" href="{% static 'css/master_style.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/skins/_all-skins.css' %}" type="text/css">  
+
+    </head>
+    <body class="hold-transition skin-purple-light sidebar-mini bg-black">
+        <div class='wrapper'>
+            <section class="content">
+                <div class="container clearfix">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2 col-lg-8 offset-lg-2">
+                            <div class="text-center">
+                                <a href="{% url 'dashboard:how' %}" class="logo">
+                                    <span class="logo-lg">
+                                        <img src="/static/images/logo.png" alt="logo" class="light-logo">
+                                    </span>
+                                </a>
+                                <h1 class="text-dark mt-30 mb-50">Legal agreement</h1>
+                            </div>
+                            <div class="font-size-16">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <p>This Merchant Agreement contains important information about payment and refund terms and requirements, event prohibitions, rights you provide to us, and other rights, representations and liabilities.</p>
+                                            <ol>
+                                                <li>
+                                                    <p class="sm-heading">Who We Are.</p>
+                                                    <p>1.1 Ercess Inc.</p>
+                                                    <p>Welcome to Ercess Inc! We are a ticketing and event registration platform dedicated to bringing the event organizers and viewers together via our platform Ercess Live. Through our platform, mobile apps and services, we enable people all over the world to create, discover, share and register for events.
+                                                    </p>
+                                                    <p>1.2 The Services.</p>
+                                                    <p>Ercess Inc's products, features and offerings are available (a) online through various Ercess Inc properties; (b) off platform, including without limitation, entry management, sponsorship and marketing or distribution services; and (c) through mobile applications, webpages, application programming interfaces, and subdomains ("Applications"). (a), (b), and (c) are collectively referred to as "Ercess Inc Properties" or our "Services". Ercess Inc is a firm with its principal place of business at 456/A, 3, 17th C Main Road, HSR LAYOUT, Bengaluru (Bangalore) Urban, Karnataka, 560102 ("Ercess Inc," "us," "we" or "our"). When this Merchant Agreement mentions "Ercess Inc," "we," "us," or "our," it refers to Ercess Inc, Inc. and its Affiliates, and subsidiaries, and each of its and their respective officers, directors, agents, partners and employees. An "Affiliate" of any entity means any person or entity that controls, is controlled by, or that is under common control with, such entity, whether as of the date of your agreement to this Merchant Agreement or thereafter. For purposes of this Agreement, "control" means ownership or control, directly or indirectly, of more than 50% of the voting power of an entity or otherwise possessing the power to direct the management and policies of an entity.
+                                                    </p>
+                                                    <p>
+                                                        1.3 Organizers and Consumers. When this Merchant Agreement uses the term "Organizer" we mean event creators using the Services to create, list or promote events for consumers using our Services (a) to consume information about, or purchase tickets for events from Organizers ("Consumers"), or (b) for any other reason. Organizers, Consumers and third parties using our Services are all referred to in these Terms collectively as "Users", "you" or "your".
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>Our Merchant Agreement.</p>
+                                                    <p>
+                                                        2.1 Purpose. The following policy sets forth the terms and conditions upon which Organizers can use the Services to create, promote and/or collect sales proceeds for selling tickets and/or registrations to an event (this "Merchant Agreement"). By accepting the Terms of Service, you agree to the terms of this Merchant Agreement without modification and enter into a binding contract with Ercess Inc, which will be applicable when and if you use the Services to create, promote and/or collect sales proceeds for selling tickets and/or registrations to an event.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>Additional Registration Information.</p>
+                                                    <p>
+                                                        3.1 Additional Information. As part of the creation of a paid event or at any time following such creation, you may be required by Ercess Inc to provide additional information (beyond the information required to register for the Services) about yourself, the entity you represent (if any) and the principals/beneficial owners of the entity you represent (if any) (collectively, "Additional Registration Data"). As an example, the Additional Registration Data may include current address, doing business as (DBA) names, description of products, website address, bank account or other payment account information, Tax Identification Numbers, date of birth, passport or drivers license number, country of origin, copies of government identification documents and other personal information. This information may be used to verify your identity, the validity and/or legality of your transactions and/or whether you qualify to use the Services for paid events. You agree to: (a) provide this information in a timely, accurate and complete manner and (b) maintain and promptly update this information in a timely manner to ensure it remains accurate and complete at all times.
+                                                    </p>
+                                                    <p>
+                                                        3.2 Disclosure Authorization. Organizer agrees that Ercess Inc is permitted to share Registration Data (as defined in the Terms of Service), Additional Registration Data and information relating to your events and transactions on the Services with our Payment Processing Partners (as defined below), the Card Schemes (as defined below) and Alternative Form of Payment Frameworks (as defined below) and with your bank or other financial institution, in each case to the extent your transactions or events involve such third parties. In addition, you authorize Ercess Inc to verify your Registration Data and Additional Registration Data and conduct due diligence on you through third parties, including third party credit reporting agencies.
+                                                    </p>
+                                                    <p>
+                                                        3.3 Failure to Provide. We reserve the right to suspend your Ercess Inc account or to withhold any amounts due to you in the event that we reasonably believe that your Registration Data or Additional Registration Data is inaccurate or if you fail to provide all Registration Data or Additional Registration Data within the timeframes requested.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>Payment Methods; Payment Process.</p>
+                                                    <p>
+                                                        4.1 Overview.
+                                                    </p>
+                                                    <ol type="a">
+                                                        <li>
+                                                            <p>Payment Methods.</p>
+                                                            <p>
+                                                                "Ercess Inc Payment Processing," "EPP," or the "EPP Service," in which Ercess Inc acts as Organizer's limited payments agent for the purpose of processing Event Registration Fees using its Payment Processing Partners (as defined below).
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Ercess Inc's Role.</p>
+                                                            <p>
+                                                                For the avoidance of doubt, Ercess Inc does not and will not provide banking, deposit taking, stored value, or any other financial services to an Organizer other than, for Organizers who elect EPP, serving as a limited payments agent as set forth below. To provide the EPP Service, Ercess Inc utilizes third party gateways, payment processors, merchant acquirers and/or merchant acquiring banks with which we have relationships (collectively, "Payment Processing Partners") and both Organizers and Ercess Inc are subject to the rules and regulations of such Payment Processing Partners. Additionally, in certain instances, for you to participate in the EPP Service, you must have entered into a separate agreement with our Payment Processing Partner (the &ldquo;Payment Processor Agreement&rdquo;). For convenience, Ercess Inc shows you a balance of proceeds for your events in your Ercess Inc account, by our Payment Processing Partners, and in the case of EPP, represents only a general unsecured claim against Ercess Inc and not a store of value or a deposit/current account.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Confirmations.</p>
+                                                            <p>
+                                                                Upon an order being placed by a Consumer and confirmed through Ercess Inc, Ercess Inc generates a confirmation message and issues a unique confirmation number for such Consumer's order. Organizer agrees to unconditionally accept, honor and fulfill all ticketing, registration, merchandise and donation commitments that have been confirmed by Ercess Inc through the Services. Organizer agrees it is Organizer's responsibility to verify a Consumer's confirmation number and/or any event restrictions prior to the applicable event.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Fees.</p>
+                                                            <p>
+                                                                Regardless of the payment processing option elected, Organizer agrees to pay Ercess Inc all applicable service fees for each ticket, registration or other item sold or donation solicited via the Services (the "Ercess Inc Service Fee"). To the extent Organizer uses EPP, Organizer also agrees to pay Ercess Inc the additional Ercess Inc Payment Processing fee (the "Ercess Inc Payment Processing Fee") for each ticket, registration or other item sold or donation solicited via the Services. The Ercess Inc Service Fee will be 1.5% on every ticket on which the organizer charges from the consumer. Note that these fees are subject to change from time to time with respect to transactions that occur following the change. In addition, Organizer may from time to time request additional Services from Ercess Inc, including without limitation marketing and promotion services, stall space services, which Ercess Inc may provide as per the packages opted by the organizer. Fees for such ancillary Services (the "Ancillary Fees") will be disclosed to Organizer prior to Organizer's acceptance of such Services. The Ercess Inc Service Fee, the Ercess Inc Payment Processing Fee and the Ancillary Fees are referred to herein as the "Fees." In addition to such Fees, Ercess Inc may also charge you, at Ercess Inc's standard rates, for research, including, but not limited to, (i) research required to respond to any third party or government subpoena, levy or garnishment on your account, and (2) research and activities necessary to verify and execute any payee change, whether pursuant to the government&rsquo;s direction or court order.
+                                                            </p>
+                                                            <p>
+                                                                Ercess Inc may charge various fees to Consumers that are not passed on to Organizers, related to ticket sales, processing, handling, and access to various Ercess Inc content and services. We have sole discretion to set and assess such fees.
+                                                            </p>
+                                                        </li>
+                                                    </ol>
+                                                    <p>4.2 Ercess Inc Payment Processing.</p>
+                                                    <ol type="a">
+                                                        <li>
+                                                            <p>Underwriting.</p>
+                                                            <p>
+                                                                If you have requested EPP, then upon receipt of Additional Registration Data and if applicable your separate acceptance of the Payment Processor Agreement, Ercess Inc will determine, in its discretion (which may be based on input from our Payment Processing Partners), whether you are qualified to use EPP. If you are not qualified to use EPP, but you are otherwise qualified to use the Services, Ercess Inc will notify you and you may switch to EPP unless the reason that you do not qualify for EPP is that your event is a Prohibited Event, you are a Prohibited Merchant and/or your transactions are Prohibited Transactions, in each case as such terms are defined in Section 5 of this Merchant Agreement. For risk management and security reasons and to meet the requirements imposed by our Payment Processing Partners, we may from time to time in our discretion impose a transaction limit on the amount of any given transaction that you process through EPP and you authorize us to reject any transaction over that limit. We may also from time to time in our discretion impose a reserve requirement on you under Section 4.3(f).
+                                                            </p>
+                                                            <p>Payment Process.</p>
+                                                            <p>
+                                                                When using EPP, payment processing occurs directly through our Payment Processing Partners, and you understand and agree that within five (5) business days after the successful completion of an event, Ercess Inc will on your behalf cause our Payment Processing Partners to pass along to you all Event Registration Fees related to such event that have been processed by our Payment Processing Partners, subject to (i) deduction of all applicable Fees then due; (ii) our right of setoff against any debts or other amounts owed to us or any of our Affiliates by you or any of your Affiliates under this Merchant Agreement, the Terms of Service or other applicable agreement for Services provided by Ercess Inc or any of its Affiliates; (iii) any other deductions authorized pursuant to this Merchant Agreement; and (iv) any reserves established as set forth in subsection (f) below. Such payouts will be made only to the payout information designated by Organizer on the Services under "Payment Options." Payouts are made in INR only, by online transfer to bank account details shared by the organizer. In addition, EPP may allow you to accept payments from card based payment networks, such as Visa&reg;, MasterCard&reg;, or any other card affiliated with Ercess (collectively, the "Card Schemes"). Except to the extent that the Commercial Entity Agreement (as defined below) is applicable to you, and notwithstanding the Payment Processor Agreement you may have entered into with our Payment Processing Partner, or a Card Scheme, you are not a direct party to any agreement with any Payment Processing Partner, Card Scheme or Alternative Form of Payment Framework, nor are you a third party beneficiary of any such agreement. In addition, by accepting a particular Card Scheme payment type (e.g., MasterCard, Visa), you are authorizing the owner of that Card Scheme and its affiliates to use your name, address and website URL in any media from time to time. You agree that, regardless of the delivery option used by Ercess Inc to make a payout to you, you will not request or use any information related to that payout method for any purpose that you know or should know to be fraudulent, erroneous or otherwise in violation of this Merchant Agreement. 
+                                                            </p>
+                                                            <p>
+                                                                For ACH transactions, if any bank account number you provide to us, including a bank account number you provide as part of your Additional Registration Data, is inaccurate, you agree that we are still entitled to make payment to that account number, even if the bank account is not owned by you. You agree that we may rely solely on the bank account number you provide to us as the proper<br />identification of your bank account, even if the bank account number identifies a different account from your account. You also agree to reimburse us for any losses or expenses we incur as a result of our reliance on any bank account number you provide to us.
+                                                            </p>
+                                                            <p>
+                                                                You agree that we may, from time to time, in our sole discretion, without notice to you, (a) setoff against your or your Affiliate's reserve as defined under Section 4.3(f), (b) setoff against any Event Registration Fees you receive and any other fees for Services provided to you or any of your Affiliates by Ercess Inc or any of its Affiliates (including for any Ercess Inc fees or any other amounts you owe to Ercess Inc under this Merchant Agreement, the Terms of Service, or any other agreement between you and us), or both (a) and (b), based upon the level of refunds, disputed charges, chargebacks, customer complaints, allegations of fraud, changes in your or your Affiliate's credit profile or the underlying event(s)' risk profile, fraudulent conduct by you, any of your Affiliates or anyone acting on your behalf, or breaches of the Terms of Service, including this Merchant Agreement or any other applicable agreement for Services provided by Ercess Inc or any of its Affiliates. We may exercise such setoff rights before we make any payout, whether by check or by ACH, to you. We are not liable to you for any claims resulting from our decision to exercise our setoff rights. We may also exercise any of our rights and remedies under Section 4.5 of this Agreement regarding recovery of such amounts due and owing to us from you.
+                                                            </p>
+                                                            <p>
+                                                                You understand that we may also debit your Event Registration Fees if Ercess Inc is served with legal process seeking to attach or garnish any of your funds or property in Ercess Inc's possession.
+                                                            </p>
+                                                            <p>
+                                                                You also understand that, if instructed by any authority under the law or as per the directions of the government, we may be required, upon receipt of a notice of assignment and payment direction from your secured party (lender), to pay all or a portion of your Event Registration Fees as directed by your secured party. If we receive such a notice and direction, we will, after deducting our fees and expenses of compliance as provided above, make payments to your secured party as so directed without notice to you.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Appointment as Agent.</p>
+                                                            <p>
+                                                                With respect to any events for which Organizer uses EPP, Organizer hereby appoints Ercess Inc as Organizer's limited payment agent for the purpose of facilitating the receipt of payments made by Consumers for such events through our Payment Processing Partners, and the disbursement of those payments to Organizer. Organizer agrees that a payment made by a Consumer that is processed by Ercess Inc will be considered the same as a payment made by a Consumer directly to Organizer and Organizer will sell or provide all advertised goods and services to the Consumer as if Organizer had directly received the Event Registration Fees from such Consumer, regardless of whether the Event Registration Fees have yet to be or are ever received from Ercess Inc. Organizer agrees that Ercess Inc, in its role as limited payments agent, is authorized to (i) enable Consumers to transfer or upgrade a ticket and/or registration (if such transfers are permitted by Organizer during the event registration process); (ii) hold, disburse and retain proceeds on Organizer's behalf pursuant to this Merchant Agreement, or otherwise instruct our Payment Processing Partners to do so; (iii) issue refunds to Consumers as set forth in Section 4.4 below; and (iv) manage credit card chargebacks as set forth in subsection (g) below. In accepting appointment as the limited agent of Organizer, Ercess Inc assumes no liability for any acts or omissions of Organizer and Organizer understands that Ercess Inc's obligation to pay Organizer is subject to and conditional upon Consumers&rsquo; actual payment of Event Registration Fees. Organizer further authorizes Ercess Inc to delegate its obligations under this Merchant Agreement to certain of its affiliated entities both within and outside India, provided, that Ercess Inc will remain liable for the discharge of its obligations under this Merchant Agreement by such affiliated entities.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Advances.</p>
+                                                            <p>
+                                                                Organizer agrees that all Event Registration Fees for a given event are earned by Organizer only following the conclusion of the applicable event. Ercess Inc, in its discretion, may determine to advance a portion of Event Registration Fees to Organizer prior five (5) business days after the successful completion of an event, on such terms and conditions set forth in (i) this Merchant Agreement; (ii) the applicable agreement for Services entered into by you and Ercess Inc; and/or (iii) such terms that Organizer and Ercess Inc agree to in a separate agreement. Organizer agrees that any payments made by Ercess Inc of Event Registration Fees prior to the fifth (5th) business day after the end date of the successful completion of the applicable event are merely advances of amounts that may become due to Organizer under this Merchant Agreement. If Ercess Inc decides to advance a portion of Event Registration Fees to Organizer, Organizer acknowledges and agrees that Ercess Inc may at any time (x) terminate or suspend Organizer's right to receive such advance payments; and/or (y) alter the terms (i.e. frequency, reserve rate and maximum aggregate cap) of such advance payments made to Organizer. In addition, Organizer agrees that Ercess Inc may demand back such advances (or any portion thereof) from time to time in its discretion based upon the level of refunds, disputed charges, chargebacks, customer complaints, allegations of fraud, changes in Organizer's credit profile or the underlying event(s)' risk profile, or breaches of the Terms of Service, including this Merchant Agreement. Upon receipt of notice of any such demand, Organizer will thereupon promptly pay back to Ercess Inc the portion of any such advance demanded. Organizer acknowledges and agrees that Ercess Inc has the right to withhold funds as set forth in Sections 4.3(b) and 4.5(a) of this Merchant Agreement. Organizer also acknowledges and accepts its obligations under Section 4.3(g) and 4.4(c) of the Merchant Agreement, including its obligations to reimburse Ercess Inc for refunds and credit card chargebacks.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Cancellations; Nonperformance.</p>
+                                                            <p>
+                                                                No payments will be made to Organizer with respect to any event that is cancelled or with respect to which Ercess Inc believes there is a risk of cancellation or nonperformance, unless Ercess Inc receives adequate security (as determined by Ercess Inc in its discretion) for Organizer's obligations under this Merchant Agreement. In addition, no Event Registration Fees for a given event will be settled to Organizer until that event is successfully completed. If payments have already been settled to an Organizer for a cancelled event, Organizer will immediately refund to a payment address designated by Ercess Inc all such payments upon cancellation of such event for the purpose of effecting refunds if refunds are being made under Section 4.4. You are responsible for complying with the requirements of Section 4.4 and the requirements of the Organizer Refund Policy Requirements which are in addition to and are incorporated into the Terms of Service by reference. If you do not remit funds due to Ercess Inc that are sufficient to cover refunds due to Consumers for an event cancellation or nonperformance, including, but not limited to, any mandatory refunds under Section 4.4(c) below, then you acknowledge and agree that the amount of such funds shortfall will become due and owing from you to us under these Terms of Service, including this Merchant Agreement, until you have satisfied the amount in full and such amounts are also subject to the provisions of Sections 4.4(f) and 4.5 of this Agreement.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Reserves and Ercess Inc Right of Setoff.</p>
+                                                            <p>
+                                                                Ercess Inc reserves the right to retain a certain percentage of Event Registration Fees and any other fees for Services provided to you or any of your Affiliates by Ercess Inc or any of its Affiliates (with such percentage being determined by Ercess Inc in its discretion) to fund a reserve (i) at any time as we determine in our discretion to be necessary based upon the level (or expected level) of refunds, disputed charges, chargebacks, customer complaints, allegations of fraud or changes in Organizer's credit profile or the underlying event(s)' risk profile; and (ii) as otherwise necessary to secure the performance of your obligations under the Terms of Service, including this Merchant Agreement, or to protect Ercess Inc against fraudulent or erroneous activity. Ercess Inc's right to hold a reserve will continue following the applicable event(s) and until either (A) Organizer and any of its Affiliates have discharged all obligations under the Terms of Service or other applicable agreement for Services provided by Ercess Inc or any of its Affiliates and the applicable periods for refunds, disputed charges, chargebacks, and complaints have passed or (B) Organizer and any of its Affiliates have otherwise provided Ercess Inc or any of its Affiliates with adequate security (as determined by Ercess Inc or its Affiliates in their discretion) for its obligations under the Terms of Service or other applicable agreement for Services provided by Ercess Inc or any of its Affiliates, whether matured or unmatured, contingent or non-contingent, or liquidated or unliquidated. Further, the reserve is subject to the right of setoff as set forth in Section 4.3(b). In the event that the exercise of our or our Affiliates' setoff right does not fully cover the amount of funds due and owing from you or any of your Affiliates to us or any of our Affiliates under the Terms of Service or other applicable agreement for Services provided by Ercess Inc or any of its Affiliates, including this Merchant Agreement, then such amount of funds will be deemed due and owing to us until you have satisfied the amount in full.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Chargebacks; Reversals.</p>
+                                                            <p>
+                                                                Any credit card chargebacks or other transaction reversals initiated against Ercess Inc or its affiliates for any reason (except to the extent they are caused solely by Ercess Inc's negligence or willful misconduct) with respect to an Organizer's event and all related credit card association, payment processing, re-presentment, penalty and other fees and expenses incurred by Ercess Inc or its affiliates in connection with such chargebacks will ultimately be the responsibility of Organizer, and Organizer agrees to promptly and fully reimburse Ercess Inc for such amounts on demand. As part of Ercess Inc's activity as limited payments agent, Ercess Inc will use commercially reasonable efforts to manage the re-presentment of such chargebacks and reversals on behalf of Organizer and Organizer hereby authorizes Ercess Inc to do so and agrees to use reasonable efforts to cooperate with Ercess Inc in such re-presentment. However, Ercess Inc will have no obligation to re-present any chargeback that it believes in its discretion it is more likely than not to lose or that relates to a transaction that should be refunded in accordance with the Organizer's refund policy or the provisions of Section 4.4(c) below. Understanding the nature of the Payment Scheme Rules (as defined below) and the discretion that they provide to the Card Schemes and Alternative Form of Payment Frameworks, both parties agree that Ercess Inc's loss of any chargeback that has been re-presented by Ercess Inc will not in any way limit Organizer's obligation to reimburse Ercess Inc and its affiliates under this paragraph.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Currencies.</p>
+                                                            <p>
+                                                                Ercess Inc only provides the Ercess Inc Payment Processing Service for certain currencies and for Organizers in certain locations. In addition, Event Registration Fees collected in a currency may only be paid out to Organizer in the currency in which they are collected. Ercess Inc does not provide currency conversion services. Finally different payment options or payment methods may be available to you depending on the currency in which you collect Event Registration Fees and your location.
+                                                            </p>
+                                                            <ol type="i">
+                                                                <li>
+                                                                    <p>Payment Scheme Rules.</p>
+                                                                    <p>
+                                                                        The Card Schemes and Alternative Form of Payment Frameworks require that you comply with all applicable bylaws, rules and regulations published by them from time to time (collectively, the "Payment Scheme Rules"). We may be required to change this Merchant Agreement in connection with amendments to the Payment Scheme Rules. Depending on what payment methods you elect to use in EPP, you may be subject to different Payment Scheme Rules. You agree to comply with any applicable Payment Scheme Rules as in effect from time to time. These Payment Scheme Rules, include without limitation, a requirement to submit only bona fide transactions, limits on how you use the Card Scheme logos and trademarks and authorization to use certain of your information to show that you participate in the Card Schemes. The Payment Scheme Rules are publicly available from the websites of the related Card Schemes and Alternative Form of Payment Frameworks.
+                                                                    </p>
+                                                                </li>
+                                                            </ol>
+                                                        </li>
+                                                    </ol>
+                                                    <p>4.3 Refunds.</p>
+                                                    <ol type="a">
+                                                        <li>
+                                                            <p>Refund Policy and Process.</p>
+                                                            <p>
+                                                                Regardless of what payment method is selected, Organizer agrees to communicate a refund policy to Consumers with respect to each event posted on the Services that meets the requirements of the Organizer Refund Policy Requirements and to administer such policy in accordance with its terms. The Organizer Refund Policy Requirements are incorporated by reference into this Merchant Agreement. All refunds for EPP transactions must be processed through Ercess Inc, unless otherwise agreed by Ercess Inc. For EPP transactions, Organizer can issue refunds to Consumers directly through the Services within certain windows permitted by our Payment Processing Partners. If the refund is outside such windows, then it will need to be processed manually by Ercess Inc. Ercess Inc may determine in its discretion not to process any refunds which are manual, in which case they will be processed directly by Organizer. Consistent with the Consumer Refund Policy Requirements, refunds that you are responsible for due to the cancellation or nonperformance of an event are subject to the following refund requirements:
+                                                            </p>
+                                                            <ol type="i">
+                                                                <li>
+                                                                    <p>
+                                                                        In the event of a full or partial event cancellation, Organizer agrees to issue refunds to Consumers either by using backup funding sources within the Ercess Inc platform (e.g. additional security sources), or by remitting funds due for refunds back to Ercess Inc so that refunds can be processed by Ercess Inc on the Organizer's behalf.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        Organizer agrees that no refunds will be made outside of the Ercess Inc platform (e.g. offline), and EPP refund transactions may only be employed for bona fide event refunds, and not for other money transfers, including without limitation cash advance transactions.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        If Organizer elects to remit funds back to Ercess Inc so that Ercess Inc can process refunds on Organizer's behalf, Organizer must remit funds to Ercess Inc that are sufficient to cover refunds due to Consumers within 5 days of the cancellation of the event.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        Organizer agrees to notify Consumers of the event cancellation as soon as reasonably possible and prior to the event start time.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        Organizer will be the main point of contact for Consumers with refund requests, and Organizer will instruct the Consumers not to contact Ercess Inc with refund requests.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        Organizer will provide clear instructions and contact information to Consumers so that Consumers can make refund requests, or, alternatively, Organizer will turn on the in-product refund request function within the Ercess Inc platform and respond to any Consumer refund requests received.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        Organizer acknowledges that Ercess Inc reserves the right to charge the Organizer for the cost of charge backs related to the cancelled event, and such amounts are also subject to the provisions of Sections 4.4(f) and 4.5 of this Agreement.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        If the Organizer cancels only part of a multi-day event, then Organizer agrees to refund a pro-rata monetary value portion of the purchase price of a multi-day ticket based on the corresponding monetary value of the portion of the multi-day event that was cancelled. For example, if Organizer sells a 3-day ticket to a festival for Rs 3,000/-, and cancels 1 day of the festival, the Organizer must provide a Rs 1,000/- refund to Consumers for the cancelled day.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        If the Organizer is offering Consumers an "other make good" refund in lieu of purchase price refund, then such offer must be of equal or greater value to the value of the ticket for the cancelled event and such value must be clearly communicated to the Consumers. Organizer agrees that it will be fully liable for the cost of chargebacks received related to purchases even if an "other make good" refund is given. 
+                                                                    </p>
+                                                                </li>
+                                                            </ol>
+                                                        </li>
+                                                        <li>
+                                                            <p>Refund Disputes.</p>
+                                                            <p>
+                                                                Regardless of what payment method is selected, all disputes regarding refunds are between Organizer and its Consumers. In the event of a dispute, Ercess Inc may try to mediate, but ultimately it is Organizer's obligation to settle the dispute. Notwithstanding the foregoing, with respect to EPP transactions, Ercess Inc will have the right to make refunds on Organizer's behalf as set forth in subsection (c) below.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Mandatory Refunds.</p>
+                                                            <p>
+                                                                Notwithstanding the foregoing, Organizer authorizes Ercess Inc to make refunds in the following situations (i) Organizer specifically authorizes the refunds at the time; (ii) the event description presented to a Consumer at time of purchase is significantly different from the actual event; (iii) Attendees are unable to attend the event due to failure of the Organizer to adequately plan for capacity, ingress or egress, or attendance will otherwise subject the Consumer to safety concerns; (iv) Ercess Inc believes in its discretion that specific orders should be refunded under the Organizer's posted refund policy or Ercess Inc's Organizer Refund Policy Requirements, including without limitation, that they are required by applicable local, state, provincial, national or other law, rule or regulation or the Payment Scheme Rules; (v) Ercess Inc believes in its discretion that the refund request, if not granted, will lead to a chargeback that Ercess Inc is more likely than not to lose; (vi) Organizer failed to list a refund policy on the applicable event page and Ercess Inc believes in its discretion that a refund would be reasonable under the circumstances; (vii) Ercess Inc believes in its discretion that specific orders are fraudulent (e.g., made with stolen credit cards or otherwise not bona fide transactions); or (viii) Ercess Inc believes in its discretion that the order is a duplicate. Organizer also authorizes Ercess Inc to make refunds of any and all orders (including those for unrelated events) if (A) Ercess Inc believes in its discretion that Organizer has engaged in any fraudulent activity or made any misrepresentations; (B) Ercess Inc believes in its discretion that there is substantial risk of nonperformance by Organizer with respect to the applicable event or future events; (C) Ercess Inc believes in its discretion that it is likely to receive complaints, refund requests, transaction reversals and/or chargebacks with respect to a substantial amount of orders; or (D) Ercess Inc believes in its discretion that Organizer is a Prohibited Merchant, has used the Services to process Prohibited Transactions or to manage Prohibited Events or that failing to make the refunds would otherwise expose Ercess Inc to legal liability. Because all sales are ultimately made by Organizers, Organizer hereby agrees to promptly and fully reimburse Ercess Inc and its affiliates upon demand for refunds that Ercess Inc makes pursuant to this Merchant Agreement, other than to the extent that the necessity for such refunds is caused by Ercess Inc's negligence or willful misconduct. Organizer acknowledges and agrees that chargebacks will result in losses to Ercess Inc in excess of the amount of the underlying transaction and that by refunding transactions in advance of a chargeback Ercess Inc is mitigating such losses and its damages with respect to Organizer's breach of this Merchant Agreement. If you do not remit funds to Ercess Inc that are sufficient to cover mandatory refunds as described by this Section 4.4(c) for an event cancellation or nonperformance, then you acknowledge and agree that the amount of such funds shortfall will become due and owing from you to us under the Terms of Service, including this Merchant Agreement, until you have satisfied the amount in full and such amounts are also subject to the provisions of Sections 4.4(f) and 4.4 of this Agreement.
+                                                            </p>
+                                                        </li>
+                                                    </ol>
+                                                    <p>4.4 Non-Exclusive Remedies; Taxes.</p>
+                                                    <ol type="a">
+                                                        <li>
+                                                            <p>Non-Exclusive Remedies.</p>
+                                                            <p>
+                                                                If Organizer fails to pay to Ercess Inc or any of its Affiliates any amount owed pursuant to the Terms of Service (including without limitation this Merchant Agreement) or any other applicable agreement for Services provided by Ercess Inc or any of its Affiliates when due and following a late payment notice being delivered by Ercess Inc, such amount will bear interest calculated from the date due until paid in full at a rate equal to the lesser of (i) one percent (1%) per month, compounded monthly; and (ii) the maximum amount permitted by applicable local, state, provincial, national or other laws, rules or regulations. In the event any amounts are owed by Organizer or any of its Affiliates to Ercess Inc or any of its Affiliates under the Terms of Service (including without limitation this Merchant Agreement) or any or other applicable agreement for Services provided by Ercess Inc or any of its Affiliates, Ercess Inc or its Affiliates may, without limiting its other rights and remedies and to the extent permitted by applicable local, state, provincial, national or other laws, rules or regulations (A) withhold any amounts due to Organizer or any of Organizer's Affiliates, whether for a particular event or for any other event that Organizer or any of Organizer's Affiliates lists through the Services or other applicable agreement for Services provided by Ercess Inc or any of its Affiliates, and use the withheld amount to setoff the amount owed by Organizer or any of Organizer's Affiliates to Ercess Inc or any of its Affiliates; and/or (B) send an invoice to Organizer or any of its Affiliates for such amounts to the extent Organizer's or any of its Affiliate's outstanding balance is insufficient to cover these costs, in which case Organizer or any of its Affiliates will pay Ercess Inc or any of its Affiliates such invoiced amounts within thirty (30) days after the date of the invoice. If payment for any amounts due to Ercess Inc or any of its Affiliates hereunder is not made by Organizer or any of its Affiliates when due and after receiving a late payment notice from Ercess Inc or any of its Affiliates, Ercess Inc or any of its Affiliates reserves the right, in its discretion and without limiting its other rights and remedies, to suspend or terminate Organizer's or any of Organizer's Affiliate's registration for any Services provided by Ercess Inc or any of its Affiliates (including any and all accounts that Organizer or any of Organizer's Affiliates may have). In addition, any such unpaid amounts due and owing to Ercess Inc or any of its Affiliates are subject to collections in accordance with Section 4.5(b).
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Collections; Costs of Recovery.</p>
+                                                            <p>
+                                                                Ercess Inc reserves the right to pursue any late and unpaid amounts due and owing to Ercess Inc or any of its Affiliates for collections if such amounts are not paid within thirty (30) days after the date of the invoice. In addition, Organizer agrees to promptly and fully reimburse Ercess Inc or any of its Affiliates upon demand for all out-of-pocket costs and expenses, including without limitation, reasonable attorneys' fees and expenses, incurred by Ercess Inc or any of its Affiliates in collecting past due amounts or any other amounts due and owing from Organizer or any of its Affiliates under this Merchant Agreement, the Terms of Service or any or other applicable agreement for Services provided by Ercess Inc or any of its Affiliates. Organizer and any of its Affiliates agree that if Ercess Inc or any of its Affiliates must seek collections for past due amounts and Organizer or any of its Affiliates does not respond or pay in full after receiving a collection notice, Ercess Inc or any of its Affiliates reserves the right to pursue outstanding balances through judicial proceedings, and such actions are expressly excluded from any arbitration provisions set forth in the Terms of Service.
+                                                            </p>
+                                                            <p>
+                                                                Use or any or other applicable agreement for Services provided by Ercess Inc or any of its Affiliates.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Taxes.</p>
+                                                            <ol type="i">
+                                                                <li>
+                                                                    <p>
+                                                                        You are solely responsible for determining which, if any, sales, use, amusement, value added, consumption, excise and other taxes, duties, levies and charges (collectively, "Taxes") apply to your use of the Services and to sales you make using the Services. You agree that it is your sole responsibility to, and that you will, collect and remit the correct amounts of all such Taxes to the applicable governmental authorities (&ldquo;Tax Authorities&rdquo;). Ercess Inc does not represent, warrant or guarantee that any tax tools or tax calculators (&ldquo;Tax Tools&rdquo;) provided to you will meet all tax requirements that may be applicable to you or that such Tax Tools will result in your collection or remittance of all applicable Taxes, which Taxes may vary based on the nature of your event, the nature of your tax status (individual, entity, business, consumer, etc.), your location, the location of your Consumers, credits and deductions for which you may qualify and other factors, and you hereby release Ercess Inc from any and all liability with respect to your use of the Tax Tools. None of such Tax Tools should be considered legal or tax advice. If you do collect Taxes and use Ercess Inc Payment Processing, Ercess Inc will pay such amounts to you at the same time as the underlying Event Registration Fees. You are responsible for remitting all such Taxes to the appropriate Tax Authorities. If you use any Tax Tools that require you to input a tax registration number, you represent and warrant that such tax registration number is true and correct. Ercess Inc cannot give<br />you legal or tax advice, so please be sure to check with your own tax advisor about any applicable Taxes. In the event that a Tax Authority requires Ercess Inc to pay any Taxes attributable to your use of the Services or to sales you make using the Services, you agree to promptly and fully reimburse Ercess Inc for such Taxes upon demand and all costs, penalties, interest and expenses related thereto.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        Notwithstanding the preceding paragraph, Ercess Inc may, in certain jurisdictions, be required to collect and remit Taxes for your sales of tickets and/or registrations facilitated using the Services. In order to determine whether any Taxes must be collected on your behalf, Ercess Inc may request certain information when you create an Event using the platform. Such information may relate to your tax exempt status, the nature of your Event and/or other similar information. If such information is requested, you represent and warrant that the information you provide is true and correct. Ercess Inc cannot give you legal or tax advice, so please be sure to check with your own legal and/or tax advisor about any information you provide through the platform. In the event that a Tax Authority requires Ercess Inc to pay any Taxes attributable to your Event as a result of the information you provided Ercess Inc being incorrect, you agree to promptly and fully reimburse Ercess Inc for such Taxes upon demand and all costs, penalties, interest and expenses related thereto.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        Notwithstanding paragraph (i) in this section, Ercess Inc may, in certain jurisdictions, be required to collect and remit Taxes on Ercess Inc Service Fees and Ercess Inc Payment Processing Fees (&ldquo;Ercess Inc Fees&rdquo;) to the Tax Authorities. In such jurisdictions, Ercess Inc will collect from you Taxes on Ercess Inc Fees, and you agree to pay such Taxes. Ercess Inc may, at its sole election, invoice you for Taxes on Ercess Inc Fees or withhold (from amounts it would otherwise pay to you) the amount of Taxes on Ercess Inc Fees. With the exception of Taxes on Ercess Inc Fees that Ercess Inc collects from you pursuant to this paragraph and Taxes collected and remitted pursuant to paragraph (ii) in this section, you remain responsible for collecting and remitting the correct amount of any Taxes that apply to your use of the Services and to sales you make using the Services.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        To comply with Goods and Service Tax regulations of the Indian Government, Ercess Inc is required to (A) collect Goods and Service Tax ("GST") from Organizers on the Ercess Inc Service Fee for paid tickets or registrations sold on or through the Site by Organizers and (B) remit any such GST collected to the relevant tax authority. You need to compulsorily provide us with your GST Number as you are affiliated with an E-commerce Operator. It is your sole responsibility to ensure that the GST Number you provide to Ercess Inc (if any) is accurate, complete and properly formatted. Please be aware that falsification or misrepresentation of information to evade payment of GST may result in fines and/or criminal prosecution. You agree to promptly and fully reimburse Ercess Inc for all out-of-pocket costs and expenses arising out of your falsification or misrepresentation of a GSTIN on the Site. 
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        Ercess Inc reserves the right to withhold the payment of any amounts owed to you hereunder and dispose of them as required by applicable local, state, provincial, national or other law, rule, regulation, judgment or order, in each case as determined by Ercess Inc, or to seek later payment from you of any amounts on taxes uncollected and unremitted, related to your events. As per GST Act, Ercess Inc is required to deduct TCS on &lsquo;taxable value for computing GST&rsquo; from the total payment remitted to you and deposit the same with the revenue authorities. You will get the credit of such TCS on GST when you file the GST return.
+                                                                    </p>
+                                                                </li>
+                                                            </ol>
+                                                        </li>
+                                                    </ol>
+                                                    <p>4.5 Commercial Entities.</p>
+                                                    <ul>
+                                                        <li>
+                                                            <p>
+                                                                From time to time, one or more Card Schemes may require that you enter into an additional agreement directly with one of our Payment Processing Partners or with the applicable Card Scheme. If we believe that your account is likely to be subject to this additional requirement, we will provide you with a "Commercial Entity Agreement" that you must agree to in order to continue using EPP. If you fail to accept that "Commercial Entity Agreement," we may suspend or terminate your account or transfer your account to EPP.
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <p>Prohibited Merchants; Prohibited Events; Prohibited Transactions.</p>
+                                                    <p>5.1 Prohibited Merchants.</p>
+                                                    <p class="pl-20">By registering for the Services and accepting this Merchant Agreement, you represent and warrant that:</p>
+                                                    <ol type="a">
+                                                        <li>
+                                                            <p>
+                                                                you are not located in, and you are not a national or resident of, any country to which India has embargoed goods and/or services of the same type as the Services ("Restricted Countries");
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                you are not a person or entity or under the control of or affiliated with a person or entity that (i) appears on India's Specially Designated Restricted Nationals List, Foreign Sanctions Evaders List; (ii) appears on negative list of any law or act in India (iii) is subject to sanctions in any other country; and
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                you are not listed in the MasterCard MATCH terminated merchant database or Visa terminated merchant file and your right to access each Card Scheme and each Alternative Form of Payment is not presently revoked or suspended.
+                                                            </p>
+                                                            <p>
+                                                                If you fall into any of the categories set forth above, as determined by Ercess Inc in its discretion, you are a "Prohibited Merchant." 
+                                                            </p>
+                                                        </li>
+                                                    </ol>
+                                                    <p>5.2 Prohibited Events.</p>
+                                                    <p class="pl-20">You may not post events to the Services or engage in activities through the Services that:</p>
+                                                    <ol type="a">
+                                                        <li>
+                                                            <p>
+                                                                violate or facilitate the violation of any applicable local, state, provincial, national or other law, rule or regulation; 
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                would be prohibited under the Payment Scheme Rules;
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                take place in Restricted Countries; and
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                contain any Content (as defined in the Terms of Service) that would violate the Terms of Service, or the Ercess Inc Community Guidelines.
+                                                            </p>
+                                                        </li>
+                                                    </ol>
+                                                    <p class="pl-20">
+                                                        Any event that falls into any of the categories set forth above, as determined by Ercess Inc in its discretion, is a "Prohibited Event."
+                                                    </p>
+                                                    <p>5.3 Prohibited Transactions.</p>
+                                                    <p class="pl-20">You may not use EPP to process any of the following transactions and you represent and warrant that you will not submit for processing through the Services:</p>
+                                                    <ol type="a">
+                                                        <li>
+                                                            <p>
+                                                                any transaction that would violate or is considered "high risk" (or another restricted category) by the Payment Scheme Rules, including any transaction regarding adult-related content or activities, illegal goods or services including cannabis, or the paraphernalia associated with any illegal goods or service, purchase of crypto-currency, raffles, sweepstakes, or gambling;
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                any transaction that is fraudulent or criminal in nature;
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                any transaction that would constitute a "restricted transaction"; and
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                any transaction that would constitute sending money to another party other than for the purchase of bona fide tickets or registrations to, or solicitation of a donation for, events, or sale of items related to such events.
+                                                            </p>
+                                                        </li>
+                                                    </ol>
+                                                    <p class="pl-20">Any transaction that falls into any of the categories set forth above, as determined by Ercess Inc in its discretion, is a "Prohibited Transaction."</p>
+                                                    <p>5.4 Remedies.</p>
+                                                    <ol type="a">
+                                                        <li>
+                                                            <p>
+                                                                In the event that Ercess Inc discovers that you are a Prohibited Merchant, that you have posted a Prohibited Event and/or that you have attempted to process or processed a Prohibited Transaction, then Ercess Inc may take any or all of the following actions in its discretion in addition to any and all remedies that Ercess Inc may have under the law or elsewhere in the Terms of Service:
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                suspend or terminate your Ercess Inc account;
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                alter, edit, or remove any Prohibited Event or any portion thereof;
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                block, reverse or refund any or all of your transactions;
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                hold any and all funds associated with your account to the extent required by applicable local, state, provincial, national or other law, rule, regulation, judgment or order; and
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                refer you, your events and/or your transactions and information relating to the same (without further notice to you) to our Payment Processing Partners, the Card Schemes, the Alternative Form of Payment Frameworks and/or applicable law enforcement agencies for further action.
+                                                            </p>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <p>Representations And Warranties.</p>
+                                                    <p>
+                                                        In addition to the representations and warranties contained herein, you represent and warrant to us that (a) if you represent an entity, that entity is duly organized, validly existing and in good standing under the laws of the state, province or country of its formation; (b) you, or the entity you represent (if applicable), have all requisite power and authority to enter into this Agreement and to carry out the transactions contemplated hereby; (c) the entering into and performing of this Agreement by you, or if you represent an entity by the entity you represent, will not result in any breach of, or constitute default under, any applicable local, state, provincial, national or other law, rule, regulation, judgment or order, or other agreement to which you or it is a party, including without limitation, any other agreement for the sale of tickets or registrations; and (d) if you represent an entity, you have the full right, legal power and actual authority to bind such entity to the terms and conditions hereof.
+                                                    </p>
+                                                    <p>
+                                                        Further, you represent, warrant and acknowledge that you (not we) are solely responsible for ensuring that your events are ticketed correctly, and that only valid tickets are honored. You understand and agree that Ercess Inc is not liable for any costs arising from whether a presented ticket is or is not valid, or is or is not honored, including any tickets procured through, or representing, fraud or deceptive practices.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>Termination.</p>
+                                                    <p>
+                                                        In addition to our right to terminate your use of the Services under the Terms of Service, Ercess Inc may terminate this Merchant Agreement and your right to use the Services to create, promote and collect sales proceeds for events (a) if you are in violation or breach of any provision of this Merchant Agreement; (b) if our Payment Processing Partners and/or the Card Schemes or Alternative Form of Payment Frameworks terminate our right to provide the EPP Service or your right to accept payments via the EPP Service in their sole discretion; (c) if Ercess Inc is served with legal process seeking to attach or garnish any of your funds or property in Ercess Inc's possession; or (d) Ercess Inc is put on notice or similar communication, informing Ercess Inc that you have granted a right to assignment of payments to the your lender as a secured party.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>Arbitration</p>
+                                                    <p>
+                                                        Any disputes arising under or in connection with the validity, interpretation and performance of this Agreement that cannot be resolved amicably by the parties shall be brought before a mediator agreed to be the parties for settlement and in the event such settlement is not reached within 7 days then the dispute shall be resolved in arbitration before a single arbitrator. The parties shall endeavor in good faith to mutually agree on the selection of an arbitrator of commercial disputes. If the parties cannot mutually agree on the selection of an arbitrator within ten (10) days of the request, they shall apply to the court of Karnataka, INDIA to appoint one. The arbitrator will be requested to render his award within no more than ninety (90) days and to provide, in writing the reasoning for his award. The decision of any such arbitrator shall be final and binding on the parties. The acceptance of this Agreement shall be deemed as a signature upon a deed of arbitration. Each party shall pay the arbitrator&rsquo;s fees when due, and if he shall not do so, the arbitrator shall enter a final award against such party.
+                                                    </p>
+                                                </li>
+                                            </ol>
+                                            <p>Miscellaneous Provisions</p>
+                                            <p><u>Good Faith.</u> Subject to the terms and conditions of this Agreement, each of the parties hereto will act in good faith and devote his best efforts to take, or cause to be taken, all action, and to do, or cause to be done, all things necessary, proper or advisable under applicable laws and regulations to consummate and make effective the transactions contemplated by this Agreement.</p>
+                                            <p><u>Waiver of Compliance; Consents.</u> Except as otherwise provided in this Agreement, any failure of any of the parties to comply with any obligation, covenant, agreement or condition herein may be waived by the party or parties entitled to the benefits thereof only by a written instrument signed by the party granting such waiver, but such waiver or failure to insist upon strict compliance with such obligation, covenant, agreement or condition shall not operate as a waiver of, or estoppel with respect to, any subsequent or other failure.
+                                            </p>
+                                            <p><u>Notices.</u> All notices and other communications hereunder shall be deemed given on delivery if delivered personally or sent by facsimile transmission with electronic confirmation, or four (4) business days following such notice being sent, if mailed by registered or registered, postage prepaid, to the other party at the address as mentioned in the details shared by the organizer during acceptance of this agreement.</p>
+                                            <p><u>Governing Law; Interpretation.</u> This Agreement shall be governed by and construed in accordance with the laws of India. The paragraph and section headings in this Agreement are intended solely for the convenience of reference shall not be used in interpretation of this Agreement.</p>
+                                            <p><u>Counterparts.</u> This Agreement may be executed in one or more counterparts, each of which shall be deemed an original, but all of which together shall constitute one and the same instrument.</p>
+                                            <p><u>Severability.</u> If any provision of this Agreement is held by a competent court to be invalid or unenforceable under applicable law, then such provision shall be severed from this Agreement and the remainder of this Agreement shall be interpreted as if such provision were so severed and shall be enforceable in accordance with its terms; provided, however, that in such event this Agreement shall be interpreted so as to give effect, to the greatest extent consistent with and permitted by applicable law, to the meaning and intention of the severed provision as determined by the parties or as determined by court of competent jurisdiction.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>

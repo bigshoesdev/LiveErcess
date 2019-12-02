@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <title>Sign in to your Ercess Live account | Ercess Live</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+        <meta name="description" content="Login to Ercess Live account to manage your events, promote, sell tickets, and sell stall spaces." />
+        <link rel="shortcut icon" href="{% static 'images/fav.ico'%}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <meta name="google-site-verification" content="Hp-UR63f6b4b-tVU0rbbM4gE6AEHcRCbZ8vtbxRnpC4" />
+        {% include 'static/common/css.html' %}
+        <!--[if IE]>
+            <script src="js/html5shiv.js"></script>
+        <![endif]-->
+
+        <style>
+            body{
+                background: #da2021;
+            }
+            label{
+                visibility: hidden;
+                display: none;
+            }
+            section{
+                padding: 15px 0;
+            }
+            .box{
+                width: 100%;
+                padding: 30px;
+                border-radius: 6px;
+                background: #ffffff;
+            }
+        </style>
+
+    </head>
+    <body>
+        {% if messages %}
+        {% for message in messages %}
+                <div class="alert alert-danger" role="alert"><center>{{message}}</center></div>
+        {% endfor %}
+        {% endif %}
+
+        <section class="" id="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 visible-lg visible-md">
+                        <img src="/static/images/signup-page.png" />
+                    </div>
+                    <div class = 'col-md-8 col-lg-8 text-center'>
+                        <div class="box">
+                            <a href="{% url 'home' %}" title="Ercess Live"><img src="/static/images/logo.png" /></a>
+                            <div class="alert"></div>
+                            <form method="post"  >
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input class='btn btn-transparent-dark-gray btn-large margin-20px-top' type="submit" name="" value="Submit">
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+
+
+</html>

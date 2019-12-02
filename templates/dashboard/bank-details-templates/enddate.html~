@@ -1,0 +1,34 @@
+<div class="form-group" style="width: 80%;">
+        	<div class="input-group mb-3">
+                     
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-info border-info"><i class="ti-calendar"></i></span>
+            </div>
+        <input name="expiry_date" class="form-control" id="enddatepicker" type="text" placeholder="End Date" required >
+	<div style="
+
+   color: red;
+  
+   display: inline-block;
+   margin-left: 23px;
+   position: absolute;
+   margin-top: 38px;
+   "></div>
+
+
+<div class="input-group-prepend">
+                <span class="input-group-text bg-info border-info"><i class="ti-time"></i></span>
+            </div>              
+            <input name="expiry_date" id="timepicker1" class="input-small form-control" placeholder="End Time" type="text" required  >
+        	<div style="
+
+   color: red;
+  
+   display: inline-block;
+   margin-left: 339px;
+   position: absolute;
+   margin-top: 38px;
+   text-align: end;
+   "></div>
+        </div>
+</div>            

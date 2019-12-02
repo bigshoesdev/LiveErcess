@@ -1,0 +1,35 @@
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %}Boost Event{% endblock title %}
+{% block edit_one %}
+
+{% if form.errors %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<section class="content">
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="md-stepper-horizontal red" style="padding: 10%">
+           <center>
+           <h1>enter your contact</h1>
+           <form method="post">
+             {% csrf_token %}
+             {{form}}
+             <br/>
+             <input type="submit" class="btn btn-primary" style="width:100%;" value="save">
+
+           </form>
+           </center>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock edit_one %}

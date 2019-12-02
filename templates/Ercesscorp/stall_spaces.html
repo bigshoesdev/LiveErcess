@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <title>Largest community of vendors to purchase your stall spaces at your event.</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+        <meta name="description" content="Get the details on our stall booking services how we can sell your stalls at your next event fast and more efficiently.">
+        <meta name="keywords" content="stall booking, sell stalls, sell stall spaces, sell stalls at event, sell stall spaces at event, how to sell event stalls">
+        <link rel="shortcut icon" href="{% static 'images/fav.ico' %}">
+        <meta name="google-site-verification" content="Hp-UR63f6b4b-tVU0rbbM4gE6AEHcRCbZ8vtbxRnpC4" />
+        <!--[if IE]>
+            <script src="js/html5shiv.js"></script>
+        <![endif]-->
+        {% include 'static/common/css.html'%}
+    </head>
+    <body>
+        {%  include 'static/common/header2.html' %}
+        <section class="wow fadeIn cover-background background-position-top top-space" style="background-image:url('{% static 'images/contact-banner.jpg' %}');">
+            <div class="opacity-medium bg-extra-dark-gray"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 display-table page-title-large">
+                        <div class="display-table-cell vertical-align-middle text-center padding-30px-tb">
+                            <h1 class="alt-font text-white font-weight-600 no-margin-bottom">Marketplace for event stall spaces</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-light-gray">
+            <div class="container">
+                <div class="row equalize sm-equalize-auto">
+                    <div class="col-md-5 col-sm-12 sm-margin-30px-bottom wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft; height: 553px;">
+                        <div class="display-table width-100 heidth-100">
+                            <div class="display-table-cell vertical-align-middle">
+                                <img src="{% static 'images/services-img2.png' %}" class="width-100" alt="" data-no-retina="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-md-offset-1 wow fadeInRight" style="visibility: visible; animation-name: fadeInRight; height: 553px;">
+                        <div class="display-table width-100 heidth-100">
+                            <div class="display-table-cell vertical-align-middle">
+                                <h5 class="alt-font text-extra-dark-gray font-weight-600">Biggest marketplace for organizers</h5>
+                                <p>We have the biggest network of companies, freelancers and vendors to bring on board for your next event.</p>
+                                <div class="margin-30px-tb">
+                                    <ul class="no-padding list-style-5">
+                                        <li>Your stall spaces will be showcased on around 10 sites</li>
+                                        <li>Our team constantly look for as many vendors as possible to sell your spaces.</li>
+                                        <li>We have around 45,000 vendors in network</li>
+                                        <li>Amazing vendors to brighten your event</li>
+                                    </ul>
+                                </div>
+                                <a href="{% url 'login' %}" class="btn btn-dark-gray btn-small border-radius-4 text-extra-small">Get started</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% include 'static/common/social.html'  %}
+    {% include 'static/common/footer.html' %}
+    {% include 'static/common/js.html' %}
+    </body>
+
+</html>

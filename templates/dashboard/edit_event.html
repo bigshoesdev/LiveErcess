@@ -1,0 +1,572 @@
+{% extends 'dashboard/create_event.html' %}
+{% block title %}Event details - Ercess Live {% endblock title %}
+{% block edit_one %}
+<section class="content">
+   <div class="container arrow-steps clearfix">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="md-stepper-horizontal red">
+               <div class="md-step active">
+                  <a href="{% url 'dashboard:edit-event' event_id %}">
+                     <div class="md-step-circle"><span>1</span></div>
+                     <div class="md-step-title">Basic details</div>
+                     <div class="md-step-bar-left"></div>
+                     <div class="md-step-bar-right"></div>
+                  </a>
+               </div>
+               <div class="md-step">
+                  <a href="{% url 'dashboard:edit-event-two' event_id  %}">
+                     <div class="md-step-circle"><span>2</span></div>
+                     <div class="md-step-title">Set targets</div>
+                     <div class="md-step-bar-left"></div>
+                     <div class="md-step-bar-right"></div>
+                  </a>
+               </div>
+               <div class="md-step">
+                  <a href="{% url 'dashboard:edit-event-three' event_id  %}">
+                      <div class="md-step-circle"><span>3</span></div>
+                      <div class="md-step-title">Upload images</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                  </a>
+               </div>
+               <div class="md-step">
+                  <a href="{% url 'dashboard:edit-event-four' event_id  %}">
+                     <div class="md-step-circle"><span>4</span></div>
+                     <div class="md-step-title">Description</div>
+                     <div class="md-step-bar-left"></div>
+                     <div class="md-step-bar-right"></div>
+                  </a>
+               </div>
+               <div class="md-step">
+                  <a href="{% url 'dashboard:edit-event-ticket' event_id  %}">
+                     <div class="md-step-circle"><span>5</span></div>
+                     <div class="md-step-title">Add tickets</div>
+                     <div class="md-step-bar-left"></div>
+                     <div class="md-step-bar-right"></div>
+                  </a>
+               </div>
+            </div>
+            <h1 class="text-dark mb-30">Edit your basic event details</h1>
+            <form action="{% url 'dashboard:edit-event' event_id %}" method="POST" id="msform1" class="col-md-12 mt-50 mb-50" autocomplete="off">
+               {% csrf_token %}
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <div class="input-group mb-3">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+                           </div>
+                           <input name="event_name" type="text" class="form-control" value="{{s.0}}" required  >
+                           <div class="input-error"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <div class="input-group mb-3">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+                           </div>
+                           <input name="website" type="url" pattern="https?://.+" value="{{s.1}}" id="webs" class="input-small form-control" placeholder="Event website link*" type="text" required>
+                           <div class="input-error"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <div class="input-group mb-3">
+                           <div class="input-group-prepend"> <span class="input-group-text bg-info border-info"><i class="ti-calendar"></i></span></div>
+                           <input name="sdate" type="text" class="form-control" id="datepicker" value="{{s.2}}" >
+                           <div class="input-error"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <div class="input-group mb-3">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text bg-info border-info"><i class="ti-time"></i></span>
+                           </div>
+                           <input name="start_time" id="timepicker" class="input-small form-control" value="{{s.3}}" type="text" required >
+                           <div class="input-error"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <div class="input-group mb-3">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text bg-info border-info"><i class="ti-calendar"></i></span>
+                           </div>
+                           <input name="edate" class="form-control" id="enddatepicker" type="text" value="{{s.4}}" required >
+                           <div class="input-error"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <div class="input-group mb-3">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text bg-info border-info"><i class="ti-time"></i></span>
+                           </div>
+                           <input name="end_time" id="timepicker1" class="input-small form-control" value="{{s.5}}" type="text" required  >
+                           <div class="input-error"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <script>
+                  $('#timepicker').datetimepicker({
+                  format: 'LT',
+                  stepping : 5 });
+                  $('#timepicker1').datetimepicker({
+                  format: 'LT',
+                  stepping : 5 });
+                  $("#enddatepicker").keydown(function(e){
+                      e.preventDefault();
+                  });
+                  $("#datepicker").keydown(function(e){
+                      e.preventDefault();
+                  });
+                  $("#timepicker").keydown(function(e){
+                      e.preventDefault();
+                  });
+                  $("#timepicker1").keydown(function(e){
+                      e.preventDefault();
+                  });
+
+
+
+                  $('#datepicker').on('change', function() {
+                      function convertInputtoDate(){
+                      var input = document.getElementById("datepicker").value;
+                      var date = input.split('/');
+                      var selectdate = new Date(date[2]+"-"+ date[1]+"-"+ date[0]);
+
+                      return selectdate;
+                  }
+                  var today = convertInputtoDate();
+                  var tomorrow = new Date(convertInputtoDate());
+                  tomorrow.setDate(today.getDate());
+                  $('#enddatepicker').datepicker('setStartDate', tomorrow);
+                  });
+               </script>
+
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="form-group">
+                        <div class="alert alert-info">
+                           In case of outdoor event, provide the address of start point.
+                        </div>
+                        <div class="input-group mb-3">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                           </div>
+                           <input name="address_line1" id="street_number" type="text" class="form-control street_number route sublocality_level_2" value="{{s.6}}" >
+                           <div class="input-error"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <script type="text/javascript">
+                  var componentForm = {
+                      street_number: 'long_name',
+                      route: 'long_name',
+                      neighborhood: 'long_name',
+                      sublocality_level_1: 'long_name',
+                      sublocality_level_2: 'long_name',
+                      locality: 'long_name',
+                      administrative_area_level_4: 'long_name',
+                      administrative_area_level_3: 'short_name',
+                      administrative_area_level_1: 'long_name',
+                      administrative_area_level_2: 'short_name',
+                      country: 'long_name',
+                      postal_code: 'short_name'
+                  };
+
+                  function initAutocomplete() {
+                      // Create the autocomplete object, restricting the search to geographical
+                      // location types.
+                      autocomplete = new google.maps.places.Autocomplete((document.getElementById('street_number')), {
+                          types: ['establishment']
+                      });
+                      // When the user selects an address from the dropdown, populate the address
+                      // fields in the form.
+                      autocomplete.addListener('place_changed', fillInAddress);
+                  }
+
+                  // @author Shubham
+                  var initialStreetAddr = $("#street_number").val()
+                  var changedStreetAddr = '';
+                  // ends here ~ @author Shubham
+
+                  function fillInAddress() {
+
+                      // Get the place details from the autocomplete object.
+                      var place = autocomplete.getPlace();
+                      //  console.log(place)
+                      // alert(place.formatted_address)
+                      for (var component in componentForm) {
+                          //document.getElementsByClassName(component).value = '';
+                          //document.getElementsByClassName(component).disabled = false;
+                          var collection = document.getElementsByClassName(component)
+                          for (index = 0; index < collection.length; ++index) {
+                              collection[index].value = ""
+                              //  collection[index].disabled =false;
+                          }
+                      }
+                      document.getElementsByName('address_line1')[0].value = place.name;
+                      for (var i = 0; i < place.address_components.length; i++) {
+                          var addressType = place.address_components[i].types[0];
+                          if (componentForm[addressType]) {
+                              var val = place.address_components[i][componentForm[addressType]];
+                              //   document.getElementById(addressType).value = val;
+                              var collection = document.getElementsByClassName(addressType)
+                              for (index = 0; index < collection.length; ++index) {
+                                  if (collection[index].value == "") {
+                                      collection[index].value = val;
+                                  } else {
+                                      var previous = collection[index].value
+                                      collection[index].value = previous + ", " + val;
+                                  }
+                              }
+                          }
+                      }
+                      changedStreetAddr = $("#street_number").val()
+                      var lat = place.geometry.location.lat();
+                      var long = place.geometry.location.lng();
+                      var pid = place.place_id;
+                      document.getElementsByName('latitude')[0].value = lat;
+                      document.getElementsByName('longitude')[0].value = long;
+                      document.getElementsByName('place_id')[0].value = pid;
+
+                      myMap(lat, long);
+                  }
+
+                  function myMap(lat, long) {
+
+                      var pos = {
+                          lat: lat,
+                          lng: long
+                      };
+                      var mapProp = {
+                          center: pos,
+                          zoom: 14,
+                          mapTypeId: google.maps.MapTypeId.ROADMAP
+                      };
+                      var map = new google.maps.Map(document.getElementById("map"), mapProp);
+                      var marker = new google.maps.Marker({
+                          position: pos,
+                          map: map
+                      });
+
+                  }
+
+                  $(function() {
+                      lat = document.getElementById("la").value;
+                      long = document.getElementById("lo").value;
+                      myMap(Number(lat), Number(long));
+                  });
+               </script>
+               <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWfptEfuRFJAMKh1XQOZQMZQ0q9qOtrm0&libraries=places&callback=initAutocomplete" async defer></script>
+               <div class="row">
+                  <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                     <div class="row">
+                        <div class="col-md-12">
+                           <div class="form-group">
+                              <div class="input-group mb-3">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                                 </div>
+                                 <input name="address_line2" id="route" type="text" class="form-control neighborhood sublocality_level_1  administrative_area_level_4 administrative_area_level_2" value="{{s.7}}" readonly >
+                                 <div class="input-error"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                           <div class="form-group">
+                              <div class="input-group mb-3">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                                 </div>
+                                 <input name="city" type="text" id='locality' class="form-control locality administrative_area_level_3" value="{{s.8}}" readonly>
+                                 <div class="input-error"></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                           <div class="form-group">
+                              <div class="input-group mb-3">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                                 </div>
+                                 <input name="state" type="text" id="administrative_area_level_1" class="form-control administrative_area_level_1 " value="{{s.9}}" readonly >
+                                 <div class="input-error"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                           <div class="form-group">
+                              <div class="input-group mb-3">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                                 </div>
+                                 <input name="country" id="country" type="text" class="form-control country" value="{{s.10}}" readonly  >
+                                 <div class="input-error"></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                           <div class="form-group">
+                              <div class="input-group mb-3">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                                 </div>
+                                 <input name="pincode" id="postal_code" type="text" class="form-control postal_code" value="{{s.11}}" readonly >
+                                 <div class="input-error"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div id="map" ></div>
+                  </div>
+               </div>
+               <input name="latitude" id="la" type="hidden" class="form-control" value='{{s.12}}'>
+               <input name="longitude" id="lo" type="hidden" class="form-control"  value='{{s.13}}'>
+               <input name="place_id" id="" type="hidden" class="form-control" value='{{s.14}}'>
+               <button type="submit" class="btn btn122 btn-danger btn-block mt-10">Update</button>
+            </form>
+         </div>
+      </div>
+   </div>
+</section>
+<script src="/static/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script>
+
+   // end date and start date
+   // function for tomorrow date
+     function tomorrow() {
+       let today = new Date();
+       let tomorrow = new Date();
+       tomorrow.setDate(today.getDate() + 1);
+       return tomorrow
+    }
+    // ends here ~ function for tomorrow date
+
+    // function for get next day date
+    function nextDayDate() {
+       let today = convertInputtoDate();
+       let tomorrow = new Date(convertInputtoDate());
+       tomorrow.setDate(today.getDate() + 1);
+       return tomorrow
+    }
+    // ends here ~ function for get next day date
+
+     //startdate
+     $('#datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: tomorrow()
+    })
+
+    $('#enddatepicker').datepicker({
+    //  weekStart: 1,
+         format: 'dd/mm/yyyy',
+          startDate: tomorrow()
+    })
+   // ends here ~ end date and start date
+    //starttime
+    $('#timepicker').datetimepicker({
+      format: 'LT',
+
+    }).on('change', function () {
+      $(this).valid(); // triggers the validation test
+
+    });
+
+    //endtime
+    $('#timepicker1').datetimepicker({
+      format: 'LT'
+
+    }).on('change', function () {
+      $(this).valid(); // triggers the validation test
+    });
+
+    //custom-method-to compare start and end date
+    $.validator.addMethod("enddate", function (enddatevalue, element) {
+      var startdatevalue = $('#datepicker').val();
+      var arrsdate = startdatevalue.split('/');
+      var arredate = enddatevalue.split('/');
+      return new Date(arrsdate[2], arrsdate[1], arrsdate[0]) <= new Date(arredate[2], arredate[1], arredate[0]);
+    }, "End date can not be less than Start Date.");
+
+    //custom-method-to compare start and end time for same day event
+    $.validator.addMethod("endtime", function (endtimevalue, element) {
+      var startdatevalue = $('#datepicker').val();
+      var enddatevalue = $('#enddatepicker').val();
+
+      if (startdatevalue == enddatevalue) {
+
+        var temp = '01/01/1990'
+        var starttimevalue = $('#timepicker').val();
+        var st = new Date(temp + " " + starttimevalue).getTime();
+        var et = new Date(temp + " " + endtimevalue).getTime();
+
+
+        return et > st;
+      } else {
+        return true;
+      }
+
+    }, "End Time can not be less than Start Time for same day event.");
+
+    $.validator.addMethod("web", function (webvalue, element) {
+      if (webvalue.length > 8) {
+        return true;
+      } else {
+        return false;
+      }
+
+    }, "Enter website link including https://");
+
+    // @author Shubham ~ wrong address issue
+    $.validator.addMethod("googleAddrSel", function (webvalue, element) {
+      let currentStreetAddr = $("#street_number").val();
+      let isGoogleAddrSel = initialStreetAddr == currentStreetAddr || changedStreetAddr == currentStreetAddr;
+      return isGoogleAddrSel;
+
+    }, "Please select address only by Google Suggestion");
+    // ends here ~ @author Shubham ~ wrong address issue
+
+
+    // event name validation
+    $.validator.addMethod("eventNameValidation", function(eventNameVal, element) {
+        return /^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/.test(eventNameVal)
+    }, "Event Name is Not Valid: Check Spaces");
+    // ends here ~ event name validation
+
+
+
+    $(".btn122").click(function () {
+
+      form = $("#msform1");
+      form.validate({
+        rules: {
+      event_name: {
+        required: true,
+        minlength: 5,
+        eventNameValidation: true,
+        eventNameContValidation: true
+      },
+      website: {
+      // web:true,
+        required: true,
+        url: true,
+      },
+      sdate: {
+      required: true,
+      },
+      edate: {
+      required: true,
+      enddate: true,
+      },
+      start_time: {
+      required: true,
+      },
+      end_time: {
+      required: true,
+      endtime: true,
+      },
+      address_line1: {
+        customRequired: true,
+      },
+      city: {
+        customRequired: true,
+      },
+      state: {
+        customRequired: true,
+      },
+      country: {
+        customRequired: true,
+      },
+      pincode: {
+        customRequired: true,
+      },
+    },
+        highlight: function (element) {
+          // add a class "has_error" to the element
+          $(element).next('div').addClass('has_error');
+        },
+        unhighlight: function (element) {
+          // remove the class "has_error" from the element
+          $(element).next('div').removeClass('has_error');
+        },
+        messages: {
+          event_name: {
+            required: "Please provide name of your event",
+            minlength: "Event Name should have atleast 5 characters."
+          },
+          website: {
+            required: "Provide website link."
+          },
+          sdate: {
+            required: "Provide the Start Date of Event",
+          },
+          edate: {
+            required: "Provide the End Date of Event",
+            enddate: "End Date cannot be less than Start Date."
+          },
+          start_time: {
+            required: "Provide Start Time of the event",
+          },
+          end_time: {
+            required: "Provide End Time of the event.",
+            endtime: "End Time can not be less than Start Time for same day event."
+          },
+          address_line1: {
+            required: "Provide proper address of the event.",
+          }
+
+
+        },
+        errorPlacement: function (error, element) {
+
+          error.appendTo(element.next('div'));
+          element.next('div').show();
+
+
+        },
+      });
+
+    });
+
+
+    // contact details validation
+
+    var re_email = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+
+    var re_phn = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/im;
+
+    var re_url = /((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?/;
+
+  $.validator.addMethod("eventNameContValidation", function(eventNameVal, element) {
+      if (re_email.test(eventNameVal)|| re_phn.test(eventNameVal)|| re_url.test(eventNameVal)) {
+        return false;
+      } else {
+        return true
+      }
+  }, "Event Name must not be Contained Contact Details");
+  // ends here ~ contact details validation
+
+</script>
+{% endblock edit_one %}

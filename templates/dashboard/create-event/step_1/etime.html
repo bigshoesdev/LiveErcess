@@ -1,0 +1,52 @@
+<div class="col-md-6">
+    <div class="form-group">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-info border-info"><i class="ti-time"></i></span>
+            </div>
+            <input name="end_time" id="timepicker1" class="input-small form-control" placeholder="End Time*" type="text">
+        	<div class="input-error"></div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<script>
+$('#timepicker').datetimepicker({
+format: 'LT',
+stepping : 5 });
+$('#timepicker1').datetimepicker({
+format: 'LT',
+stepping : 5 });
+$("#enddatepicker").keydown(function(e){
+    e.preventDefault();
+});
+$("#datepicker").keydown(function(e){
+    e.preventDefault();
+});
+$("#timepicker").keydown(function(e){
+    e.preventDefault();
+});
+$("#timepicker1").keydown(function(e){
+    e.preventDefault();
+});
+
+
+
+$('#datepicker').on('change', function() {
+    function convertInputtoDate(){
+    var input = document.getElementById("datepicker").value;
+    var date = input.split('/');
+    var selectdate = new Date(date[2]+"-"+ date[1]+"-"+ date[0]);
+
+    return selectdate;
+}
+var today = convertInputtoDate();
+var tomorrow = new Date(convertInputtoDate());
+tomorrow.setDate(today.getDate());
+$('#enddatepicker').datepicker('setStartDate', tomorrow);
+});
+
+</script>

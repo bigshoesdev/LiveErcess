@@ -1,0 +1,170 @@
+{% extends "dashboard/create_event.html" %}
+{% load rest_framework %}
+
+
+{% block step_one %}
+  
+
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+
+                    <!-- bank details modal -->
+
+                    <div class="modal modal-right fade" id="bank-details-modal" tabindex="-1">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Add your bank details</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="" method="POST" id="bankDetailsForm">    {% csrf_token %}
+                                <fieldset>
+                                   {% render_form serializer template_pack='rest_framework/vertical' %}
+
+                                <button type="submit" class="btn btn-info-outline btn-block mt-10 btn-rounded">Save Details</button>
+
+                                </fieldset>
+                            </form>
+
+
+                          </div>
+                          <div class="modal-footer modal-footer-uniform">
+                            <button type="button" class="btn btn-bold btn-secondary" data-dismiss="modal">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- ends here ~ bank details modal -->
+
+                    <div class="col-md-6">
+                        <h1 class="text-dark mb-30">Bank details</h1>
+                    </div>
+                    <div class="col-md-6">
+
+                        <!-- edit bank details -->
+                        {% if flag == False %}
+                            <button type="button" class="btn btn-danger text-white" onclick="openModal('editBankDetails')"><i class="fa fa-pencil"></i> Edit Bank Details</button>
+                        {% endif %}
+                        <!-- ends here ~ edit bank details -->
+
+
+                    </div>
+                </div>
+                <div class="alert alert-info text-center mb-80">
+                {% if flag %}
+                    <h4>WE DON'T HAVE YOUR BANK DETAILS!</h4>
+                    <!-- <button type="button" class="btn btn-default btn-sm mt-20" data-toggle="modal" data-target="#bank-modal">
+                      <i class="fa fa-plus mr-10"></i> Add bank details now
+                    </button> -->
+                    <button type="button" class="btn btn-default btn-sm mt-20" onclick="openModal('addBankDetails')">
+                      <i class="fa fa-plus mr-10"></i> Add bank details now
+                    </button>
+                </div>
+
+                <!-- <div class="modal modal-right fade" id="bank-modal" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Add your bank details</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="" method="POST">    {% csrf_token %}
+                            <fieldset>
+                               {% render_form serializer template_pack='rest_framework/vertical' %}
+
+                            <button type="submit" class="btn btn-info-outline btn-block mt-10 btn-rounded">Save Details</button>
+
+                            </fieldset>
+                        </form>
+
+
+                      </div>
+                      <div class="modal-footer modal-footer-uniform">
+                        <button type="button" class="btn btn-bold btn-secondary" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                {% else %}
+                
+
+                <div style="color:grey">
+
+                    <table class="table">
+                        <tr>
+                            <th>Bank Name</th>
+                            <th>Account Holder Name</th>
+                            <th>Account Type</th>
+                            <th>Account Number</th>
+                            <th>IFSC Code</th>
+                            <th>Branch Name</th>
+                            <th>GST Number</th>
+
+                        </tr>
+                        <tr>
+                            <td>{{ i.bank_name }}</td>
+                            <td>{{ i.ac_holder_name }}</td>
+                            <td>{{ i.ac_type }}</td>
+                            <td>{{ i.ac_number }}</td>
+                            <td>{{ i.ifsc_code }}</td>
+                            <td>{{ i.branch }}</td>
+                            <td>{{ i.gst_number }}</td>
+
+                        </tr>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- new js code -->
+<script type="text/javascript">
+    function openModal(mode) {
+        if(mode == 'editBankDetails') {
+            // open model in edit mode
+
+            // set value in form
+            $("input[name='bank_name']").val('{{ i.bank_name }}');
+            $("input[name='ac_holder_name']").val('{{ i.ac_holder_name }}');
+            $("input[name='ac_number']").val('{{ i.ac_number }}');
+            $("input[name='ifsc_code']").val('{{ i.ifsc_code }}');
+            $("input[name='branch']").val('{{ i.branch }}');
+            $("input[name='gst_number']").val('{{ i.gst_number }}');
+            $("select[name='ac_type']").val('{{ i.ac_type }}');
+            // set value in form
+
+            // change form action
+            $('#bankDetailsForm').attr( 'action','/live/dashboard/edit-bank-details');
+            // ends here ~ change form action
+
+            // open model by JQuery
+            $('#bank-details-modal').modal('show');
+            // ends here ~ open model by JQuery
+            
+
+            // ends here ~ open model in edit mode
+        } else {
+            // open model in add mode
+            $('#bankDetailsForm').attr( 'action','');
+            $('#bank-details-modal').modal('show');
+            // ends here ~ open model in add mode
+        }
+    }
+</script>
+
+<!-- ends here ~ new js code -->
+
+{% endblock step_one %}
+

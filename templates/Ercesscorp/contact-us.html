@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+
+  <title>Contact Ercess Live</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+  <meta name="description" content="Contact us and get to know how we can amplify your event's revenue.">
+  <meta name="keywords" content="contact, contact us, contact Ercess Live, Ercess Live">
+  <link rel="shortcut icon" href="{% static 'images/fav.ico' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta name="google-site-verification" content="Hp-UR63f6b4b-tVU0rbbM4gE6AEHcRCbZ8vtbxRnpC4" />
+  <!--[if IE]>
+            <script src="js/html5shiv.js"></script>
+        <![endif]-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  {% include 'static/common/css.html' %}
+  <style>
+    label {
+      visibility: hidden;
+      display: none;
+    }
+  </style>
+
+  <script>
+    $(document).ready(function() {
+
+
+      $("#id_name").addClass("bg-transparent border-color-medium-dark-gray medium-input");
+      $("#id_mobile").addClass("bg-transparent border-color-medium-dark-gray medium-input");
+      $("#id_email").addClass("bg-transparent border-color-medium-dark-gray medium-input");
+      $("#id_purpose").addClass("bg-transparent border-color-medium-dark-gray medium-input");
+      $("#id_comment").addClass("bg-transparent border-color-medium-dark-gray medium-input");
+      $("#nam").append($("#id_name"));
+      $("#mil").append($("#id_email"));
+      $("#pho").append($("#id_mobile"));
+      $("#purp").append($("#id_purpose"));
+      $("#comm").append($("#id_comment"));
+
+    });
+  </script>
+</head>
+
+<body>
+  {% include 'static/common/header2.html' %}
+  {% if contactregerror %}
+  <div class="alert alert-danger" role="alert">
+    <center>Unable to contact ! Try after some time !</center>
+  </div>
+  {% endif %}
+  <section class="wow fadeIn cover-background background-position-top top-space" style="background-image:url('{% static 'images/contact-banner.jpg' %}');">
+    <div class="opacity-medium bg-extra-dark-gray"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 display-table page-title-large">
+          <div class="display-table-cell vertical-align-middle text-center padding-30px-tb">
+            <span class="display-block text-white opacity6 width-45 sm-width-100 center-col alt-font margin-5px-bottom">We are located in downtown Bengaluru</span>
+            <h1 class="alt-font text-white font-weight-600 no-margin-bottom">Find us</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="wow fadeIn">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-4 col-md-offset-4 col-sm-offset-4 col-sm-4 col-xs-12 text-center last-paragraph-no-margin sm-margin-30px-bottom wow fadeInUp">
+          <div class="padding-60px-all border-all border-width-1 border-color-medium-gray sm-padding-20px-all xs-padding-30px-all">
+            <img src="{% static 'images/flag-in.jpg' %}" alt="India" class="margin-30px-bottom sm-margin-20px-bottom contact-flag" />
+            <div class="text-extra-dark-gray alt-font font-weight-600 text-uppercase">India</div>
+            <p>1<sup>st</sup> Floor, 184, 9<sup>th</sup> Main Rd,<br />Sector 7, HSR Layout,<br />Bengaluru, Karnataka 560102</p>
+            <p><strong>P:</strong> +91 9886188705<br>
+              <strong>E:</strong> <a href="mailto:info@ercess.com">info@ercess.com</a><br>
+              <strong>E:</strong> <a href="mailto:info@ercess.com">marketing@ercess.com</a><br>
+              <strong>E:</strong> <a href="mailto:info@ercess.com">tickets@ercess.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <section class="wow fadeIn parallax" data-stellar-background-ratio="0.5" style="background-image:url('{% static 'images/parallax-bg23.jpg' %}');">
+            <div class="opacity-full bg-black"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 center-col margin-eight-bottom sm-margin-40px-bottom xs-margin-30px-bottom text-center">
+                        <div class="text-small text-medium-gray alt-font text-uppercase margin-5px-bottom">Write a message to us</div>
+                        <h5 class="alt-font text-white font-weight-600">Fill out the form & we'll be in touch soon!</h5>
+                    </div>
+                </div>
+
+                <form method="post"  >
+                    <div class="row">
+
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+{#                                        <br>#}
+
+                        <div class="col-md-6 col-sm-12" id="nam">
+
+                        </div>
+                        <div class="col-md-6 col-sm-12" id="mil">
+
+                        </div>
+                        <div class="col-md-6 col-sm-12" id="pho">
+
+                        </div>
+                        <div class="col-md-6 col-sm-12" id="purp">
+
+                        </div>
+                        <div class="col-md-12 sm-clear-both" id="comm">
+
+                        </div>
+                        <div class="col-md-12 text-center">
+{#                                     <input type="submit"  id="lsub" value="submit"  class="btn btn-default">#}
+                            <button  type="submit" class="btn btn-deep-pink btn-rounded btn-large margin-20px-top xs-no-margin-top">send message</button>
+                        </div>
+
+                        </div>
+                     </form>
+
+            </div>
+        </section> -->
+
+
+  {% include 'static/common/social.html'  %}
+  {% include 'static/common/footer.html' %}
+  {% include 'static/common/js.html' %}
+
+</body>
+
+</html>

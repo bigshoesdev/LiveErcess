@@ -1,0 +1,203 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block eventlist %}
+<link rel="stylesheet" type="text/css" href="/static/assets/vendor_components/datatable/datatables.min.css"/>
+<style>
+  table tr{
+    cursor: pointer;
+  }
+</style>
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-dark mb-30">Upcoming/ongoing events</h1>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#new">New Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#approved">Approved Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#unapproved">Unapproved Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#drafts">Drafts</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="new" class="tab-pane active">
+                        <div class="table-responsive">
+                            <table id="example" class="table table-hover display nowrap">
+                                <thead>
+                                    <tr>
+                                      <th>Event id</th>
+                                      <th>Event name</th>
+                                      <th>Created date</th>
+                                      <th>Start date</th>
+                                      <th>Organizer</th>
+                                    </tr>
+                                </thead>
+
+                                {% for id,name,create,start,user in new %}
+                                <tr data-href="{% url 'admin-panel:details' event_id=id %}">
+                                    <td>{{id}}</td>
+                                    <td>
+                                      <div class="pull-left pt-10">
+                                        <a href="{% url 'admin-panel:details' event_id=id %}" target="_blank">{{name}}</a>
+                                      </div>
+                                    </td>
+                                    <td>{{create.date}}</td>
+                                    <td>{{start.date}}</td>
+                                    <td>{{user}}</td>
+                                </tr>
+                                {% endfor %}
+                                <tfoot>
+                                    <tr>
+                                      <th>Event id</th>
+                                      <th>Event name</th>
+                                      <th>Created date</th>
+                                      <th>Start date</th>
+                                      <th>Organizer</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                    <div id="approved" class="tab-pane ">
+                        <div class="table-responsive">
+                            <table class="table table-hover display nowrap">
+                                <thead>
+                                    <tr>
+                                      <th>Event id</th>
+                                      <th>Event name</th>
+                                      <th>Created date</th>
+                                      <th>Start date</th>
+                                      <th>Organizer</th>
+                                    </tr>
+                                </thead>
+                                {% for id,name,create,start,user in app %}
+                                <tr data-href="{% url 'admin-panel:details' event_id=id %}">
+                                    <td>{{id}}</td>
+                                    <td>
+                                      <div class="pull-left pt-10">
+                                        <a href="{% url 'admin-panel:details' event_id=id %}" target="_blank">{{name}}</a>
+                                      </div>
+                                    </td>
+                                    <td>{{create.date}}</td>
+                                    <td>{{start.date}}</td>
+                                    <td>{{user}}</td>
+                                </tr>
+                                {% endfor %}
+                                <tfoot>
+                                    <tr>
+                                      <th>Event id</th>
+                                      <th>Event name</th>
+                                      <th>Created date</th>
+                                      <th>Start date</th>
+                                      <th>Organizer</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                    <div id="unapproved" class="tab-pane ">
+                        <div class="table-responsive">
+                            <table class="table table-hover display nowrap">
+                              <thead>
+                                <tr>
+                                  <th>Event id</th>
+                                  <th>Event name</th>
+                                  <th>Created date</th>
+                                  <th>Start date</th>
+                                  <th>Organizer</th>
+                                </tr>
+                              </thead>
+                                {% for id,name,create,start,user in unapp %}
+                                <tr data-href="{% url 'admin-panel:details' event_id=id %}">
+                                    <td>{{id}}</td>
+                                    <td>
+                                      <div class="pull-left pt-10">
+                                        <a href="{% url 'admin-panel:details' event_id=id %}" target="_blank">{{name}}</a>
+                                      </div>
+                                    </td>
+                                    <td>{{create.date}}</td>
+                                    <td>{{start.date}}</td>
+                                    <td>{{user}}</td>
+                                </tr>
+                                {% endfor %}
+                                <tfoot>
+                                  <tr>
+                                    <th>Event id</th>
+                                    <th>Event name</th>
+                                    <th>Created date</th>
+                                    <th>Start date</th>
+                                    <th>Organizer</th>
+                                  </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="drafts" class="tab-pane">
+                        <div class="table-responsive">
+                            <table class="table table-hover display nowrap">
+                              <thead>
+                                <tr>
+                                  <th>Event id</th>
+                                  <th>Event name</th>
+                                  <th>Created date</th>
+                                  <th>Start date</th>
+                                  <th>Organizer</th>
+                                </tr>
+                              </thead>
+                                {% for id,name,create,start,user in draft %}
+                                <tr data-href="{% url 'admin-panel:details' event_id=id %}">
+                                    <td>{{id}}</td>
+                                    <td>
+                                      <div class="pull-left pt-10">
+                                        <a href="{% url 'admin-panel:details' event_id=id %}" target="_blank">{{name}}</a>
+                                      </div>
+                                    </td>
+                                    <td>{{create.date}}</td>
+                                    <td>{{start.date}}</td>
+                                    <td>{{user}}</td>
+                                </tr>
+                                {% endfor %}
+                                <tfoot>
+                                <tr>
+                                  <th>Event id</th>
+                                  <th>Event name</th>
+                                  <th>Created date</th>
+                                  <th>Start date</th>
+                                  <th>Organizer</th>
+                                </tr>
+                              </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/static/assets/vendor_components/datatable/datatables.min.js"></script>
+<script src="/static/js/pages/data-table.js"></script>
+<script src="/static/js/pages/project-table.js"></script>
+<script>
+    $("table tbody tr").click(function() {
+        window.open($(this).attr("data-href"), '_blank')
+    });
+</script>
+{% endblock eventlist %}

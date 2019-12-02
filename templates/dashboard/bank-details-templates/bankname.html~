@@ -1,0 +1,18 @@
+<div class="form-group"  style="width: 80%">
+      		<div class="input-group mb-3">
+         	 <div class="input-group-prepend">
+            	  <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+        	 </div>
+        	 <input name="" type="text" class="form-control" placeholder="Bank Name" required  >
+		<div style="
+
+   color: red;
+  
+   display: inline-block;
+   margin-left: 23px;
+   position: absolute;
+   margin-top: 38px;
+   "></div>
+     	  	 </div>
+    	  </div>
+

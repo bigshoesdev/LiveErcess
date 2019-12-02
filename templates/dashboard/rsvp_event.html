@@ -1,0 +1,61 @@
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %} {{ eventname }} {% endblock title %}
+
+{% block og %}
+<link rel="stylesheet" type="text/css" href="/static/assets/vendor_components/datatable/datatables.min.css"/>
+
+<section class="content">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="text-dark mb-30">{{ eventname }}</h1>
+
+                {% if count  == 0 %}
+                <div class="alert alert-info text-center mb-80">
+                    <h4>OOPS! NOTHING TO SHOW</h4>
+                </div>
+                {% else %}
+                <div class="table-responsive">
+                    <table id="example" class="table table-hover display nowrap w-p100">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Received on</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          {% for name,email,mobile,rec in items %}
+                            <tr>
+                                <td>{{name}}</td>
+                                <td>{{email}}</td>
+                                <td>{{mobile}}</td>
+                                <td>{{rec}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Received on</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+    <script src="/static/assets/vendor_components/datatable/datatables.min.js"></script>
+
+    <!-- SoftPro admin for Data Table -->
+    <script src="/static/js/pages/data-table.js"></script>
+    <script src="/static/js/pages/project-table.js"></script>
+{% endblock og %}

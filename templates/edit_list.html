@@ -1,0 +1,36 @@
+<html>
+  <body>
+    <h1>Events</h1>
+    <h3>Basic</h3>
+    <ul>
+      {% for article in Articles %}
+      <li>{{ article.id }}</li>
+      <li>{{ article.event_name }}</li>
+      <li>{{ article.md5 }}</li>
+      <li>{{ article.address_line1 }}</li>
+      <li>{{ article.address_line2 }}</li>
+      <li>{{ article.pincode }}</li>
+      <li>{{ article.state }}</li>
+      <li>{{ article.city }}</li>
+      <h3>Images</h3>
+      <li>{{ article.banner }}</li>
+      <li>{{ article.editable_image }}</li>
+
+      <h3>Target</h3>
+
+      <li>{{ article.date_added }}</li>
+      <li>{{ article.sdate }}</li>
+      <li>{{ article.edate }}</li>
+      <li>{{ article.start_time }}</li>
+      <li>{{ article.end_time }}</li>
+
+      <h3>Description</h3>
+
+      <li>{{ article.description }}</li>
+
+      <h3>Tickets</h3>
+      <li>{{ article.ticket_url }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

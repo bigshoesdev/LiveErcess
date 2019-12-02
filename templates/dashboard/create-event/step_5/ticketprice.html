@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-4 col-lg-4">
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-info border-info"><i class="ti-money"></i></span>
+                </div>
+                <select>
+                    {% for entry in a %}
+                    <option value="{{ entry }}">{{ entry.country }}</option>
+                    {% endfor %}
+                    <option value="">INR</option>
+                </select>
+                <input name="ticket_price" id="ticket_price" type="number" class="form-control" placeholder="Ticket Price*" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" />
+                <div class="input-error"></div>
+            </div>
+        </div>
+    </div>

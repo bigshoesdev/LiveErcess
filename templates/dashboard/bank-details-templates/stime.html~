@@ -1,0 +1,17 @@
+  <div class="input-group-prepend">
+                 <span class="input-group-text bg-info border-info"><i class="ti-time"></i></span>
+                </div>
+		
+                <input name="start_time" id="timepicker" class="input-small form-control" placeholder="Start Time" type="text" required >
+		<div style="
+
+   color: red;
+  
+   display: inline-block;
+   margin-left: 339px;
+   position: absolute;
+   margin-top: 38px;
+   "></div>
+		
+	   </div>
+</div>

@@ -1,0 +1,46 @@
+
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %} Dashboard - Ercess Live {% endblock title %}
+{% block og %}
+
+
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{% url 'dashboard:organizer-agreement' %}" target="_blank">
+                  <div style="min-height: 148px;" class="alert alert-info text-center pt-60 mt-50">
+                      <h4>GO THROUGH ORGANIZER AGREEMENT</h4>
+                  </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="{% url 'dashboard:step_one' %}">
+                  <div style="min-height: 148px;" class="alert alert-danger text-center pt-60 mt-50">
+                      <h4>CREATE NEW EVENT</h4>
+                  </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="/live/how-it-works/" target="_blank">
+                  <div style="min-height: 148px;" class="alert alert-danger text-center pt-60">
+                      <h4>HOW DO WE WORK?</h4>
+                  </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="{% url 'dashboard:bank_details' %}">
+                  <div style="min-height: 148px;" class="alert alert-info text-center pt-60">
+                      <h4>ADD BANK ACCOUNT DETAILS</h4>
+                  </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock og %}

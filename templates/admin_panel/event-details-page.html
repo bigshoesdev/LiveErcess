@@ -1,0 +1,97 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block saleslist %}
+<section class='content'>
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Sales List</h1>
+        <div class="table-responsive">
+            <table class="table table-hover table-event-list">
+                <tr>
+                  <th>Booking Id</th>
+                  <th>Event Id</th>
+                  <th>Organizer</th>
+                  <th>Amount Paid</th>
+                  <th>Purchase Date</th>
+                  <th>Attendee Contact</th>
+                  <th>Attendee Email</th>
+                  <th>Settlement Id</th>
+                  <th>Recieval Status</th>
+                  <th>Amount Processed Date</th>
+                  <th>Process Invoice</th>
+                  <th>user</th>
+                </tr>
+                 <tr>
+                    <td>
+                      <div class="pull-left ml-10 pt-10">
+                        <a href="#">{{tickets_sale.booking_id}}</a>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="pull-left ml-10 pt-10">
+                        <a href="{% url 'admin-panel:details' event_id=event_id  %}" target="_blank">{{ event_id }}</a>
+                      </div>
+                    </td>
+                    <td>{{tickets_sale.oragnizer}}</td>
+                    <td>{{tickets_sale.ampunt_paid}}</td>
+                     <td>{{tickets_sale.purchase_date}}</td>
+                     <td>{{tickets_sale.attendee_contact}}</td>
+                     <td>{{tickets_sale.attendee_email}}</td>
+                     <td>{{payment_settlement.settlement_id}}</td>
+                     <td>{{payment_settlement.receival_status}}</td>
+                     <td>{{payment_settlement.amount_process_date}}</td>
+                     <td>{{payment_settlement.process_invoice}}</td>
+                     <td>{{name}}</td>
+                      <td>
+                      <div class="pull-left ml-10 pt-10">
+                        <a href="#">Link</a>
+                      </div>
+                    </td>
+                     <td>
+                     <div class="pull-left ml-10 pt-10">
+                        <a href="#" class="btn btn-sm btn-primary">generate invoice</a>
+                      </div>
+                    </td>
+                </tr>
+     </table>
+        </div>
+
+       {% if bankdetails is not None %}
+        <h1>Bank Details</h1>
+           <div class="table-responsive">
+            <table class="table table-hover table-event-list">
+                <tr>
+                  <th>Bank Name</th>
+                  <th>Account Holder Name</th>
+                  <th>Account Type</th>
+                  <th>Account No</th>
+                  <th>IFSC code</th>
+                  <th>Branch</th>
+                  <th>GST Number</th>
+
+                </tr>
+                 <tr>
+                    <td>
+                      {{ bankdetails.bank_name }}
+                    </td>
+                    <td>
+                      {{ bankdetails.ac_holder_name }}
+                    </td>
+                    <td>{{ bankdetails.ac_type }}</td>
+                    <td>{{ bankdetails.ac_number }}</td>
+                     <td>{{ bankdetails.ifsc_code }}</td>
+                     <td>{{ bankdetails.branch }}</td>
+                     <td>{{ bankdetails.gst_number }}</td>
+
+                </tr>
+     </table>
+        </div>
+          {% else %}
+           <h1>No Bank Details</h1>
+         {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock saleslist %}

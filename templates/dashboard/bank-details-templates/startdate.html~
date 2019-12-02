@@ -1,0 +1,14 @@
+ <div class="form-group" style="width: 80%;">
+        	<div class="input-group mb-3">
+            	  <div class="input-group-prepend"> <span class="input-group-text bg-info border-info"><i class="ti-calendar"></i></span></div>
+                  <input name="ticket_start_date" type="text" class="form-control" id="datepicker" placeholder="Start Date" required >
+		<div style="
+
+   color: red;
+  
+   display: inline-block;
+   margin-left: 23px;
+   position: absolute;
+   margin-top: 38px;
+   "></div>
+	

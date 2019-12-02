@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <title>About us | Ercess Live | Ercess.com/Live</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+        <meta name="description" content="Best tool in the world to increase the ROI on your next event. Get to know our story here." />
+        <meta name="keywords" content="about us, Ercess Live" />
+        <link rel="shortcut icon" href="{% static 'images/fav.ico' %}">
+        <!--[if IE]>
+            <script src="js/html5shiv.js"></script>
+        <![endif]-->
+
+        {% include 'static/common/css.html' %}
+    </head>
+    <body>
+
+        {% include 'static/common/header2.html' %}
+        <section class="wow fadeIn cover-background background-position-top top-space" style="background-image:url('{% static 'images/contact-banner.jpg' %}');">
+            <div class="opacity-medium bg-extra-dark-gray"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 display-table page-title-large">
+                        <div class="display-table-cell vertical-align-middle text-center padding-30px-tb">
+                            <h1 class="alt-font text-white font-weight-600 no-margin-bottom">About Ercess Live</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-sm-12 col-xs-12 center-col xs-text-center">
+                        <p class="text-justify xs-text-center text-medium line-height-28 xs-line-height-26">Ercess, Inc. was founded in 2011 as a web development agency while <strong class="text-extra-dark-gray text-decoration-underline">Ercess Live</strong> started on 27 March 2016. Our aim is to serve people by helping them save time and effort by taking on the tedious responsibility of event promotion, management along with data and feedback collection.</p>
+                        <p class="text-justify xs-text-center">We are the sole multi-channel event promotion company with no competitor in the market and aspire to be the go-to platform for all event goers and organisers. With more than 65+ regional, national and global event promotion and ticketing platforms in our network, publishing events for free turn out to be a win-win situation for both consumers and organisers, and eventually event promotion companies. Having partnered with reputed and well-established brand names, we register your event on all these pages at just one click.</p>
+                    </div>
+                    <div class="col-md-5 col-sm-6 col-xs-12 col-md-offset-1">
+                        <ul>
+                            <li>The submission of just one online form through our page will enable you to register your event on all event listing and ticketing sites instantly that we have a tie-up with.</li>
+                            <li>All the attendee, RSVP, payment and other details can be viewed, accessed and managed from our dashboard itself instead of logging on to different websites which is time-consuming. Payment collection at one go is also made easier.</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <ul>
+                            <li>Any changes such as the ticket price, date of event, venue or other similar alterations can also be made by just a simple online submission.</li>
+                            <li>Sell all your stall spaces quickly using our community of vendors and other enablers.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% include 'static/common/social.html'  %}
+    {% include 'static/common/footer.html' %}
+    {% include 'static/common/js.html' %}
+    </body>
+
+</html>

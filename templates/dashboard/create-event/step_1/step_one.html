@@ -1,0 +1,335 @@
+{% extends "dashboard/create_event.html" %}
+{% load rest_framework %}
+
+{% block title %}Create your event - Ercess Live{% endblock title %}
+{% block step_one %}
+
+
+
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-dark mb-30">Create your event</h1>
+                <div class="md-stepper-horizontal red">
+                    <div class="md-step active">
+                      <div class="md-step-circle"><span>1</span></div>
+                      <div class="md-step-title">Basic details</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>2</span></div>
+                      <div class="md-step-title">Set targets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>3</span></div>
+                      <div class="md-step-title">Upload images</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>4</span></div>
+                      <div class="md-step-title">Description</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>5</span></div>
+                      <div class="md-step-title">Add tickets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>6</span></div>
+                      <div class="md-step-title">Custom questions</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    {% if flag %}
+      {% if serializer.errors %}
+        {% for key,value in serializer.errors.items %}
+          <div class="alert alert-danger">
+             <strong style="color: white">{{ key|title }} : {{ value.0 }}</strong>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+
+    <form action="{% url 'dashboard:step_one' %}" method="POST" id="msform123" class="col-md-12 mt-50 mb-50" autocomplete="off">    {% csrf_token %}
+        <fieldset>
+            {% render_form serializer template_pack='rest_framework/vertical' %}
+
+            <p>By clicking this button, you agree to our <a href="{% url 'dashboard:organizer-agreement' %}" target="_blank">legal business agreement</a>.</p>
+            <button type="submit" id="btn123" class="btn btn-danger btn-block mt-10">Create Event</button>
+
+        </fieldset>
+    </form>
+
+
+
+</section>
+<script>
+
+
+   // $('#id_venue_not_decided').change(function () {
+   //    let venueVal = $('#id_venue_not_decided').val()
+   //
+   //    if(venueVal == 'false' || venueVal == false) {
+   //      venueVal = true
+   //    } else {
+   //      venueVal = false
+   //    }
+   //
+   //    $('#id_venue_not_decided').val(venueVal)
+   // });
+   //
+   // // custom required validation
+   // $.validator.addMethod("customRequired", function(elementVal, element) {
+   //    let venueVal = $('#id_venue_not_decided').val()
+   //    if(venueVal == 'false' || venueVal == false) {
+   //      if(elementVal.trim() == '') {
+   //        return false
+   //      } else {
+   //        return true
+   //      }
+   //    } else {
+   //      return true
+   //    }
+   //  }, "This field is required");
+   // ends here ~ custom required validation
+
+    function convertInputtoDate(){
+      var input = document.getElementById("datepicker").value;
+      var date = input.split('/');
+      var selectdate = new Date(date[2]+"-"+ date[1]+"-"+ date[0]);
+
+      return selectdate;
+    }
+
+    // function for tomorrow date
+     function tomorrow() {
+       let today = new Date();
+       let tomorrow = new Date();
+       tomorrow.setDate(today.getDate() + 1);
+       return tomorrow
+    }
+    // ends here ~ function for tomorrow date
+
+    // function for get next day date
+    function nextDayDate() {
+       let today = convertInputtoDate();
+       let tomorrow = new Date(convertInputtoDate());
+       tomorrow.setDate(today.getDate() + 1);
+       return tomorrow
+    }
+    // ends here ~ function for get next day date
+
+     //startdate
+     $('#datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: tomorrow()
+    })
+
+    $('#enddatepicker').datepicker({
+    //  weekStart: 1,
+         format: 'dd/mm/yyyy',
+          startDate: tomorrow()
+    })
+
+//starttime
+$('#timepicker').datetimepicker({
+format: 'LT',
+
+})
+
+//endtime
+$('#timepicker1').datetimepicker({
+format: 'LT'
+
+})
+
+//custom-method-to compare start and end date
+$.validator.addMethod("enddate", function(enddatevalue, element) {
+var startdatevalue = $('#datepicker').val();
+    var arrsdate = startdatevalue.split('/');
+    var arredate = enddatevalue.split('/');
+return new Date(arrsdate[2], arrsdate[1], arrsdate[0]) <= new Date(arredate[2],arredate[1],arredate[0]);
+}, "End date can not be less than Start Date.");
+
+//custom-method-to compare start and end time for same day event
+$.validator.addMethod("endtime", function(endtimevalue, element) {
+var startdatevalue = $('#datepicker').val();
+var enddatevalue = $('#enddatepicker').val();
+
+if(startdatevalue == enddatevalue){
+    var temp = '01/01/1990'
+    var starttimevalue = $('#timepicker').val();
+    var st = new Date(temp + " " +starttimevalue).getTime();
+    var et = new Date(temp + " " +endtimevalue).getTime();
+    return et > st;
+} else{
+  return true;
+}
+
+}, "End Time can not be less than Start Time for same day event.");
+
+$.validator.addMethod("web", function(webvalue, element) {
+if(webvalue.length > 8){
+    return true;
+}
+else{
+    return false;
+}
+
+}, "Enter wesite link including https://");
+
+$("#btn123").click(function(){
+
+
+          //  alert('clicked')
+
+  //  alert(new Date(arrsdate[2], arrsdate[1], arrsdate[0]))
+          form = $("#msform123");
+
+              form.validate({
+
+
+    rules: {
+      event_name: {
+        required: true,
+        minlength: 5,
+        eventNameValidation: true,
+        eventNameContValidation: true
+      },
+      website: {
+      // web:true,
+        required: true,
+        url: true,
+      },
+      sdate: {
+      required: true,
+      },
+      edate: {
+      required: true,
+      enddate: true,
+      },
+      start_time: {
+      required: true,
+      },
+      end_time: {
+      required: true,
+      endtime: true,
+      },
+      address_line1: {
+        customRequired: true,
+      },
+      city: {
+        customRequired: true,
+      },
+      state: {
+        customRequired: true,
+      },
+      country: {
+        customRequired: true,
+      },
+      pincode: {
+        customRequired: true,
+      },
+    },
+    highlight: function(element) {
+            // add a class "has_error" to the element
+            $(element).next('div').addClass('has_error');
+      },
+              unhighlight: function(element) {
+            // remove the class "has_error" from the element
+            $(element).next('div').removeClass('has_error');
+        },
+    messages: {
+      event_name: {
+      required: "Please provide name of your event",
+      minlength: "Event Name should have atleast 5 characters."
+      },
+      website: {
+      required: "Provide website link.",
+      },
+    sdate: {
+      required: "Provide the Start Date of Event",
+      },
+    edate: {
+      required: "Provide the End Date of Event",
+      enddate: "End Date cannot be less than Start Date.",
+      },
+    start_time: {
+      required: "Provide Start Time of the event",
+      },
+    end_time: {
+      required: "Provide End Time of the event.",
+      endtime: "End Time can not be less than Start Time for same day event.",
+      },
+    address_line1: {
+      required: "Provide proper address of the event.",
+      }
+
+
+    },
+    errorPlacement: function(error, element) {
+
+      error.appendTo( element.next('div'));
+      element.next('div').show();
+
+
+        },
+    });
+
+      });
+
+//   $("#msform123").on('submit', function(e) {
+//     $("#msform123").validate();
+//     var isvalid = $("#msform123").valid();
+//     if (isvalid) {
+//         e.preventDefault();
+//         alert(isvalid);
+//     }
+// });
+
+
+// event name validation
+$.validator.addMethod("eventNameValidation", function(eventNameVal, element) {
+    return /^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/.test(eventNameVal)
+}, "Event Name is Not Valid: Check Spaces");
+// ends here ~ event name validation
+
+// check contact details content
+ var re_email = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+
+var re_phn = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/im;
+
+var re_url = /((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?/;
+
+// contact details validation
+$.validator.addMethod("eventNameContValidation", function(eventNameVal, element) {
+    console.log(re_email.test(eventNameVal)|| re_phn.test(eventNameVal))
+    if (re_email.test(eventNameVal)|| re_phn.test(eventNameVal)|| re_url.test(eventNameVal)) {
+      return false;
+    } else {
+      return true
+    }
+}, "Event Name must not be Contained Contact Details");
+// ends here ~ contact details validation
+
+// ends here ~ check contact details content
+
+</script>
+
+
+{% endblock step_one %}

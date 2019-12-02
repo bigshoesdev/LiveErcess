@@ -1,0 +1,22 @@
+{% extends "dashboard/create_event.html" %}
+
+{% block title %}Congratulations! you have successfully created your event - Ercess Live{% endblock title %}
+
+{% block step_success %}
+
+	<section class="content">
+		<div class="container clearfix">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<img src="/static/images/success-lg.PNG" />
+					<h1 class="text-dark mb-30" style='color:green'>Congratulations! you have successfully created your event</h1>
+
+					<div><a href="/live/dashboard/add-event" class="btn btn-danger mt-40">
+                      <i class="fa fa-rocket mr-10"></i> Go to my events page
+                    </a></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock step_success %}

@@ -1,0 +1,29 @@
+
+<div class="form-group"  style="width: 80%">
+      		<div class="input-group mb-" style="color:grey">
+        	    <label class="checkbox-inline">
+      			<input type="checkbox"  style="position:inherit;opacity:inherit;" class="marked"  value="flat">flat
+    			</label>
+    			<label class="checkbox-inline">
+      			<input type="checkbox"  style="position:inherit;opacity:inherit;" class="marked" value="">percentage
+    			</label>
+			
+		<div style="
+
+   color: red;
+  
+   display: inline-block;
+   margin-left: 23px;
+   position: absolute;
+   margin-top: 38px;
+   "></div>
+     	  	 </div>
+    	  </div>
+
+
+<script type="text/javascript">
+        $('.marked').on('change', function() {
+            $('.marked').not(this).prop('checked', false);  
+        });
+    </script>
+

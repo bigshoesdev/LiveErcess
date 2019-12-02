@@ -1,0 +1,100 @@
+{% extends "dashboard/create_event.html" %}
+{% load rest_framework %}
+{% block title %}Create tickets to sell - Ercess Live{% endblock title %}
+
+
+{% block step_one %}
+<section class="content">
+   <div class="container arrow-steps clearfix">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="md-stepper-horizontal red">
+                <div class="md-step">
+                  <a href="{% url 'dashboard:edit-event' event_id %}">
+                    <div class="md-step-circle"><span>1</span></div>
+                    <div class="md-step-title">Basic details</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                  </a>
+                </div>
+                <div class="md-step">
+                  <a href="{% url 'dashboard:edit-event-two' event_id  %}">
+                    <div class="md-step-circle"><span>2</span></div>
+                    <div class="md-step-title">Set targets</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                  </a>
+                </div>
+                <div class="md-step">
+                  <a href="{% url 'dashboard:edit-event-two' event_id  %}">
+                    <div class="md-step-circle"><span>3</span></div>
+                    <div class="md-step-title">Upload images</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                  </a>
+                </div>
+                <div class="md-step">
+                  <a href="{% url 'dashboard:edit-event-four' event_id  %}">
+                    <div class="md-step-circle"><span>4</span></div>
+                    <div class="md-step-title">Description</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                  </a>
+                </div>
+                <div class="md-step active">
+                  <a href="{% url 'dashboard:edit-event-ticket' event_id  %}">
+                    <div class="md-step-circle"><span>5</span></div>
+                    <div class="md-step-title">Add tickets</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                  </a>
+                </div>
+              </div>
+
+
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <tr>
+                        <th>Ticket</th>
+                        <th>Price</th>
+                        <th>        </th>
+                      </tr>
+                      {% for id,name,price in ticks %}
+                    <tr>
+                      <td>{{name}}
+
+                      </td>
+                      <td>{{currency | safe}} {{price}} </td>
+                      <td>
+                        {% now "Y-m-d" as todays_date %}
+                        {% if todays_date >= eventStart_date|date:"Y-m-d" %}
+                           <a class="btn btn1 btn-danger text-white" disabled>Edit</a>
+                        {% else %}
+                          <a class="btn btn1 btn-danger text-white" href="{% url 'dashboard:edit-event-five' event_id id %}">Edit</a>
+                        {% endif %}
+                        <a class="btn btn1 btn-danger text-white ml-5" href="{% url 'dashboard:delete-ticket' 'notreq' event_id id 1 %}">Delete</a></td>
+
+                    </tr>
+                    {% endfor %}
+                    </table>
+                  </div>
+
+
+          </div>
+      </div>
+  </div>
+
+  {% now "Y-m-d" as todays_date %}
+  {% if todays_date >= eventStart_date|date:"Y-m-d" %}
+     <div class="col-md-12">
+        <a class="btn btn1 btn-danger text-white">+ Create New Ticket</a>
+      </div>
+  {% else %}
+     <div class="col-md-12">
+      <a class="btn btn1 btn-danger text-white" href="{% url 'dashboard:new-ticket' event_id %}">+ Create New Ticket</a>
+    </div>
+  {% endif %}
+  <!-- <input id="Button1" type="button" class="btn btn21 btn-danger mt-30" value="+ Create New Ticket" /> -->
+  </div>
+  </section>
+  {% endblock step_one %}

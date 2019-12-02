@@ -1,0 +1,163 @@
+<!-- <div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="alert alert-info">
+                In case of if Venue is not Decided yet.
+            </div>
+            <div class="input-group">
+
+                <label class="customCheckbox">
+                  <input type="checkbox" name="venue_not_decided" id="id_venue_not_decided" value="false" class="form-control"/>
+                  <span></span>
+                </label>
+                <label for="test">Venue is not Decided yet</label>
+                <style type="text/css">
+                  .customCheckbox input {
+                    position: relative;
+                    z-index: -9999;
+                  }
+
+                  .customCheckbox span {
+                    width: 20px;
+                    height: 20px;
+                    display: block;
+                    /*background: red;*/
+                    border: solid 2px;
+                  }
+
+                  .customCheckbox input:checked + span {
+                    background: url('http://www.pngmart.com/files/3/Green-Tick-PNG-Picture.png');
+                    background-size: 15px 15px;
+                  }
+                </style>
+
+                <div class="input-error"></div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="alert alert-info">
+                In case of outdoor event, provide the address of start point.
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                </div>
+                <input name="address_line1" id="street_number" type="text" class="form-control street_number route sublocality_level_2" placeholder="Address Line 1*" >
+                <div class="input-error"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <script type="text/javascript">
+     var componentForm = {
+            street_number: 'long_name',
+            route: 'long_name',
+            neighborhood: 'long_name',
+	    sublocality_level_1: 'long_name',
+	    sublocality_level_2: 'long_name',
+            locality: 'long_name',
+	    administrative_area_level_4: 'long_name',
+	    administrative_area_level_3: 'short_name',
+            administrative_area_level_1: 'long_name',
+	    administrative_area_level_2: 'short_name',
+            country: 'long_name',
+            postal_code: 'short_name'
+        };
+    function initAutocomplete() {
+      // Create the autocomplete object, restricting the search to geographical
+      // location types.
+      autocomplete = new google.maps.places.Autocomplete( (document.getElementById('street_number')),
+          {types: ['establishment']}
+			);
+      // When the user selects an address from the dropdown, populate the address
+      // fields in the form.
+      autocomplete.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+      // Get the place details from the autocomplete object.
+      var place = autocomplete.getPlace();
+
+	// console.log(place.address_components)
+//	console.log(place)
+      // alert(place.formatted_address)
+      for (var component in componentForm) {
+        //document.getElementsByClassName(component).value = '';
+        //document.getElementsByClassName(component).disabled = false;
+        var collection = document.getElementsByClassName(component)
+        for (index = 0; index < collection.length; ++index) {
+           collection[index].value = ""
+	  //  collection[index].disabled =false;
+	}
+      }
+      document.getElementsByName('address_line1')[0].value = place.name;
+
+    // @author Shubham
+    let cityNameExists = false;
+    if (place.address_components.some(e => e.types[0] == 'locality')) {
+      cityNameExists = true;
+    }
+    if(cityNameExists == false) {
+        for (var i = 0; i < place.address_components.length; i++) {
+          if(place.address_components[i].types[0] == 'sublocality_level_1') {
+            let sublocatilyLoc = place.address_components[i];
+            sublocatilyLoc.types[0] = 'locality';
+            // place.address_components.push(sublocatilyLoc)
+          }
+        }
+    }
+
+    console.log(cityNameExists, place.address_components)
+    // ends here ~ @author Shubham
+      for (var i = 0; i < place.address_components.length; i++) {
+         var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+              var val = place.address_components[i][componentForm[addressType]];
+           //   document.getElementById(addressType).value = val;
+		var collection = document.getElementsByClassName(addressType)
+
+
+
+		for (index = 0; index < collection.length; ++index) {
+           		if(collection[index].value == ""){
+	    			collection[index].value =val;
+			}
+			else{
+				var previous = collection[index].value
+				collection[index].value = previous +", "+val;
+			}
+		}
+          }
+      }
+    var lat =  place.geometry.location.lat();
+    var long = place.geometry.location.lng();
+    var pid = place.place_id;
+//	      console.log("hen");
+//	      console.log(lat);
+//	       alert(pid)
+  document.getElementsByName('latitude')[0].value = lat;
+  document.getElementsByName('longitude')[0].value = long;
+  document.getElementsByName('place_id')[0].value = pid;
+
+    myMap(lat, long);
+  }
+function myMap(lat, long) {
+
+	var pos = {lat: lat, lng: long};
+	var mapProp= {
+	  center:pos,
+  	  zoom:14,
+	  mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+var map = new google.maps.Map(document.getElementById("map"),mapProp);
+var marker = new google.maps.Marker({position: pos, map: map});
+
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWfptEfuRFJAMKh1XQOZQMZQ0q9qOtrm0&libraries=places&callback=initAutocomplete" async defer></script>

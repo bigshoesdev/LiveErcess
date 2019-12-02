@@ -1,0 +1,255 @@
+{% extends "dashboard/create_event.html" %}
+
+{% block title %}Add questions for your attendees - Ercess Live{% endblock title %}
+{% block step_six %}
+<style>
+  [type=checkbox]:checked, [type=checkbox]:not(:checked){
+      position: static;
+      opacity: 1;
+  }
+</style>
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-dark mb-30">Create questions to ask your attendees</h1>
+                <div class="md-stepper-horizontal red">
+                    <div class="md-step active done">
+                      <div class="md-step-circle"><span>1</span></div>
+                      <div class="md-step-title">Basic details</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step active done">
+                      <div class="md-step-circle"><span>2</span></div>
+                      <div class="md-step-title">Set targets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step active done">
+                      <div class="md-step-circle"><span>3</span></div>
+                      <div class="md-step-title">Upload images</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step active done">
+                      <div class="md-step-circle"><span>4</span></div>
+                      <div class="md-step-title">Description</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step active done">
+                      <div class="md-step-circle"><span>5</span></div>
+                      <div class="md-step-title">Add tickets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step active">
+                      <div class="md-step-circle"><span>6</span></div>
+                      <div class="md-step-title">Custom questions</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                </div>
+            </div>   
+        </div>   
+    </div>   
+
+        <form action="" method="POST" id="msform" name='question_form' class="col-md-12 mt-50 mb-50" autocomplete="off">    {% csrf_token %}
+
+          <div class="row">
+              <div class="col-md-4">
+                  <label> Name </label>
+                  <input class="form-control" type="text" placeholder="Name *" readonly="">
+              </div>
+              <div class="col-md-4">
+                  <label> Contact No. </label>
+                  <input class="form-control" type="text" placeholder="Contact No. *" readonly="">
+              </div>
+              <div class="col-md-4 mb-40">
+                  <label> Email </label>
+                  <input class="form-control" type="text" placeholder="Email *" readonly="">
+              </div>
+          </div>
+          <fieldset>
+         <div id="dialog-form" title="Create Question">
+           
+            <input placeholder='Question Title*' type="text" id="email" class="text ui-widget-content ui-corner-all form-control form-control-sm mb-20" required />
+            <select id="type-response" class="form-control form-control-sm mb-20">
+                {% for val in context %}  
+                    <option value="{{ val|first }}"> {{ val|last }} </option>
+                {% endfor %}
+            </select>
+                   
+            <input type="text" placeholder="If dropdown, provide options comma seperated"
+                name="password" id="password" value=""
+                class="text ui-widget-content ui-corner-all form-control form-control-sm mb-20"  />
+                
+         </div>
+         <div id="users-contain" class="ui-widget">
+            <div class="table-responsive">
+                <table id="questions" class="table table-hover">
+                    <thead>
+                        <tr>
+                          <th>Mandatory</th>
+                          <th>Question Title</th>
+                          <th>Type Of Response</th>
+                          <th>Options for Multiple Choice</th>
+                          <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody style="word-break: break-word;">
+                        
+                    </tbody>
+                </table>
+
+            </div>
+
+         </div>
+          <input type='button' class="btn btn-default mt-20" id="create-user" value='+ Create questions'/>
+          <button type="submit" class="btn btn6 btn-block btn-danger mt-10">Done</button>
+      </fieldset>
+     </form>
+    </section>
+
+<script>
+     $(function () {
+   var flag = true;
+    var new_dialog = function (type, row) {
+        var dlg = $("#dialog-form").clone();
+        var fname = dlg.find(("#type-response")),
+            email = dlg.find(("#email")),
+            password = dlg.find(("#password"));
+        type = type || 'Create';
+        var config = {
+            autoOpen: true,
+            height: 300,
+            width: 550,
+            modal: true,
+            buttons: {
+                "Add": save_data,
+                "Cancel": function () {
+                    dlg.dialog("close");
+                }
+            },
+            close: function () {
+                dlg.remove();
+            } 
+        };
+        
+        if (type === 'Edit') {
+            config.title = "Edit Question";
+            get_data();
+            delete(config.buttons['Add']);
+            config.buttons['Done Editing'] = function () {
+                save_data();
+                if(flag == true){
+                  row.remove();
+                }
+            };
+
+        }
+        dlg.dialog(config);
+        function get_data() {
+            var _que = $(row.children().get(1)).text(),
+                _ops = $(row.children().get(3)).text();
+            email.val(_que);
+            password.val(_ops);
+        }
+       function save_data() {
+          if(email.val()==""){
+               alert("Question Title is Mandatory");
+               return false;
+          } else if(email.val().length > 150){
+               alert("Maximum 150 Characters Allowed");
+               return false;
+          } else if(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/.test(email.val()) == false) {
+            alert("Question Titles Contains UnNecessary Spaces");
+            return false;
+          }
+          if(fname.find("option:selected").text().trim() == 'dropdown'){
+              if(password.val()==""){
+                     alert("Provide options for users to select.");
+                     flag=false;
+                     return false;
+              }
+                 
+          }
+          flag=true;
+         $('#questions tbody').append("<tr>" + "<td><input type='checkbox'></td>" +  "<td >" + email.val() + "</td>" +"<td>" + fname.find("option:selected").text().trim() + "</td>" + "<td>" + password.val() + "</td>" + "<td><a href='#' class='edit mr-10'><i class='fa fa-pencil'></i></a><span class='delete'><a href=''><i class='fa fa-times'></i></a></span></td>" + "</tr>");
+            dlg.dialog("close");
+        }
+    };
+   
+    $(document).on('click', 'span.delete', function () {
+        var checkstr =  confirm('Are you sure you want to delete this?');
+        if(checkstr == true){
+            $(this).closest('tr').find('td').fadeOut(1000,
+                function () {
+                   
+                $(this).parents('tr:first').remove();
+            });
+        }
+        return false;
+    });
+    $(document).on('click', 'td a.edit', function () {
+        new_dialog('Edit', $(this).parents('tr'));
+        
+        return false;
+    });
+
+  $('#create-user').button().click(new_dialog);
+   $(".btn6").click( function(e){
+        // e.preventDefault();
+     var checkstr =  confirm('Are you sure you want to submit?');
+     if(checkstr == true){
+         var all_questions =[];
+         var count=0;
+         
+    if(document.getElementById('questions').getElementsByTagName("tr").length > 1){
+         $("#questions>tbody>tr").each(function(){
+                      var temp=[];
+                     var $tds = $(this).find('td');
+                     var bool_value = $tds.find('input[type="checkbox"]').is(':checked')
+                     if(bool_value ){
+                          var mandate =1;
+                     }
+                     else{
+                          var mandate =2;
+                     }
+                        var title = $tds.eq(1).text();
+                        var type = $tds.eq(2).text();
+                        var ops = $tds.eq(3).text();
+                     if(ops===""){
+                       temp.push(mandate, title, type);
+                     }
+                     else{
+                       temp.push(mandate, title, type, ops);
+                     }
+                    all_questions.push(temp);
+                    count = count+1;   
+            });
+       }
+       
+        $.ajax({
+            
+            type: 'POST',
+            //url:url,
+            data: {'data':all_questions,         
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                  }, //jQuery.param(data)
+            success: function(success_url){         
+                window.location.href = success_url;
+            }
+        });
+     }
+     else{
+        return false;
+    }
+});
+
+});
+
+      
+</script>
+{% endblock step_six %}

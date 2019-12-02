@@ -1,0 +1,113 @@
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %} Sales report - Ercess Live {% endblock title %}
+{% block og %}
+
+
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-dark mb-30">Sales report</h1>
+                {% if t_count == 0  %}
+                  <div class="alert alert-info text-center mb-80">
+                      <h4>YOU HAVE NO UPCOMING EVENTS!</h4>
+                      <a href="/live/dashboard/add-event" class="btn btn-default mt-20">
+                          <i class="fa fa-plus mr-10"></i> Create new
+                      </a>
+                  </div>
+                {% else %}
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#upcoming">Upcoming</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#past">Past</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="upcoming" class="tab-pane active">
+                      {% if up_count == 0  %}
+                        <div class="alert alert-info text-center mb-80 mt-30">
+                            <h4>YOU HAVE NO UPCOMING EVENTS!</h4>
+                            <a href="/live/dashboard/add-event" class="btn btn-default mt-20">
+                                <i class="fa fa-plus mr-10"></i> Create new
+                            </a>
+                        </div>
+                      {% else %}
+                        <div class="table-responsive">
+                            <table class="table table-hover table-event-list">
+                                <tr>
+                                  <th>Event</th>
+                                  <th>Starts on</th>
+                                  <th>Happening in</th>
+                                  <th>Total Sales</th>
+                                </tr>
+                                {% for id,name,sdate,banner,city,sale in upcoming %}
+                                <tr>
+                                    <td>
+                                      <div class="pull-left event-img">
+                                        <a href="{% url 'dashboard:sale_details' event_id=id %}">
+                                          <img src="{{banner}}">
+                                        </a>
+                                      </div>
+                                      <div class="pull-left ml-10 pt-10">
+                                        <a href="{% url 'dashboard:sale_details' event_id=id %}">{{name}}</a>
+                                      </div>
+                                    </td>
+                                    <td>{{sdate.date}}</td>
+                                    <td>{{city}}</td>
+                                    <td>{{sale}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div id="past" class="tab-pane">
+                      {% if pa_count == 0 %}
+                        <div class="alert alert-info text-center mb-80 mt-30">
+                            <h4>OOPS! NOTHING TO SHOW</h4>
+                        </div>
+                      {% else %}
+                        <table class="table table-hover table-event-list">
+                            <tr>
+                              <th>Event</th>
+                              <th>Starts on</th>
+                              <th>Happening in</th>
+                              <th>Total Sales</th>
+                            </tr>
+                            {% for id,name,sdate,banner,city,sale in past %}
+                            <tr>
+                                <td>
+                                  <div class="pull-left event-img">
+                                    <a href="{% url 'dashboard:sale_details' event_id=id %}">
+                                      <img src="{{banner}}">
+                                    </a>
+                                  </div>
+                                  <div class="pull-left ml-10 pt-10">
+                                    <a href="{% url 'dashboard:sale_details' event_id=id %}">{{name}}</a>
+                                  </div>
+                                </td>
+                                <td>{{sdate.date}}</td>
+                                <td>{{city}}</td>
+                                <td>{{sale}}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+{% endblock og %}

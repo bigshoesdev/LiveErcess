@@ -1,0 +1,520 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block details %}
+
+<style>
+    .tab-pane{
+        background: #fff;
+        padding: 15px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border: 1px solid #f4f4f4;
+        box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    }
+    .table{
+        width: auto;
+        max-width: auto;
+    }
+    th, td{
+      min-width: 130px;
+    }
+</style>
+
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+              <h1 class="text-dark mb-30">{{ article.event_name}}</h1>
+            </div>
+
+             {% if status.approval == 1 %}
+              {% if request.session.para_2 == 'event_promotion' and request.session.read_2 == 1 and request.session.write_2 == 1 %}
+              <div class="col-md-3">
+                <p><a href="" data-target="#exampleModalCenter" data-toggle="modal"  class="btn btn-info btn-block">Add/edit promotion link</a></p>
+              </div>
+              {% endif %}
+              {% if request.session.para_3 == 'rsvp' and request.session.read_3 == 1 and request.session.write_3 == 1 %}
+              <div class="col-md-3">
+                <p><a href="{% url 'admin-panel:add-rsvp' event_id=id %}" class="btn btn-info btn-block">Add RSVP</a></p>
+              </div>
+              {% endif %}
+              {% if request.session.para_4 == 'sales' and request.session.read_4 == 1 and request.session.write_4 == 1 %}
+              <div class="col-md-3">
+                <p><a href="{% url 'admin-panel:add-sales' event_id=id %}" class="btn btn-info btn-block">Add Sales</a></p>
+              </div>
+              {% endif %}
+              {% if request.session.para_9 == 'inquiries' and request.session.read_9 == 1 and request.session.write_9 == 1 %}
+              <div class="col-md-3">
+                <p><a href="" class="btn btn-info btn-block">Add inquiries</a></p>
+              </div>
+              {% endif %}
+              {% if request.session.para_1 == 'event_list' and request.session.read_1 == 1 and request.session.write_1 == 1 %}
+                <!-- <p><a href="" class="btn btn-info btn-block">Edit this event</a></p> -->
+              {% endif %}
+            {% endif %}
+
+
+            <div class="col-md-12">
+
+              <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#basic">Basic</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#targets">Targets</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#images">Images</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#description">Description</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#tickets">Tickets</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#custom-question">Custom Question</a>
+                  </li>
+              </ul>
+
+              <div class="tab-content">
+
+                <div id="basic" class="tab-pane active">
+                  <div class="row">
+                    <div class="col-md-8 mb-30">
+                      <h4 class="dark-grey-text">Event Name:</h4>
+                      <p>{{ article.event_name}}</p>
+                    </div>
+                    {% if request.session.para_1 == 'event_list' and request.session.read_1 == 1 and request.session.write_1 == 1 %}
+                    <!-- <div class="col-md-4 float-right">
+                      <div class="float-right">
+                        <a class="btn btn1 btn-danger text-white" href="{% url 'dashboard:edit-event' article.id  %}"><i class="fa fa-pencil"></i> Edit</a>
+                      </div>
+                    </div> -->
+                    {% endif %}
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 mb-30">
+                      <h4 class="dark-grey-text">Website:</h4>
+                      <p >{{ website }}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6 mb-30">
+                      <h4 class="dark-grey-text">Start date:</h4>
+                      <p >{{ article.sdate.date|date:'M d, Y'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <h4 class="dark-grey-text">Start time:</h4>
+                      <p class="text-uppercase">{{ article.start_time|time:'g:i A' }}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6 mb-30">
+                      <h4 class="dark-grey-text">End date:</h4>
+                      <p>{{ article.edate.date |date:'M d, Y'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <h4 class="dark-grey-text">End time:</h4>
+                      <p class="text-uppercase">{{ article.end_time|time:'g:i A' }}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6 mb-30">
+                      <h4 class="dark-grey-text">Address line 1:</h4>
+                      <p>{{ article.address_line1}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <h4 class="dark-grey-text">Address line 2:</h4>
+                      <p>{{ article.address_line2}}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-3 mb-30">
+                      <h4 class="dark-grey-text">Pincode:</h4>
+                      <p>{{ article.pincode}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <h4 class="dark-grey-text">City:</h4>
+                      <p>{{ article.city}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <h4 class="dark-grey-text">State:</h4>
+                      <p>{{ article.state}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <h4 class="dark-grey-text">Country:</h4>
+                      <p>{{ article.country}}</p>
+                    </div>
+                  </div>
+                </div>
+
+                  <div id="targets" class="tab-pane ">
+                    <div class="row">
+                      <div class="col-md-6 mb-30">
+                        <h4 class="dark-grey-text">Category:</h4>
+                        <p>{{ cat.0 }}</p>
+                      </div>
+                      <div class="col-md-3 float-right mb-30">
+                        <h4 class="dark-grey-text">Sub-Category:</h4>
+                        <p>{{ cat.1 }}</p>
+                      </div>
+                      {% if request.session.para_1 == 'event_list' and request.session.read_1 == 1 and request.session.write_1 == 1 %}
+                      <!-- <div class="col-md-3">
+                        <div class="float-right">
+                          <a class="btn btn1 btn-danger text-white" href="{% url 'dashboard:edit-event-two' article.id  %}"><i class="fa fa-pencil"></i> Edit</a>
+                        </div>
+                      </div> -->
+                      {% endif %}
+                      <div class="clearfix"></div>
+                      <div class="col-md-6 mb-30">
+                        <h4 class="dark-grey-text">Event Type:</h4>
+                        <p class="text-capitalize">{{ types }}</p>
+                      </div>
+                      <div class="col-md-6 mb-30">
+                        <h4 class="dark-grey-text">Ticket Type:</h4>
+                        <p class="text-capitalize">{{ tkt_typ }}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="images" class="tab-pane ">
+                      <h4 class="dark-grey-text">Profile Image</h4>
+                      <img src="{{ images.0 }}" alt="">
+
+                      <h4 class="dark-grey-text">Banner</h4>
+                      <img src="{{ images.1 }}" alt="">
+
+                      <h4 class="dark-grey-text">Artwork file of image</h4>
+                      <p><a href="{{ images.2 }}">{{ images.2 }}</a></p>
+                  </div>
+                  <div id="description" class="tab-pane ">
+                      <div class="row">
+                        <div class="col-md-9 mb-30">
+                          <h4 class="dark-grey-text">Description:</h4>
+                          {{ article.description | safe}}
+                        </div>
+                        {% if request.session.para_1 == 'event_list' and request.session.read_1 == 1 and request.session.write_1 == 1 %}
+                        <!-- <div class="col-md-3 float-right">
+                          <div class="float-right">
+                            <a class="btn btn1 btn-danger text-white" href="{% url 'dashboard:edit-event-four' article.id  %}"><i class="fa fa-pencil"></i> Edit</a>
+                          </div>
+                        </div> -->
+                        {% endif %}
+                      </div>
+                  </div>
+                  <div id="tickets" class="tab-pane ">
+                    {% if request.session.para_1 == 'event_list' and request.session.read_1 == 1 and request.session.write_1 == 1 %}
+                    <div class="col-md-3 float-right">
+                      <div class="float-right">
+                        {% if free == False %}
+                        <!-- <a class="btn btn1 btn-danger text-white" href="{% url 'dashboard:edit-event-ticket' article.id  %}"><i class="fa fa-pencil"></i> Edit</a> -->
+                        {% endif %}
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% if free == True %}
+                    <div class="alert alert-info text-center mb-80">
+                        <h4>NO TICKETS CREATED AS IT IS A FREE EVENT!</h4>
+                    </div>
+
+                    {% else %}
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <tr>
+                          <th>Ticket</th>
+                          <th>Price</th>
+                          <th>Extra charge</th>
+                          <th>Inventory</th>
+                          <th>Min to purchase</th>
+                          <th>Max to purchase</th>
+                          <th>Qty left</th>
+                          <th>Message</th>
+                          <th>Valid from</th>
+                          <th>Valid through</th>
+                          <th>Ticket label</th>
+                          <th>Status</th>
+                        </tr>
+                        {% for name,price,o_crg,o_crg_type,qty,min,max,left,msg,start,exp,e_fee,t_fee,label,act in items %}
+                      <tr>
+                        <td>{{name}} </td>
+                        <td>{{currency | safe}} {{price}} </td>
+                        <td>{% if o_crg == 0 %}
+                          -
+                          {% else %}
+                          {% if o_crg_type == 0 %}
+                            {{o_crg}}
+                          {% elif o_crg_type == 1 %}
+                            {{o_crg}}%
+                          {% elif o_crg_type == 2 %}
+                            {{currency | safe}}{{o_crg}}
+                          {% endif %}
+                          {% endif %}
+                        </td>
+                        <td>{{qty}} </td>
+                        <td>{{min}} </td>
+                        <td>{{max}} </td>
+                        <td>{{left}} </td>
+                        <td>{% if msg == 0 %} {% else %}{{msg}}{% endif %} </td>
+                        <td>{{start|date:"M d, Y H:m A"}} </td>
+                        <td>{{exp|date:"M d, Y H:m A"}} </td>
+                        <td>{{label}} </td>
+                        <td class="text-capitalize">{{act}} </td>
+                      </tr>
+                      {% endfor %}
+                      </table>
+                    </div>
+                    {% endif %}
+
+                  </div>
+                  <div id="custom-question" class="tab-pane">
+                    <div class="row">
+                      <div class="col-md-8 col-lg-8">
+                        <div class="table-responsive">
+                          <table class="table table-hover mt-0">
+                            <tr>
+                              <th>Question title</th>
+                              <th>Mandatory</th>
+                              <th>Question type</th>
+                              <th>Options</th>
+                            </tr>
+                            <tr>
+                              <td>Your name</td>
+                              <td>Mandatory</td>
+                              <td>Text</td>
+                              <td>--</td>
+                            </tr>
+                            <tr>
+                              <td>Your email id</td>
+                              <td>Mandatory</td>
+                              <td>Text</td>
+                              <td>--</td>
+                            </tr>
+                            <tr>
+                              <td>Your contact number</td>
+                              <td>Mandatory</td>
+                              <td>Text</td>
+                              <td>--</td>
+                            </tr>
+                            {% for title,man,name,opt in x %}
+                            <tr>
+                              <td>{{title}}</td>
+                              {% if man == 1 %}
+                              <td>Mandatory</td>
+                              {% else %}
+                              <td>Optional</td>
+                              {% endif %}
+                              <td class="text-capitalize">{{name}}</td>
+                              <td>{{opt}}</td>
+                            </tr>
+                            {% endfor %}
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-lg-4">
+                        <div class="alert alert-danger">
+                          Questions created once cannot be edited again.
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+              </div>
+
+
+            </div>
+
+
+
+
+
+            <div class="col-md-12">
+              <ul class="nav nav-tabs">
+                  {% if request.session.para_2 == 'event_promotion' and request.session.read_2 == 1 %}
+                  <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#promotion-status">Promotion status</a>
+                  </li>
+                  {% endif %}
+                  {% if request.session.para_6 == 'verification_status' and request.session.read_6 == 1 %}
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#verification-status">Verification status</a>
+                  </li>
+                  {% endif %}
+              </ul>
+
+              <div class="tab-content">
+                  {% if request.session.para_2 == 'event_promotion' and request.session.read_2 == 1 %}
+                  <div id="promotion-status" class="tab-pane active">
+                      <div class="table-responsive">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>Site</th>
+                                <th>Link</th>
+                                <th>Promotion status</th>
+                                <th>Partner status</th>
+
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for site_name,link,pro_sta,par_sta in site %}
+                                <tr>
+                                  <td>{{site_name}}</td>
+                                  {% if link == 0 %}
+                                  <td class="">--</td>
+                                  {% else %}
+                                  <td class=""><a href="{{link}}" target="_blank">Link</a></td>
+                                  {% endif %}
+
+
+                                  {% if pro_sta == 'published' %}
+                                  <td class="text-capitalize"><span class="green-text">{{pro_sta}}</span></td>
+                                  {% elif pro_sta == 'pending' or pro_sta == 'ready to upload'  %}
+                                  <td class="text-capitalize"><span class="grey-text">{{pro_sta}}</span></td>
+                                  {% else %}
+                                  <td class="text-capitalize"><span class="">{{pro_sta}}</span></td>
+                                  {% endif %}
+                                  {% if par_sta == 'published' %}
+                                  <td class="text-capitalize"><span class="green-text">{{par_sta}}</span></td>
+                                  {% elif par_sta == 'pending' or par_sta == 'ready to upload'  %}
+                                  <td class="text-capitalize"><span class="grey-text">{{par_sta}}</span></td>
+                                  {% else %}
+                                  <td class="text-capitalize"><span>{{par_sta}}</span></td>
+                                  {% endif %}
+
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                  {% endif %}
+                  {% if request.session.para_6 == 'verification_status' and request.session.read_6 == 1 %}
+                  <div id="verification-status" class="tab-pane">
+                      <table class="table mb-50">
+                        {% for msg in fail %}
+                        <tr style="background: red;color: #fff;">
+                            <td>{{msg|safe}}</td>
+                            <td>Failed</td>
+                        </tr>
+                        {% endfor %}
+                        {% for msg in pass %}
+                        <tr>
+                            <td>{{msg|safe}}</td>
+                            <td>Passed</td>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                  </div>
+                  {% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-50 mb-50">
+                <ul class="nav nav-tabs">
+                  {% if request.session.para_4 == 'sales' and request.session.read_4 == 1 %}
+                  <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#sales">SALES</a>
+                  </li>
+                  {% endif %}
+                  {% if request.session.para_3 == 'rsvp' and request.session.read_3 == 1 %}
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#rsvp">RSVP</a>
+                  </li>
+                  {% endif %}
+              </ul>
+
+              <div class="tab-content">
+                  {% if request.session.para_4 == 'sales' and request.session.read_4 == 1 %}
+                  <div id="sales" class="tab-pane active">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <tr>
+                                  <th>ticket Type</th>
+                                  <th>booking id</th>
+                                  <th>amount</th>
+                                  <th>quantity</th>
+                                  <th>purchase date</th>
+                                  <th>seller site</th>
+                                  <th>attendee name</th>
+                                  <th>attendee contact</th>
+                                  <th>attendee email</th>
+
+
+                              </tr>
+                              {% for type,id,amt,qty,purc,site,attendee,cont,email in detail %}
+                              <tr>
+                                  <td>{{type}}</td>
+                                  <td>{{id}}</td>
+                                  <td>{{amt}}</td>
+                                  <td>{{qty}}</td>
+                                  <td>{{purc}}</td>
+                                  <td>{{site}}</td>
+                                  <td>{{attendee}}</td>
+                                  <td>{{cont}}</td>
+                                  <td>{{email}}</td>
+
+
+                              </tr>
+                              {% endfor %}
+
+                          </table>
+                      </div>
+                  </div>
+                  {% endif %}
+                  {% if request.session.para_3 == 'rsvp' and request.session.read_3 == 1 %}
+                  <div id="rsvp" class="tab-pane">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <tr>
+                                  <th>Name</th>
+                                  <th>Contact</th>
+                                  <th>Email</th>
+                              </tr>
+                              {% for name_r,cont,email in rsvp %}
+                              <tr>
+                                  <td>{{name_r}}</td>
+                                  <td>{{cont}}</td>
+                                  <td>{{email}}</td>
+                              </tr>
+                              {% endfor %}
+                          </table>
+                      </div>
+                  </div>
+                  {% endif %}
+              </div>
+            </div>
+
+
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Add/Edit Promotion link</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  {% for message in messages %}
+                    {{message}}
+                  {% endfor %}
+
+                  <form  method="post">
+                  <div class="modal-body">
+
+                      {% csrf_token %}
+                      {{ form.as_p }}
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+{% endblock details %}

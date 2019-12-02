@@ -1,0 +1,22 @@
+<div class="form-group"  style="width: 80%">
+      		<div class="input-group mb-3">
+         	 <div class="input-group-prepend">
+            	  <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+        	 </div>
+        	 <select>
+  <input name="ac_type" value="Current">Current</input>
+  <input name="ac_type "value="savings">Savings</input>
+
+</select>
+		<div style="
+
+   color: red;
+  
+   display: inline-block;
+   margin-left: 23px;
+   position: absolute;
+   margin-top: 38px;
+   "></div>
+     	  	 </div>
+    	  </div>
+

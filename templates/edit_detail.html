@@ -1,0 +1,309 @@
+{% extends "dashboard/create_event.html" %}
+{% load static %}
+{% block title %} Edit your event - Ercess Live {% endblock title %}
+
+{% block og %}
+<style>
+    .tab-pane{
+        background: #fff;
+        padding: 15px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border: 1px solid #f4f4f4;
+        box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    }
+    .table{
+        width: auto;
+        max-width: auto;
+    }
+    th, td{
+      min-width: 130px;
+    }
+</style>
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+              <h1 class="text-dark mb-30">Edit {{ article.event_name}}</h1>
+              <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#basic">Basic</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#targets">Targets</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#images">Images</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#description">Description</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#tickets">Tickets</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#custom-question">Custom Question</a>
+                  </li>
+              </ul>
+
+              <div class="tab-content">
+
+                <div id="basic" class="tab-pane active">
+                  <div class="row">
+                    <div class="col-md-8 mb-30">
+                      <h4 class="dark-grey-text">Event Name:</h4>
+                      <p>{{ article.event_name}}</p>
+                    </div>
+                    <div class="col-md-4 float-right">
+                      <div class="float-right">
+                        <a class="btn btn1 btn-danger text-white" href="{% url 'dashboard:edit-event' article.id  %}"><i class="fa fa-pencil"></i> Edit</a>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6 mb-30">
+                      <h4 class="dark-grey-text">Start date:</h4>
+                      <p >{{ article.sdate.date|date:'M d, Y'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <h4 class="dark-grey-text">Start time:</h4>
+                      <p class="text-uppercase">{{ article.start_time|time:'g:i A' }}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6 mb-30">
+                      <h4 class="dark-grey-text">End date:</h4>
+                      <p>{{ article.edate.date |date:'M d, Y'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <h4 class="dark-grey-text">End time:</h4>
+                      <p class="text-uppercase">{{ article.end_time|time:'g:i A' }}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6 mb-30">
+                      <h4 class="dark-grey-text">Address line 1:</h4>
+                      <p>{{ article.address_line1}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <h4 class="dark-grey-text">Address line 2:</h4>
+                      <p>{{ article.address_line2}}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-3 mb-30">
+                      <h4 class="dark-grey-text">Pincode:</h4>
+                      <p>{{ article.pincode}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <h4 class="dark-grey-text">City:</h4>
+                      <p>{{ article.city}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <h4 class="dark-grey-text">State:</h4>
+                      <p>{{ article.state}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <h4 class="dark-grey-text">Country:</h4>
+                      <p>{{ article.country}}</p>
+                    </div>
+                  </div>
+                </div>
+
+                  <div id="targets" class="tab-pane ">
+                    <div class="row">
+                      <div class="col-md-6 mb-30">
+                        <h4 class="dark-grey-text">Category:</h4>
+                        <p>{{ cat.0 }}</p>
+                      </div>
+                      <div class="col-md-3 float-right mb-30">
+                        <h4 class="dark-grey-text">Sub-Category:</h4>
+                        <p>{{ cat.1 }}</p>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="float-right">
+                          <a class="btn btn1 btn-danger text-white" href="{% url 'dashboard:edit-event-two' article.id  %}"><i class="fa fa-pencil"></i> Edit</a>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="col-md-6 mb-30">
+                        <h4 class="dark-grey-text">Event Type:</h4>
+                        <p class="text-capitalize">{{ types }}</p>
+                      </div>
+                      <div class="col-md-6 mb-30">
+                        <h4 class="dark-grey-text">Ticket Type:</h4>
+                        <p class="text-capitalize">{{ tkt_type }}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="images" class="tab-pane ">
+                    <div class="row">
+                      <div class="col-md-6 mb-30">
+                        <h4 class="dark-grey-text">Profile Image</h4>
+                        <img src="{{ images.0 }}" class="img-responsive mb-50" style="max-width: 250px;" alt="">
+                      </div>
+                      <div class="col-md-6 mb-30">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <h4 class="dark-grey-text">Artwork file of image </h4>
+                          </div>
+                          <div class="col-md-6">
+                             <a class="btn btn1 btn-danger text-white pull-right" href="{% url 'dashboard:edit-event-three' article.id  %}"><i class="fa fa-pencil"></i> Edit</a>
+                          </div>
+                        </div>
+                        <p><a href="{{ images.2 }}" target="_blank">{{ images.2 }}</a></p>
+                      </div>
+                      <div class="col-md-12 mb-30">
+                        <h4 class="dark-grey-text">Banner</h4>
+                        <img src="{{ images.1 }}" class="img-responsive" style="max-width: 500px;" alt="">
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <div id="description" class="tab-pane ">
+                      <div class="row">
+                        <div class="col-md-9 mb-30">
+                          <h4 class="dark-grey-text">Description:</h4>
+                          {{ article.description | safe}}
+                        </div>
+                        <div class="col-md-3 float-right">
+                          <div class="float-right">
+                            <a class="btn btn1 btn-danger text-white" href="{% url 'dashboard:edit-event-four' article.id  %}"><i class="fa fa-pencil"></i> Edit</a>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div id="tickets" class="tab-pane ">
+                    {% if free == False %}
+                      <div class="float-right">
+                        <a class="btn btn1 btn-danger text-white" href="{% url 'dashboard:edit-event-ticket' article.id  %}"><i class="fa fa-pencil"></i> Edit</a>
+                      </div>
+                    {% endif %}
+                    {% if free == True %}
+                    <div class="alert alert-info text-center mb-80">
+                        <h4>NO TICKETS CREATED AS IT IS A FREE EVENT!</h4>
+                    </div>
+
+                    {% else %}
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <tr>
+                          <th>Ticket</th>
+                          <th>Price</th>
+                          <th>Extra charge</th>
+                          <th>Inventory</th>
+                          <th>Min to purchase</th>
+                          <th>Max to purchase</th>
+                          <th>Qty left</th>
+                          <th>Message</th>
+                          <th>Valid from</th>
+                          <th>Valid through</th>
+                          <th>Ticket label</th>
+                          <th>Status</th>
+                        </tr>
+                        {% for name,price,o_crg,o_crg_type,qty,min,max,left,msg,start,exp,e_fee,t_fee,label,act in items %}
+                      <tr>
+                        <td>{{name}} </td>
+                        <td>{{currency | safe}} {{price}} </td>
+                        <td>
+
+                          {% if o_crg_type == 1 %}
+
+                            {% if o_crg == None %}
+                            {% else %}
+                              {{currency | safe}}{{o_crg}}
+                            {% endif %}
+                            
+                          {% elif o_crg_type == 2 %}
+                              {{o_crg}}%
+                          {% endif %}
+
+                     <!--      {% if o_crg_type == 0 %}
+                            {{o_crg}}
+                          {% elif o_crg_type == 1 %}
+
+                            {% if o_crg == None %}
+                            {% else %}
+                              {{o_crg}}%
+                            {% endif %}
+                            
+                          {% elif o_crg_type == 2 %}
+                            {{currency | safe}}{{o_crg}}
+                          {% endif %} -->
+                        </td>
+                        <td>{{qty}} </td>
+                        <td>{{min}} </td>
+                        <td>{{max}} </td>
+                        <td>{{left}} </td>
+                        <td>{% if msg == 0 %} {% else %}{{msg}}{% endif %} </td>
+                        <!-- <td>{{start|date:"M d, Y H:m A"}} </td> -->
+                        <td>{{start|date:"M d, Y h:i A"}}</td>
+                        <!-- <td>{{exp|date:"M d, Y H:m A"}} </td> -->
+                        <td>{{exp|date:"M d, Y h:i A"}} </td>
+
+                        <td>{{label}} </td>
+                        <td class="text-capitalize">{{act}} </td>
+                      </tr>
+                      {% endfor %}
+                      </table>
+                    </div>
+                    {% endif %}
+
+                  </div>
+                  <div id="custom-question" class="tab-pane">
+                    <div class="row">
+                      <div class="col-md-8 col-lg-8">
+                        <div class="table-responsive">
+                          <table class="table table-hover mt-0">
+                            <tr>
+                              <th>Question title</th>
+                              <th>Mandatory</th>
+                              <th>Question type</th>
+                              <th>Options</th>
+                            </tr>
+                            <tr>
+                              <td>Your name</td>
+                              <td>Mandatory</td>
+                              <td>Text</td>
+                              <td>--</td>
+                            </tr>
+                            <tr>
+                              <td>Your email id</td>
+                              <td>Mandatory</td>
+                              <td>Text</td>
+                              <td>--</td>
+                            </tr>
+                            <tr>
+                              <td>Your contact number</td>
+                              <td>Mandatory</td>
+                              <td>Text</td>
+                              <td>--</td>
+                            </tr>
+                            {% for title,man,name,opt in x %}
+                            <tr>
+                              <td>{{title}}</td>
+                              {% if man == 1 %}
+                              <td>Mandatory</td>
+                              {% else %}
+                              <td>Optional</td>
+                              {% endif %}
+                              <td class="text-capitalize">{{name}}</td>
+                              <td>{{opt}}</td>
+                            </tr>
+                            {% endfor %}
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-lg-4">
+                        <div class="alert alert-danger">
+                          Questions created once cannot be edited again.
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock og %}

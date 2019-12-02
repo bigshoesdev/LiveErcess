@@ -1,0 +1,123 @@
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %} Change your password - Ercess Live {% endblock title %}
+{% block og %}
+
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-dark mb-30">Change your password</h1>
+                <div id='alert' class='hide'></div>
+
+                {% if flag %}
+                <div class="alert alert-danger" role="alert"><center>You have entered wrong old password !</center></div>
+                {% elif exe %}
+                <div class="alert alert-danger" role="alert"><center>{{ e }}</center></div>
+                {% elif success %}
+                <div class="alert alert-success" role="alert"><center>You have successfully changed password !</center></div>
+                {% endif %}
+                <form method="post" id="setform">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ field }}
+                                    <div class='input-error'></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <br>
+                    <input type="submit" value="Submit"  class="btn btnset btn-transparent-dark-gray btn-large margin-20px-top">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+       $(".btnset").click(function () {
+                     // alert('clicked');
+                 document.getElementById("id_oldpassword").required = false;
+
+                document.getElementById("id_newpassword1").required = false;
+                document.getElementById("id_newpassword2").required = false;
+
+                   form = $("#setform");
+                  form.validate({
+    //              ignore: ":hidden:not(select)",
+                  rules: {
+                      oldpassword: {
+                          required: true,
+                          minlength: 8,
+                      },
+                      newpassword1: {
+                          required: true,
+                          minlength: 8,
+                      },
+                     newpassword2: {
+                        required: true,
+                        minlength: 8,
+                        equalTo: "#id_newpassword1"
+                   },               
+
+                  },
+    		highlight: function (element) {
+      // add a class "has_error" to the element 
+                   $(element).next('div').addClass('has_error');
+               },
+              unhighlight: function (element) {
+      // remove the class "has_error" from the element 
+                  $(element).next('div').removeClass('has_error');
+              },
+              messages: {
+                  newpassword2: {
+                equalTo: "Enter same as new password above.",
+        // eventdate: "Date can not be greater than Start Date of Event."
+                },
+             },
+             errorPlacement: function (error, element) {
+                   // error.insertAfter(element)
+                 error.appendTo(element.next('div'));
+                 element.next('div').show();
+
+
+            },
+      
+       submitHandler: function(form) {
+  //    $("#msform").valid();
+        var userResetDetails = {'oldpass':$('#id_oldpassword')[0].value, 'newpass':$('#id_newpassword1')[0].value }
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/live/dashboard/settings",
+                    data: JSON.stringify(userResetDetails),
+                    success: function(response) {
+                        if(response.responseType == 'success') {
+                            if(response.messageType == 'success') {
+                               $('#id_oldpassword')[0].value = '';
+                               $('#id_newpassword1')[0].value ='';
+                               $('#id_newpassword2')[0].value='';
+                               $('#alert').html("<div class='alert alert-success'>"+response.message+"</div>");
+                                $('#alert').show();
+                                //let messageBoxData = '<div style="color: white;background: #555555;text-align: center;padding: 20px;border-radius: 8px;font-size: 18px;">'+ response.message+'</div>'
+                                //document.getElementById('completeFormDiv').innerHTML = messageBoxData
+                            } else if(response.messageType == 'error') {
+                                $('#alert').html("<div class='alert alert-error'>"+response.message+"</div>");
+                                $('#alert').show();
+                                //toastrErrorMsg("Error",response.message)
+                            }
+                        }
+                    }
+                });
+       }
+      });
+
+   });
+
+</script>
+
+{% endblock og %}

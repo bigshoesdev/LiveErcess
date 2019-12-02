@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <title>Our blog posts | Ercess Live | Ercess.com/Live</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+        <meta name="description" content="Join latest upcoming events around you related to Music, Fashion, Buisness, Sports and much more. To get more information related to weekend events, login on our platform. Welcome to our about us, check here who we are and what we do." />
+        <meta name="keywords" content="our blog posts, Ercess Live, Ercess Live blog" />
+        <meta name="google-site-verification" content="Hp-UR63f6b4b-tVU0rbbM4gE6AEHcRCbZ8vtbxRnpC4" />
+        <link rel="shortcut icon" href="{% static 'images/fav.ico' %}">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        {% include 'static/common/css.html' %}
+
+    </head>
+    <body>
+
+        {% include 'static/common/header1.html' %}
+        <section class="wow fadeIn parallax" data-stellar-background-ratio="0.5" style="background-image:url('{% static 'images/parallax-bg39.jpg' %}');">
+            <div class="opacity-medium bg-extra-dark-gray"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 extra-small-screen display-table page-title-large">
+                        <div class="display-table-cell vertical-align-middle text-center">
+                            <h1 class="text-white alt-font font-weight-600 letter-spacing-minus-1 margin-10px-bottom">Ercess Live Blog</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container-fluid padding-five-lr sm-padding-25px-lr xs-padding-15px-lr">
+                <div class="row">
+                    <main class="col-md-12 col-sm-12 col-xs-12 right-sidebar sm-margin-60px-bottom xs-margin-40px-bottom sm-padding-15px-lr">
+                        <div class="equalize sm-equalize-auto blog-post-content margin-60px-bottom padding-60px-bottom display-inline-block border-bottom border-color-extra-light-gray sm-margin-30px-bottom sm-padding-30px-bottom xs-text-center sm-no-border">
+                            <div class="blog-image col-md-5 no-padding sm-margin-30px-bottom xs-margin-20px-bottom margin-45px-right sm-no-margin-right display-table">
+                                <div class="display-table-cell vertical-align-middle">
+                                    <a href="/live/blog-post/{{ data.pk}}" title=""><img src="/media/{{ data.image }}" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="blog-text col-md-6 display-table no-padding">
+                                <div class="display-table-cell vertical-align-middle">
+                                    <div class="content margin-20px-bottom sm-no-padding-left ">
+                                        <a href="/live/blog-post/{{ data.pk }}" class="text-extra-dark-gray margin-5px-bottom alt-font text-extra-large font-weight-600 display-inline-block">{{ data.title }}</a>
+                                        <div class="text-medium-gray text-extra-small margin-15px-bottom text-uppercase alt-font"><span>By {{ data.author }}</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span>{{ data.date }}</span>&nbsp;&nbsp;&nbsp;</div>
+                                        <p id="desc" class="no-margin width-95">{{ desc|linebreaks }}</p>
+                                    </div>
+                                    <a class="btn btn-very-small btn-dark-gray text-uppercase" href="/live/blog-post/{{ data.pk }}">Continue Reading</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </main>
+                <?php } ?>
+                </div>
+            </div>
+        </section>
+
+
+            {% include 'static/common/social.html' %}
+            {% include 'static/common/footer.html' %}
+            {% include 'static/common/js.html' %}
+
+    </body>
+
+</html>

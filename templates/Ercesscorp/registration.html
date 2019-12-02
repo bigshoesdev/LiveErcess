@@ -1,0 +1,201 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <title>Create your new account on Ercess Live | Ercess Live</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+        <meta name="description" content="Create your account on Ercess Live to manage and boost your events, promote, sell tickets, and stall spaces." />
+        <link rel="shortcut icon" href="{% static 'images/fav.ico'%}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <meta name="google-site-verification" content="Hp-UR63f6b4b-tVU0rbbM4gE6AEHcRCbZ8vtbxRnpC4" />
+        {% include 'static/common/css.html' %}
+        <!--[if IE]>
+            <script src="js/html5shiv.js"></script>
+        <![endif]-->
+
+        <style>
+            body{
+                background: #da2021;
+            }
+            label{
+                visibility: hidden;
+                display: none;
+            }
+            section{
+                padding: 15px 0;
+            }
+            .box{
+                width: 100%;
+                padding: 30px;
+                border-radius: 6px; 
+                background: #ffffff;
+            }
+        </style>
+
+        <script>
+            $(document).ready(function () {
+
+                $("#id_username").addClass("big-input");
+                $("#id_password").addClass("big-input");
+                $("#id_email").addClass("big-input");
+                $("#id_reenter_password").addClass("big-input");
+                $("#id_mobile").addClass("big-input");
+            });
+
+        </script>
+         <script>
+            $(document).ready(function () {
+
+                $("#id_firstname").addClass("bg-transparent border-color-medium-dark-gray big-input");
+                $("#id_lastname").addClass("bg-transparent border-color-medium-dark-gray big-input");
+                $("#id_password").addClass("bg-transparent border-color-medium-dark-gray big-input");
+                $("#id_email").addClass("bg-transparent border-color-medium-dark-gray big-input");
+                $("#id_confirmmail").addClass("bg-transparent border-color-medium-dark-gray big-input");
+                $("#id_reenter_password").addClass("bg-transparent border-color-medium-dark-gray big-input");
+                $("#id_gender").addClass("bg-transparent border-color-medium-dark-gray big-input");
+                $("#id_location").addClass("bg-transparent border-color-medium-dark-gray big-input");
+
+                $( "#fname" ).append( $( "#id_firstname" ) );
+                $( "#lname" ).append( $( "#id_lastname" ) );
+                $( "#emal" ).append( $( "#id_email" ) );
+                $( "#cemal" ).append( $( "#id_confirmmail" ) );
+                $( "#pass" ).append( $( "#id_password" ) );
+                $( "#repass" ).append( $( "#id_reenter_password" ) );
+                $( "#gen" ).append( $( "#id_gender" ) );
+                $( "#loc" ).append( $( "#id_location" ) );
+
+            });
+
+        </script>
+    </head>
+    <body>
+        {% if regerr %}
+         <div class="alert alert-danger" role="alert"><center>This email address is already with us. Try to <a href="/live/login">Login</a> instead.</center></div>
+        {% elif errormail %}
+            <div class="alert alert-success" role="alert"><center>Registered sucessfully, but we failed to send email to you.</center></div>
+        {% elif auth_email_failed %}
+            <div class="alert alert-danger" role="alert"><center>Email verification failed.</center></div>
+        {% elif submitted %}
+          <div class="alert alert-success" role="alert"><center>Registered sucessfully, please check your mailbox to verify your email address.</center></div>
+        {% elif pass_no_match %}
+         <div class="alert alert-danger" role="alert"><center>Passwords are not matching.</center></div>
+        {% endif %}
+
+        <section class="wow fadeIn" id="start-your-project">
+            <div class="container" id="completeFormDiv">
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 visible-lg visible-md">
+                        <img src="/static/images/signup-page.png" />
+                    </div>
+                    <div class = 'col-md-8 col-lg-8 text-center'>
+                        <div class="box">
+
+                            <a href="{% url 'home' %}" title="Ercess Live"><img src="/static/images/logo.png" /></a>
+                            <p class="margin-40px-top">
+                                Already have an account? <b><u><a href="/live/login">Login</a></u></b>
+                            </p>
+                            <form method="post">
+                                {% csrf_token %}
+                                    {{ form1.as_p }}
+                                    {{ form2.as_p }}
+                                        <br>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12" id="fname"></div>
+                                    <div class="col-md-6 col-sm-12" id="lname"></div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-6 col-sm-12" id="loc"></div>
+                                    <div class="col-md-6 col-sm-12" id="emal"></div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-6 col-sm-12" id="pass"></div>
+                                    <div class="col-md-6 col-sm-12" id="repass"></div >
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-transparent-dark-gray btn-large margin-20px-top" onclick="submitUserDetails()">CREATE ACCOUNT</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+            {% include 'static/common/js.html' %}
+    </body>
+
+    <script type="text/javascript">
+        toastr.options = {
+            closeButton: true,
+            newestOnTop: true,
+            progressBar: true
+        };
+        function toastrErrorMsg(title, message) {
+            toastr.error(message, title)
+        }
+        function toastrSuccessMsg(title, message) {
+            toastr.success(message, title)
+        }
+
+        var emailRegex = /^[0-9a-zA-Z._-]{3,}@[a-zA-Z0-9-_.]+?\.[a-zA-Z]{2,15}$/;
+        var nameRegex = /^[a-zA-Z\s]*$/;
+
+        function submitUserDetails() {
+
+            toastr.clear();
+
+            var fnameVal = $('#id_firstname')[0].value
+            var lnameVal = $('#id_lastname')[0].value
+            var locVal = $('#id_location')[0].value
+            var emalVal = $('#id_email')[0].value
+            var passVal = $('#id_password')[0].value
+            var repassVal = $('#id_reenter_password')[0].value
+
+
+            if(fnameVal == '' || fnameVal == undefined) {
+                toastrErrorMsg("Error","Please enter your First Name")
+            } else if(nameRegex.test(fnameVal) == false) {
+                toastrErrorMsg("Error","First Name is invalid. Only alphabets are allowed.")
+            } else if(lnameVal == '' || lnameVal == undefined) {
+                toastrErrorMsg("Error","Please enter your Last Name")
+            } else if(nameRegex.test(lnameVal) == false) {
+                toastrErrorMsg("Error","Last Name is invalid. Only alphabets are allowed.")
+            } else if(locVal == '' || locVal == undefined) {
+                toastrErrorMsg("Error","Please select your Country.")
+            } else if(emalVal == '' || emalVal == undefined) {
+                toastrErrorMsg("Error","Please enter your Email.")
+            } else if(emailRegex.test(emalVal) == false) {
+                toastrErrorMsg("Error","Email address is Invalid.")
+            } else if(passVal == '' || passVal == undefined || passVal.length < 8) {
+                toastrErrorMsg("Error","Password length should be minimum 8 characters.")
+            } else if(repassVal == '' || repassVal == undefined) {
+                toastrErrorMsg("Error","Please enter in Confirm Password.")
+            } else if(passVal != repassVal) {
+                toastrErrorMsg("Error","Both passwords do not match.")
+            } else {
+                var userRegistrationPayload = {'fnameVal':fnameVal,'lnameVal':lnameVal,'locVal':locVal, 'emalVal':emalVal, 'passVal':passVal}
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/live/signup/",
+                    data: JSON.stringify(userRegistrationPayload),
+                    success: function(response) {
+                        if(response.responseType == 'success') {
+                            if(response.messageType == 'success') {
+                                let messageBoxData = '<div style="color: white;background: #555555;text-align: center;padding: 20px;border-radius: 8px;font-size: 18px;">'+ response.message+'</div>'
+                                document.getElementById('completeFormDiv').innerHTML = messageBoxData
+                            } else if(response.messageType == 'error') {
+                                toastrErrorMsg("Error",response.message)
+                            }
+                        }
+                    }
+                });
+                
+            }
+        }
+    </script>
+
+</html>

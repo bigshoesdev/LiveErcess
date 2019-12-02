@@ -1,0 +1,128 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block partner_sites %}
+<link rel="stylesheet" type="text/css" href="/static/assets/vendor_components/datatable/datatables.min.css"/>
+
+
+<section class='content'>
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Partners Sites Details </h1>
+          <p>Active : {{acount}}</p>
+          <p>Inactive : {{dcount}}</p>
+        <div class="table-responsive">
+            <table id="example" class="table table-hover display nowrap">
+              <thead>
+                <tr>
+                  <th>Site</th>
+                  <th>Country</th>
+                  <th>Used for</th>
+                  <th>Coverage</th>
+                  <th>Method</th>
+                  <th>Document used</th>
+                  <th>Primary mail</th>
+                  <th>Secondary mail</th>
+                  <th>Mail in CC</th>
+                  <th>Any restriction</th>
+                  <th>Support name</th>
+                  <th>Support email</th>
+                  <th>Support mobile</th>
+                  <th>Payment policy</th>
+                  <th>Payment within</th>
+                  <th>Merchant name</th>
+                  <th>Fee</th>
+                  <th>Txn fee</th>
+                  <th>Any flat fee</th>
+                  <th>Tax</th>
+                  <th>Negotiated fee</th>
+                  <th>Negotiated Txn fee</th>
+                  <th>Negotiated flat fee</th>
+                  <th>Negotiated Tax</th>
+                  <th>Any message</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in partners_site %}
+                <tr>
+                    <td>
+                      {% if i.active_state == 1%}
+                        <a href="{% url 'admin-panel:details-page'  table_id=i.table_id  %}" style="color:green;" target="_blank">{{ i.site_name }}</a>
+                        {% else %}
+                        <a href="{% url 'admin-panel:details-page'  table_id=i.table_id  %}" style="color:red;" target="_blank">{{ i.site_name }}</a>
+                      {% endif %}
+                    </td>
+
+                    <td>
+                        {{ i.country }}
+                    </td>
+                    <td>{{i.site_use}}</td>
+                    <td>{{i.coverage}}</td>
+                    <td>{{i.method}}</td>
+                    <td>{{i.doc_name}}</td>
+                    <td>{{i.email1}}</td>
+                    <td>{{i.email2}}</td>
+                    <td>{{i.cc}}</td>
+                    <td>{{i.restriction}}</td>
+                    <td>{{i.support_name}}</td>
+                    <td>{{i.support_email}}</td>
+                    <td>{{i.support_mobile}}</td>
+                    <td>{{i.payment_policy}}</td>
+                    <td>{{i.payment_within_days}} days</td>
+                    <td>{{i.merchant_name}}</td>
+                    <td>{{i.official_convenience_fee}}</td>
+                    <td>{{i.official_transaction_fee}}</td>
+                    <td>{{i.official_flat_charges}}</td>
+                    <td>{{i.official_tax_charges}}</td>
+                    <td>{{i.negotiated_convenience_fee}}</td>
+                    <td>{{i.negotiated_transaction_fee}}</td>
+                    <td>{{i.negotiated_flat_charges}}</td>
+                    <td>{{i.negotiated_tax_charges}}</td>
+                    <td>{{i.additional_msg}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+              <thead>
+                <tr>
+                  <th>Site</th>
+                  <th>Country</th>
+                  <th>Used for</th>
+                  <th>Coverage</th>
+                  <th>Method</th>
+                  <th>Document used</th>
+                  <th>Primary mail</th>
+                  <th>Secondary mail</th>
+                  <th>Mail in CC</th>
+                  <th>Any restriction</th>
+                  <th>Support name</th>
+                  <th>Support email</th>
+                  <th>Support mobile</th>
+                  <th>Payment policy</th>
+                  <th>Payment within</th>
+                  <th>Merchant name</th>
+                  <th>Fee</th>
+                  <th>Txn fee</th>
+                  <th>Any flat fee</th>
+                  <th>Tax</th>
+                  <th>Negotiated fee</th>
+                  <th>Negotiated Txn fee</th>
+                  <th>Negotiated flat fee</th>
+                  <th>Negotiated Tax</th>
+                  <th>Any message</th>
+                </tr>
+              </thead>
+            </table>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<script src="/static/assets/vendor_components/datatable/datatables.min.js"></script>
+<script src="/static/js/pages/data-table.js"></script>
+<script src="/static/js/pages/project-table.js"></script>
+
+{% endblock partner_sites %}

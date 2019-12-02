@@ -1,0 +1,156 @@
+<<<<<<< HEAD
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %} My profile - Ercess Live {% endblock title %}
+{% block og %}
+=======
+{% extends 'dashboard/create_event.html' %} {% block title %} My profile - Ercess
+Live {% endblock title %} {% block og %}
+>>>>>>> c3b499ce8ed4006fb5762613428950b9e198c2e1
+
+<section class="content">
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-dark mb-30">My profile</h1>
+      </div>
+      <div class="col-md-6 mb-10">
+        <h4>Name</h4>
+        <p class="text-capitalize">{{ user.firstname }} {{ user.lastname }}</p>
+      </div>
+      <div class="col-md-6 mb-10">
+        <h4>Gender</h4>
+        <p class="text-capitalize">{{ user.gender }}</p>
+      </div>
+      <div class="col-md-6 mb-10">
+        <h4>Email</h4>
+        <p>{{ user.user }}</p>
+      </div>
+      <div class="col-md-6 mb-10">
+        <h4>Country</h4>
+        <p>{{ user.location }}</p>
+      </div>
+      <div class="col-md-6 mb-10">
+        <h4>Phone number</h4>
+        <p>{{ user.mobile }}</p>
+      </div>
+      <div class="col-md-6 mb-60">
+        <h4>Organization name</h4>
+        <p class="text-capitalize">{{ user.organization_name }}</p>
+      </div>
+      <div class="col-md-12 text-center">
+        <!-- <button
+          type="button"
+          class="btn btn-default btn-sm mt-20"
+          data-toggle="modal"
+          data-target="#bank-modal"
+        >
+          <i class="fa fa-pencil mr-10"></i> Edit profile
+        </button> -->
+      </div>
+
+      <div class="modal modal-right fade" id="bank-modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Edit your profile</h5>
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="First name*"
+                      value="Juliya"
+                    />
+                    <div class="input-error"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Last name*"
+                      value="Brus"
+                    />
+                    <div class="input-error"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Organization name*"
+                      value="Company Pvt. Ltd."
+                    />
+                    <div class="input-error"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Email*"
+                      value="Brus@gmail.com"
+                    />
+                    <div class="input-error"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Phone number*"
+                      value="1234567890"
+                    />
+                    <div class="input-error"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <select class="form-control">
+                      <option>Male</option>
+                      <option selected="">Female</option>
+                    </select>
+                    <div class="input-error"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <select class="form-control">
+                      <option>Country</option>
+                      <option selected="">India</option>
+                      <option>Russia</option>
+                    </select>
+                    <div class="input-error"></div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-danger mt-10">
+                  Save Details
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary mt-10 pull-right"
+                  data-dismiss="modal"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock og %}

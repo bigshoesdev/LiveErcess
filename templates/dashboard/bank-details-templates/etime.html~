@@ -1,0 +1,16 @@
+<div class="input-group-prepend">
+                <span class="input-group-text bg-info border-info"><i class="ti-time"></i></span>
+            </div>              
+            <input name="end_time" id="timepicker1" class="input-small form-control" placeholder="End Time" type="text" required  >
+        	<div style="
+
+   color: red;
+  
+   display: inline-block;
+   margin-left: 339px;
+   position: absolute;
+   margin-top: 38px;
+   text-align: end;
+   "></div>
+        </div>
+</div>

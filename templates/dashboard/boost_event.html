@@ -1,0 +1,65 @@
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %}Boost Event{% endblock title %}
+{% block edit_one %}
+
+
+{% if messages %}
+ {% for message in messages %}
+<div class="alert alert-warning" style="color:white;">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong> {{message.tags}} : </strong> {{ message }}.
+</div>
+ {% endfor %}
+{% endif %}
+
+<section class="content">
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="md-stepper-horizontal red" style="padding: 10%">
+          <h1> city for event </h1>
+          <hr/>
+          <ul style="display:block; list-style:none;">
+          {% for i in s %}
+          <li><h4>{{i.city}}</h4></li>
+          {% endfor %}
+
+          {% for i in ac %}
+
+          {% if i.city %}
+          <li><h4>{{i.city}}</h4></li>
+          {% endif %}
+
+          {% endfor %}
+
+          </ul>
+          <details style="list-style:none;">
+            <summary class="btn" style="display:block; color:blue;">add more city</summary>
+            <form method="POST" style="margin:3%; " class="form-group">
+              {% csrf_token %}
+               {{form}}
+               <br/>
+              <input type="submit" class="btn btn-default" value="submit" />
+            </form>
+          </details>
+          <br/>
+          <br/>
+
+          <a href="#" class="btn btn-success" style="float: right;">proceed</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var onLoaded = function() {
+      // assumed your field has id of where_load, it might be different
+      var location_input = document.getElementById('where_load');
+      var autocomplete = new google.maps.places.Autocomplete(location_input);
+
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{api_key}}&libraries=places&callback=onLoaded" async defer></script>
+</section>
+
+{% endblock edit_one %}

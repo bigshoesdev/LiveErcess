@@ -1,0 +1,249 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block partner_sites %}
+<link rel="stylesheet" type="text/css" href="/static/assets/vendor_components/datatable/datatables.min.css"/>
+
+
+<section class='content'>
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>{{ partners_site.site_name }}</h1>
+        {% if partner.active_state == 1%}
+          <button class="btn btn-success">Active</button>
+        {% else %}
+          <button class="btn btn-danger">Inactive</button>
+        {% endif %}
+      </div>
+      <div class="col-md-6">
+        <div class="table-responsive">
+            <h2>Basic details:</h2>
+            <table class="table table-hover display nowrap">
+                <tr>
+                    <td>Link:</td>
+                    <td>
+                        <a href="{{partners_site.site_url}}" target="_blank">{{ partners_site.site_name }}</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Operating in:</td>
+                    <td>
+                        {{ partners_site.country }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Public page URL pattern:</td>
+                    <td>
+                        {{ partners_site.url_pattern }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Approval needed:</td>
+                    <td>
+                        {{ partners_site.approval_needed }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>What is the use of the site:</td>
+                    <td>
+                        {{ partners_site.site_use }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Site's coverage:</td>
+                    <td>
+                        {{ partners_site.coverage }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Method:</td>
+                    <td>
+                        {{ partners_site.method }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Restrictions:</td>
+                    <td>
+                        {{ partners_site.restriction }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Public:</td>
+                    <td>
+                        {{ partners_site.url_pattern }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Additional message:</td>
+                    <td>
+                        {{ partners_site.additional_msg }}
+                    </td>
+                  </tr>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <h2>Details if we send on mails:</h2>
+            <table class="table table-hover display nowrap">
+              <tr>
+                <td>Doc name <small>if we mail them</small>:</td>
+                <td>
+                    {{ partners_site.doc_name }}
+                </td>
+              </tr>
+              <tr>
+                <td>Primary mail:</td>
+                <td>
+                    {{ partners_site.email1 }}
+                </td>
+              </tr>
+              <tr>
+                <td>Secondary mail:</td>
+                <td>
+                    {{ partners_site.email2 }}
+                </td>
+              </tr>
+              <tr>
+                <td>Mail in CC:</td>
+                <td>
+                    {{ partners_site.cc }}
+                </td>
+              </tr>
+            </table>
+        </div>
+
+      </div>
+      <div class="col-md-6">
+
+        <div class="table-responsive">
+            <h2>Financials:</h2>
+            <table class="table table-hover display nowrap">
+              <tr>
+                <td>Payment policy:</td>
+                <td>
+                    {{ partners_site.payment_policy }}
+                </td>
+              </tr>
+              <tr>
+                <td>Payment receival in:</td>
+                <td>
+                    {{ partners_site.payment_within_days }} day/s
+                </td>
+              </tr>
+              <tr>
+                <td>Merchant name:</td>
+                <td>
+                    {{ partners_site.merchant_name }}
+                </td>
+              </tr>
+              <tr>
+                <td>Official service fee:</td>
+                <td>
+                    {{ partners_site.official_convenience_fee }}
+                </td>
+              </tr>
+              <tr>
+                <td>Official transaction fee:</td>
+                <td>
+                    {{ partners_site.official_transaction_fee }}
+                </td>
+              </tr>
+              <tr>
+                <td>Official flat fee:</td>
+                <td>
+                    {{ partners_site.official_flat_charges }}
+                </td>
+              </tr>
+              <tr>
+                <td>Official tax:</td>
+                <td>
+                    {{ partners_site.official_tax_charges }}
+                </td>
+              </tr>
+              <tr>
+                <td>Negotiated service fee:</td>
+                <td>
+                    {{ partners_site.negotiated_convenience_fee }}
+                </td>
+              </tr>
+              <tr>
+                <td>Negotiated transaction fee:</td>
+                <td>
+                    {{ partners_site.negotiated_transaction_fee }}
+                </td>
+              </tr>
+              <tr>
+                <td>Negotiated flat fee:</td>
+                <td>
+                    {{ partners_site.negotiated_flat_charges }}
+                </td>
+              </tr>
+              <tr>
+                <td>Negotiated tax:</td>
+                <td>
+                    {{ partners_site.negotiated_tax_charges }}
+                </td>
+              </tr>
+              <tr>
+                <td>Service fee to organizer:</td>
+                <td>
+                    {{ partners_site.convenience_fee_organizer }}
+                </td>
+              </tr>
+              <tr>
+                <td>Transaction fee to organizer:</td>
+                <td>
+                    {{ partners_site.transaction_fee_organizer }}
+                </td>
+              </tr>
+              <tr>
+                <td>Flat fee to organizer:</td>
+                <td>
+                    {{ partners_site.flat_fee_organizer }}
+                </td>
+              </tr>
+              <tr>
+                <td>Tax to organizer:</td>
+                <td>
+                    {{ partners_site.tax_fee_organizer }}
+                </td>
+              </tr>
+            </table>
+        </div>
+
+        <div class="table-responsive">
+            <h2>Customer support details:</h2>
+            <table class="table table-hover display nowrap">
+              <tr>
+                <td>Support name:</td>
+                <td>
+                    {{ partners_site.support_name }}
+                </td>
+              </tr>
+              <tr>
+                <td>Support email:</td>
+                <td>
+                    {{ partners_site.support_email }}
+                </td>
+              </tr>
+              <tr>
+                <td>Secondary mobile:</td>
+                <td>
+                    {{ partners_site.support_mobile }}
+                </td>
+              </tr>
+            </table>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+
+
+
+
+    </div>
+  </div>
+</section>
+<script src="/static/assets/vendor_components/datatable/datatables.min.js"></script>
+<script src="/static/js/pages/data-table.js"></script>
+<script src="/static/js/pages/project-table.js"></script>
+{% endblock partner_sites %}

@@ -1,0 +1,903 @@
+f{% extends "dashboard/create_event.html" %}
+{% load rest_framework %}
+{% block title %}Create tickets to sell - Ercess Live{% endblock title %}
+
+
+{% block step_one %}
+<section class="content">
+   <div class="container arrow-steps clearfix">
+      <div class="row">
+          <div class="col-md-12">
+                            
+              
+          </div>
+      </div>
+  </div>
+
+
+
+   <div>
+      <div class="alert alert-info mt-30">
+          Organizer must pay both Ercess convenience fee and Applicable tax.
+      </div>
+      <form action="{% url 'dashboard:new-ticket' event_id %}" method="POST" id="msform1" class="col-md-12 mt-50 mb-50" autocomplete="off">    {% csrf_token %}
+        <fieldset>
+                
+
+      <div class="row">
+          <div class="col-md-12">
+              <div class="form-group">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+                      </div>
+                      <input name="ticket_name" type="text" class="form-control" placeholder="Ticket Name*" >
+                      <div class="input-error"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+          
+          
+
+                              
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-info border-info"><i class="ti-money"></i></span>
+                    </div>
+                    <select>
+                        {% for entry in a %}
+                        <option value="{{ entry }}">{{ entry.country }}</option>
+                        {% endfor %}
+                        <option value="">INR</option>
+                    </select>
+                    <input name="ticket_price" type="number" class="form-control" placeholder="Ticket Price*" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" />
+                    <div class="input-error"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+            <div class="col-md-12 col-lg-12">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+                        </div>
+                        <input name="other_charges" id="other_charges" type="number" class="form-control" placeholder="Any tax?(optional)" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" />
+        
+                
+                        </div>
+                    </div>
+        
+            </div>
+
+        <div class="col-md-12 col-lg-12">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+                    </div>
+                    <select class="form-control" name="other_charges_type" style="height:auto">
+                        <option value="">Select type of charge</option>
+                        <option value="1">Flat amount</option>
+                        <option value="2">Percentage</option>
+                    </select>
+                    <div class="input-error"></div> 
+                </div>
+            </div>
+            </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                        <div class="form-group" >
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+                            </div>
+                            <input name="ticket_qty" id="ticket_qty" type="number" class="form-control" placeholder="Total tickets on sale*" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" />
+                                    <div class="input-error"></div>
+                            </div>
+                        </div>
+                    </div>
+            
+            
+
+                    <div class="col-md-12">
+                        <div class="form-group"  >
+                            <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+                            </div>
+                            <input name="min_qty" id="min_qty" type="number" class="form-control" placeholder="Min tickets to purchase*" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" />
+                                        <div class="input-error"></div>
+                                </div>
+                        </div>
+                
+                    </div>
+                
+
+                    <div class="col-md-12">
+                        <div class="form-group"  >
+                            <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+                            </div>
+                            <input name="max_qty" id="max_qty" type="number" class="form-control" placeholder="Max tickets to purchase*" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" />
+                                        <div class="input-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+
+                    <div class="row">
+                        <div class="col-md-12">
+                                <div class="form-group">
+                                <div class="input-group mb-3">
+                                        <div class="input-group-prepend"> 
+                                            <span class="input-group-text bg-info border-info"><i class="ti-calendar"></i></span>
+                                        </div>
+                                        <input name="start_date" type="text" class="form-control" id="startdateticket" placeholder="Start Date*" >
+                                <div class="input-error"></div>
+                            </div>
+                                </div>
+                        </div>
+
+<div class="col-md-12">
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-info border-info"><i class="ti-time"></i></span>
+                </div>
+                <input name="start_time_step5" id="starttimepicker" class="input-small form-control" placeholder="Start Time*" type="text"  >
+                <div class="input-error"></div>
+    
+            </div>
+        </div>
+    </div>
+    </div>
+
+   <div class="row">
+        <div class="col-md-12">
+     <div class="form-group">
+                <div class="input-group mb-3">
+                      <div class="input-group-prepend"> <span class="input-group-text bg-info border-info"><i class="ti-calendar"></i></span></div>
+                      <input name="end_date" type="text" class="form-control" id="enddateticket" placeholder="End Date*" >
+            <div class="input-error"></div>
+                </div>
+     </div>
+        </div>
+    
+    
+<div class="col-md-12">
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-info border-info"><i class="ti-time"></i></span>
+                </div>
+                <input name="end_time_step5" id="endtimepicker" class="input-small form-control" placeholder="End Time*" type="text" >
+                <div class="input-error"></div>
+    
+            </div>
+        </div>
+    </div>
+    </div>
+
+    
+    <div class="row">
+            <div class="col-md-12">
+        <div class="form-group" >
+                      <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+                     </div>
+                     <input name="ticket_msg" type="text" class="form-control" placeholder="Any Message(optional)" >
+                
+                        </div>
+                  </div>
+         </div>
+                  </div>
+        
+                  <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                   <div class="input-group-prepend">
+                                      <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+                                   </div>
+                                   <select class="form-control" name="ticket_label"   style="height:auto">
+                                      <option value="">Select ticket label*</option>
+                                      <option value="Register">Register</option>
+                                      <option value="RVSP">RVSP</option>
+                                   </select>
+                                   <div class="input-error"></div>
+                                </div>
+                             </div>
+                        </div>
+                     </div>            
+                                                                                                                                                                                                                                                                                                            
+            
+            <button type="submit" id="btn2" class="btn  btn-danger btn-block mt-50">Add</button>
+        </fieldset>
+    </form>
+
+
+    <!-- new js code -->
+    <script>
+    var event_date = "{{ event_start_date }}";
+
+    function convertInputtoDate(){
+      var input = document.getElementById("startdateticket").value;
+      var date = input.split('/');
+      var selectdate = new Date(date[2]+"-"+ date[1]+"-"+ date[0]);
+
+      return selectdate;
+    }
+
+    // function for compare dates
+    function isDateGreater(prevDate, nextDate) {
+      let arrPrevDate = prevDate.split('/');
+      let arrNextDate = nextDate.split('/');
+      return new Date(arrPrevDate[2], arrPrevDate[1], arrPrevDate[0]) < new Date(arrNextDate[2], arrNextDate[1], arrNextDate[0]);
+    }
+    // ends here ~ function for compare dates
+
+    // function for get next day date
+    function nextDayDate() {
+       let today = convertInputtoDate();
+       let tomorrow = new Date(convertInputtoDate());
+       tomorrow.setDate(today.getDate() + 1);
+       return tomorrow
+    }
+    // ends here ~ function for get next day date
+
+    // function for make prepend 0 in single digit numbers
+    function leftPad(number, targetLength) {
+        let output = number + '';
+        while (output.length < targetLength) {
+            output = '0' + output;
+        }
+        return output;
+    }
+    // ends here ~ function for make prepend 0 in single digit numbers
+
+    // on load end date values
+    let onloadEventEndDate = '{{edate}}';
+    let eventEndTime = '{{event_end_time}}'.split(':')
+    let eventEndHour = eventEndTime[0]
+    let eventEndMinute;
+    if (eventEndTime[1] == 0){
+      eventEndHour -= 1;
+      eventEndMinute = 59;
+    } else {
+      eventEndMinute = leftPad(eventEndTime[1]-1, 2);
+    }
+    // ends here ~ on load end date values
+
+    console.log('onloadEventEndDate >> ',onloadEventEndDate,' eventEndTime >> ',eventEndTime, ' eventEndHour >>',eventEndHour,' eventEndMinute >> ',eventEndMinute)
+
+    // on load start date field
+    $('#startdateticket').datepicker({
+      format: 'dd/mm/yyyy',
+      endDate: '{{edate}}',
+      startDate: new Date(),
+    }).on('change', function () {
+      let tomorrowDate = nextDayDate()
+      $('#enddateticket').datepicker('setStartDate', tomorrowDate);
+    });
+    // ends here ~ on load start date field
+
+   
+    //starttime
+    $('#starttimepicker').datetimepicker({
+      format: 'LT',
+      stepping: 5
+     });
+
+    
+    // function for end time picker val
+    function changeEndTimePickerVal() {
+      let endDateTicketVal = $("#enddateticket").val();
+      if(endDateTicketVal == '') {
+        $("#endtimepicker").attr('disabled', true)
+      } else {
+        let checkIsDateGreater = isDateGreater(endDateTicketVal, '{{edate}}');
+        $("#endtimepicker").removeAttr('disabled');
+        $("#endtimepicker").replaceWith('<input name="end_time_step5" id="endtimepicker" class="input-small form-control" placeholder="End Time*" type="text" >')
+        if(checkIsDateGreater == true) {
+          $('#endtimepicker').datetimepicker({
+            format: 'LT',
+            stepping: 5,
+          });  
+        } else {
+          console.log(eventEndHour, eventEndMinute)
+          $('#endtimepicker').datetimepicker({
+            format: 'LT',
+            stepping: 5,
+            useCurrent: false,
+            defaultDate:moment(new Date()).hours(0).minutes(0).seconds(0).milliseconds(0),
+            maxDate:moment({h:eventEndHour, m:eventEndMinute})
+          });
+        }
+          
+      }
+    }
+    // ends here ~ function for end time picker val
+
+    // function for end date val
+    function changeEndDatePickerVal() {
+      $('#enddateticket').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: '{{sdate}}',
+        endDate: onloadEventEndDate
+      }).on('change', function () {
+        changeEndTimePickerVal();
+      });
+    }
+    // ends here ~ function for end date val
+
+     
+    changeEndDatePickerVal();
+    changeEndTimePickerVal();
+     
+
+    // $('#enddateticket').datepicker('setStartDate', {{sdate}});
+
+    // ends here ~ code modify ~ @author Shubham
+
+
+
+    jQuery.validator.addMethod("enddatestep5", function (enddatevalue, element) {
+      var startdatevalue = $('#startdateticket').val();
+      console.log(typeof (startdatevalue));
+      var arrsdate = startdatevalue.split('/');
+      var arredate = enddatevalue.split('/');
+      return new Date(arrsdate[2], arrsdate[1], arrsdate[0]) <= new Date(arredate[2], arredate[1], arredate[0]);
+    }, "End date can not be less than Start Date.");
+
+    $.validator.addMethod("eventdate", function (datevalue, element) {
+      console.log('datevalue >>',datevalue, 'element >>',element)
+      var arrsdate = event_date.split('/');
+      var arredate = datevalue.split('/');
+
+      console.log(arrsdate,' >  = = < ',arredate)
+
+      return new Date(arrsdate[2], arrsdate[0], arrsdate[1]) >= new Date(arredate[2], arredate[1], arredate[0]);
+    }, "Date can not be greater than Start Date of Event 3.");
+
+    $.validator.addMethod("tqty", function (qty, element) {
+      
+      var min = $("#min_qty").val();
+      var max = qty;
+      min=parseInt(min);
+      max=parseInt(max);
+      
+
+      return max > min;
+    }, "Maximum quantity should be more than minimum quantity.");
+
+    $.validator.addMethod("iqty", function (qty, element) {
+      
+      var i = $("#ticket_qty").val();
+      var m = qty;
+      i=parseInt(i);
+      m=parseInt(m);
+
+      return i >= m;
+    }, "Maximum quantity should be less than inventory.");
+
+    $.validator.addMethod("dupli", function (contt, element) {
+      // alert(k);
+      if(k==2){
+        return false;
+      }
+      else{
+      return true;
+      }
+    }, "Same ticket name with same price exist.");
+
+   
+    $.validator.addMethod("peval", function (htmldata1, element) {
+
+        var content = $("#ticket_msg").val();
+
+
+
+        var re_email = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+
+        var re_phn = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/im;
+
+
+
+        if (re_phn.test(content))
+        {
+                
+            return false;
+        }
+
+        else if (re_email.test(content))
+        {
+                
+            return false;
+        }
+
+        else {
+          return true;
+        }
+
+        }, "Please remove email id or contact number.");
+
+    $("#btn2").click(function () {
+      console.log($("#endtimepicker").val())
+
+      form1 = $("#msform1");
+        // alert("he");
+      form1.validate({
+        // alert("hehe");
+        rules: {
+          ticket_name: {
+            required: true,
+            minlength: 3,
+            ticketNameValidation:true
+          },
+          ticket_price: {
+            required: true,
+            digits: true,
+            min: 1
+
+          },
+          ticket_qty: {
+            required: true,
+            digits: true,
+            min: 1
+
+          },
+          min_qty: {
+            required: true,
+            digits: true,
+            min: 1
+            
+
+          },
+          max_qty: {
+            required: true,
+            digits: true,
+            tqty: true,
+            iqty : true,
+            min: 1
+
+          },
+          other_charges_type: {
+
+            required: true
+          },
+        
+          start_date: {
+            required: true,
+            
+          },
+          end_date: {
+            required: true,
+            enddatestep5: true,
+            // eventdate: true,
+            
+          },
+          start_time_step5: {
+            required: true,
+            
+          },
+          end_time_step5: {
+            required: true,
+            
+          },
+          ticket_label: {
+            required: true,
+            
+          },
+
+
+        },
+        highlight: function (element) {
+          // add a class "has_error" to the element
+          $(element).next('div').addClass('has_error');
+        },
+        unhighlight: function (element) {
+          // remove the class "has_error" from the element
+          $(element).next('div').removeClass('has_error');
+        },
+        messages: {
+          ticket_name: {
+            required: "Please provide name of your ticket",
+
+          },
+
+          start_date: {
+            required: "Provide the Start Date",
+            // eventdate: "Date can not be greater than Start Date of Event."
+          },
+          end_date: {
+            required: "Provide the End Date",
+            enddatestep5: "End Date cannot be less than Start Date.",
+            // eventdate: "Date can not be greater than Start Date of Event."
+          },
+          start_time_step5: {
+            required: "Provide Start Time",
+          },
+          end_time_step5: {
+            required: "Provide End Time",
+
+          },
+          other_charges_type: {
+            required: "Select other charges type",
+
+          },
+          ticket_label: {
+            required: "Select Ticket type",
+
+          },
+
+
+        },
+        errorPlacement: function (error, element) {
+
+          error.appendTo(element.next('div'));
+          element.next('div').show();
+
+
+        },
+        // alert("he");
+
+      });
+      //    $("#msform").valid();
+      // alert("hehe");
+
+    });
+    
+    $("#enddateticket").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#startdateticket").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#starttimepicker").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#endtimepicker").keydown(function(e){
+        e.preventDefault();
+    });
+
+    $("#ticket_qty").on('change', function () {
+      
+      if($("#ticket_qty").val() <= 0){
+      $("#max_qty").keydown(function(e){
+        e.preventDefault();
+    });
+    $("#min_qty").keydown(function(e){
+        e.preventDefault();
+    });
+    }
+   
+    });
+
+
+    // ticket name validation
+    $.validator.addMethod("ticketNameValidation", function(ticketNameVal, element) {
+      return /^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/.test(ticketNameVal)
+    }, "Ticket Name is Not Valid: Check Spaces");
+    // ends here ~ ticket name validation
+
+  </script>
+    <!-- ends here ~ new js code -->
+
+
+   <!--  <script>
+             function convertInputtoDate(){
+            var input = document.getElementById("startdateticket").value;
+            var date = input.split('/');
+            var selectdate = new Date(date[2]+"-"+ date[1]+"-"+ date[0]);
+        
+            return selectdate;
+          }
+
+          function getNextDay() {
+            var today = convertInputtoDate();
+            var tomorrow = new Date(convertInputtoDate());
+            tomorrow.setDate(today.getDate() + 1);
+            return tomorrow;
+          }
+
+            var event_date = "{{ event_start_date }}";
+            $('#startdateticket').datepicker({
+        
+              format: 'dd/mm/yyyy',
+              endDate: '{{sdate}}',
+              startDate: '{{sdate}}',
+              // onSelect: function( selectedDate ) {
+              //       if(this.id == 'startdateticket') {
+              //           var minDate = selectedDate + 1;
+              //           console.log(selectedDate);
+        
+              //       }
+              //   }
+                
+            }).on('change', function () {
+              $(this).valid();  // triggers the validation test
+        
+          //     function convertInputtoDate(){
+          //   var input = document.getElementById("startdateticket").value;
+          //   var date = input.split('/');
+          //   var selectdate = new Date(date[2]+"-"+ date[1]+"-"+ date[0]);
+        
+          //   return selectdate;
+          // }
+
+            $('#enddateticket').datepicker('setStartDate', getNextDay());
+
+         
+          // alert('Today : ' + today + ' Tommorow :' + tomorrow.toLocaleString());
+          
+            //   $('#enddateticket').datepicker({
+            //       format: 'dd/mm/yyyy',
+            //       endDate: '{{sdate}}',
+                  
+            //     }).on('change', function () {
+            //         $(this).valid();  // triggers the validation test
+            //         //endtime
+            //       $('#endtimepicker').datetimepicker({
+            //         format: 'LT',
+            //         stepping: 5
+              
+            //       }).on('change', function () {
+            //         $(this).valid();  // triggers the validation test
+            //       });
+            //   });
+            // $('#enddateticket').datepicker('setStartDate', tomorrow);
+            });
+
+            // end date
+             var today = convertInputtoDate();
+            var tomorrow = new Date(convertInputtoDate());
+            tomorrow.setDate(today.getDate() + 1);
+            
+           $('#enddateticket').datepicker({
+                  format: 'dd/mm/yyyy',
+                  startDate: '{{sdate}}',
+                  
+                }).on('change', function () {
+                    $(this).valid();  // triggers the validation test
+                  
+              });
+                 // ends here ~ end date
+            // $('#enddateticket').datepicker('setStartDate', tomorrow);
+           
+            //starttime
+            $('#starttimepicker').datetimepicker({
+              format: 'LT',
+              stepping: 5
+        
+            }).on('change', function () {
+              $(this).valid();  // triggers the validation test
+              
+            });
+        
+             $('#endtimepicker').datetimepicker({
+              format: 'LT',
+              stepping: 5
+        
+            }).on('change', function () {
+              $(this).valid();  // triggers the validation test
+            });
+        
+        
+            jQuery.validator.addMethod("enddatestep5", function (enddatevalue, element) {
+              var startdatevalue = $('#startdateticket').val();
+              console.log(typeof (startdatevalue));
+              var arrsdate = startdatevalue.split('/');
+              var arredate = enddatevalue.split('/');
+              return new Date(arrsdate[2], arrsdate[1], arrsdate[0]) <= new Date(arredate[2], arredate[1], arredate[0]);
+            }, "End date can not be less than Start Date.");
+        
+            $.validator.addMethod("eventdate", function (datevalue, element) {
+              var arrsdate = event_date.split('/');
+              var arredate = datevalue.split('/');
+        
+              return new Date(arrsdate[2], arrsdate[0], arrsdate[1]) > new Date(arredate[2], arredate[1], arredate[0]);
+            }, "Date can not be greater than Start Date of Event.");
+        
+            $.validator.addMethod("tqty", function (qty, element) {
+              
+              var min = $("#min_qty").val();
+              var max = qty;
+              min=parseInt(min);
+              max=parseInt(max);
+              
+        
+              return max > min;
+            }, "Maximum quantity should be more than minimum quantity.");
+        
+            $.validator.addMethod("iqty", function (qty, element) {
+              
+              var i = $("#ticket_qty").val();
+              var m = qty;
+              i=parseInt(i);
+              m=parseInt(m);
+        
+              return i >= m;
+            }, "Maximum quantity should be less than inventory.");
+        
+        
+            $("#btn2").click(function () {
+              console.log($("#endtimepicker").val())
+
+              form1 = $("#msform1");
+                // alert("he");
+              form1.validate({
+                // alert("hehe");
+                rules: {
+                  ticket_name: {
+                    required: true,
+                    minlength: 3,
+                    ticketNameValidation:true
+                  },
+                  ticket_price: {
+                    required: true,
+                    digits: true,
+                    min: 1
+
+                  },
+                  ticket_qty: {
+                    required: true,
+                    digits: true,
+                    min: 1
+        
+                  },
+                  min_qty: {
+                    required: true,
+                    digits: true,
+                    min: 1
+                    
+        
+                  },
+                  max_qty: {
+                    required: true,
+                    digits: true,
+                    tqty: true,
+                    iqty : true,
+                    min: 1
+
+                  },
+                  other_charges_type: {
+        
+                    required: true
+                  },
+                
+                  start_date: {
+                    required: true,
+                    
+                  },
+                  end_date: {
+                    required: true,
+                    enddatestep5: true,
+                    // eventdate: true,
+                    
+                  },
+                  start_time_step5: {
+                    required: true,
+                    
+                  },
+                  end_time_step5: {
+                    required: true,
+                    
+                  },
+                  ticket_label: {
+                    required: true,
+                    
+                  },
+        
+        
+                },
+                highlight: function (element) {
+                  // add a class "has_error" to the element
+                  $(element).next('div').addClass('has_error');
+                },
+                unhighlight: function (element) {
+                  // remove the class "has_error" from the element
+                  $(element).next('div').removeClass('has_error');
+                },
+                messages: {
+                  ticket_name: {
+                    required: "Please provide name of your ticket",
+        
+                  },
+        
+                  start_date: {
+                    required: "Provide the Start Date",
+                    // eventdate: "Date can not be greater than Start Date of Event."
+                  },
+                  end_date: {
+                    required: "Provide the End Date",
+                    enddatestep5: "End Date cannot be less than Start Date.",
+                    // eventdate: "Date can not be greater than Start Date of Event."
+                  },
+                  start_time_step5: {
+                    required: "Provide Start Time",
+                  },
+                  end_time_step5: {
+                    required: "Provide End Time",
+        
+                  },
+                  other_charges_type: {
+                    required: "Select other charges type",
+        
+                  },
+                  ticket_label: {
+                    required: "Select Ticket type",
+        
+                  },
+        
+        
+                },
+                errorPlacement: function (error, element) {
+        
+                  error.appendTo(element.next('div'));
+                  element.next('div').show();
+        
+        
+                },
+                // alert("he");
+
+              });
+              //    $("#msform").valid();
+              // alert("hehe");
+        
+            });
+            
+            $("#enddateticket").keydown(function(e){
+                e.preventDefault();
+            });
+            $("#startdateticket").keydown(function(e){
+                e.preventDefault();
+            });
+            $("#starttimepicker").keydown(function(e){
+                e.preventDefault();
+            });
+            $("#endtimepicker").keydown(function(e){
+                e.preventDefault();
+            });
+        
+            $("#ticket_qty").on('change', function () {
+              
+              if($("#ticket_qty").val() <= 0){
+              $("#max_qty").keydown(function(e){
+                e.preventDefault();
+            });
+            $("#min_qty").keydown(function(e){
+                e.preventDefault();
+            });
+            }
+            $(this).valid();
+              
+            });
+        
+
+          // ticket name validation
+          $.validator.addMethod("ticketNameValidation", function(ticketNameVal, element) {
+              return /^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/.test(ticketNameVal)
+          }, "Ticket Name is Not Valid: Check Spaces");
+          // ends here ~ ticket name validation
+        
+            
+        
+          </script> -->
+   </div>
+   
+
+</section>
+{% endblock step_one %}
+

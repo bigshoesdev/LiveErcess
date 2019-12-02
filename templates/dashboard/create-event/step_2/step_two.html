@@ -1,0 +1,180 @@
+{% extends "dashboard/create_event.html" %}
+{% load rest_framework %}
+
+{% block title %}Set target of your event - Ercess Live{% endblock title %}
+{% block step_two %}
+<section class="content">
+  <div class="container arrow-steps clearfix">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-dark mb-30">Set type of Event</h1>
+        <div class="md-stepper-horizontal red">
+                    <div class="md-step active done">
+                      <div class="md-step-circle"><span>1</span></div>
+                      <div class="md-step-title">Basic details</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step active">
+                      <div class="md-step-circle"><span>2</span></div>
+                      <div class="md-step-title">Set targets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>3</span></div>
+                      <div class="md-step-title">Upload images</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>4</span></div>
+                      <div class="md-step-title">Description</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>5</span></div>
+                      <div class="md-step-title">Add tickets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>6</span></div>
+                      <div class="md-step-title">Custom questions</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                </div>
+      </div>   
+    </div>   
+  </div>   
+       <!--   {% if messages %}
+           <ul class="messages">
+              {% for message in messages %}
+      <div class="alert alert-success">
+                   <strong style="color: white">{{ message }}</strong>
+                   </div>
+              {% endfor %}
+           </ul>
+          {% endif %}
+-->
+<form action="" method="POST" id="msform" class="col-md-12 mt-50 mb-50" autocomplete="off">
+   {% csrf_token %}
+   <fieldset>
+      <div class="row">
+         <div class="col-md-6">
+            <div class="form-group">
+             <div class="input-group mb-30">
+                <div class="input-group-prepend"> <span class="input-group-text bg-info border-info"><i class="ti-arrow-down"></i></span></div>
+                <select name="category_id" type="text"  id="categ" class="form-control" style="height:auto">
+                   <option value="default" selected disabled>Select a category</option>
+                   {% for val  in context %}
+                   <option id= {{ val|first }} value={{ val|first }}> {{ val|last }} </option>
+                   {% endfor %}
+                </select>
+                <div class="input-error"></div>
+             </div>
+          </div>
+         </div>
+         <div class="col-md-6">
+            <div class="form-group">
+             <div class="input-group mb-30">
+                <div class="input-group-prepend"> <span class="input-group-text bg-info border-info"><i class="ti-arrow-down"></i></span>
+                </div>
+                <select name="topic_id" id='top' type="text" class="form-control" style="height:auto" >
+                </select>
+                <div class="input-error"></div>
+             </div>
+          </div>
+         </div>
+         <div class="col-md-6">
+            <div class="btn-group mb-30 mt-30" data-toggle="buttons">
+             <label class="btn btn-primary active toggle-pair">
+             <input type="radio" name="type1" id="pub" class='type1' value='public' style="margin-right:19px" checked> Public Event
+             </label>
+             <label class="btn btn-primary toggle-pair">
+             <input type="radio" name="type1" class='type1' id="pri" value='private'> Private Event
+             </label>
+          </div>
+         </div>
+         <div class="col-md-6">
+            <div class="btn-group mb-30 mt-30" data-toggle="buttons">
+             <label class="btn btn-primary active toggle-pair">
+             <input type="radio" name="type2" id="paidevent" class='type2' value='paid' style="margin-right:19px" checked> Paid Event
+             </label>
+             <label class="btn btn-primary toggle-pair">
+             <input type="radio" name="type2" class='type2' id="freeevent" value='free'> Free Event
+             </label>
+          </div>
+         </div>
+      </div>
+      <!--  <div id='type1'  style='float: left'>
+         <input id='pub' class='type1' name='type1' type="checkbox" value='public' checked >
+          <label  for='pub' style='color: black'>Public Event</label> <br/>
+         <input type="checkbox" class='type1' name='type1' id='pri' value='private'>
+          <label for='pri' style='color: black'>Private Event</label>
+          </div>
+         <div id='type2'>
+         <input id='paidevent' class='type2' name='type2' type="checkbox" value='paid' checked >
+          <label  for='paidevent' style='color: black'>Paid Event</label> <br/>
+         <input type="checkbox" class='type2' name='type2' value='free' id='freeevent' >
+          <label for='freeevent' style='color: black'>Free Event</label>
+          </div-->
+      <button type="submit" id="btn23" class="btn btn2 btn-danger btn-block mt-50">Next</button>
+   </fieldset>
+</form>
+
+<script>
+
+
+$("#btn23").click(function(){
+          //  alert('clicked')
+    
+  //  alert(new Date(arrsdate[2], arrsdate[1], arrsdate[0]))
+          form = $("#msform");
+
+              form.validate({
+
+    
+    rules: {
+           topic_id: {
+             required: true,
+          },
+          category_id: {
+            required: true,
+          }
+      
+    },
+    highlight: function(element) {
+            // add a class "has_error" to the element 
+            $(element).next('div').addClass('has_error');
+      },
+              unhighlight: function(element) {
+            // remove the class "has_error" from the element 
+            $(element).next('div').removeClass('has_error');
+        },
+    messages: {
+         topic_id: {
+      required: "Please select a sub-catagory.",
+      
+      },
+    
+    },
+    errorPlacement: function(error, element) {
+    
+      error.appendTo( element.next('div'));
+      element.next('div').show();
+
+      
+        },
+    });
+
+      });
+
+</script>
+
+
+            
+    </section>
+{% endblock step_two %}
